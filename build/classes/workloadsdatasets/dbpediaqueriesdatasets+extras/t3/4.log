@@ -1,0 +1,1027 @@
+select distinct  * from <http://dbpedia3.8> where {
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+FILTER(?term != ?otherterm)
+} LIMIT 10000
+-----------------
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbpprop:<http://dbpedia.org/property/> 
+SELECT count(?p) ?p
+from <http://dbpedia3.8> where { ?var6 rdf:type ?var. 
+?var6 dbpprop:name ?var0. 
+    ?var6 dbpprop:pages ?var1. 
+    ?var6 dbpprop:isbn ?var2. 
+    ?var6 dbpprop:author ?var3.
+?var6 ?p ?o
+FILTER ( isLiteral(?o))
+FILTER (datatype (?o) = xsd:int 
+||datatype (?o) = xsd:float 
+|| datatype (?o) = xsd:decimal 
+|| datatype (?o) = xsd:double 
+|| datatype (?o) = xsd:integer 
+|| datatype (?o) = xsd:long)
+} 
+Group by ?p
+Order by DESC( count(?p))
+LIMIT 1000
+
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+} LIMIT 10000
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Descriptive_knowledge> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Probability_of_default> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX prop: <http://dbpedia.org/property/>
+
+    ASK
+{ <http://dbpedia.org/resource/Eiffel_Tower> prop:height ?eiffel .
+  <http://dbpedia.org/resource/Burj_Kalifa> prop:height ?burj .
+  FILTER(?burj < ?eiffel)    
+}
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX prop: <http://dbpedia.org/property/>
+
+    ASK
+{ <http://dbpedia.org/resource/Eiffel_Tower> prop:height ?eiffel .
+  <http://dbpedia.org/resource/Burj_Kalifa> prop:height ?burj .
+  FILTER(?burj > ?eiffel)    
+}
+
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader<http://www.w3.org/2004/02/skos/core#broader> ?term .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/Mr.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/Mr.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  OPTIONAL {?sourceUrl rdfs:comment ?exampleTested  .}
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> 
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  OPTIONAL {?sourceUrl rdfs:label ?entryExample } .
+  OPTIONAL {?sourceUrl rdfs:comment ?exampleTested  }.
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/D.I.E.> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/D.I.E.> }
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  OPTIONAL {?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )}
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbpprop:<http://dbpedia.org/property/> 
+SELECT ?o (count(?o) AS ?count)
+from <http://dbpedia3.8> where { 
+?var6 rdf:type ?var. 
+?var6 dbpprop:name ?var0. 
+?var6 dbpprop:pages ?var1. 
+?var6 dbpprop:isbn ?var2. 
+?var6 dbpprop:author ?var3.
+?var6  dbpprop:releaseDate   ?o
+FILTER ( isLiteral(?o))
+FILTER ( datatype (?o) = xsd:int 
+|| datatype (?o) = xsd:float 
+|| datatype (?o) = xsd:decimal 
+||datatype (?o) = xsd:double 
+|| datatype (?o) = xsd:integer 
+|| datatype (?o) = xsd:long)
+} 
+Group by ?o
+Order by DESC( count(?o))
+LIMIT 1000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  FILTER ( ?labelprop IN (rdfs:label, foaf:name))
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  {?sourceUrl rdfs:label ?entryExample  .}UNION{?sourceUrl foaf:name ?entryExample  .}
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Thai_language> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+prefix gephi:<http://gephi.org/>
+CONSTRUCT{
+?termsubject gephi:label ?termname .
+?broader gephi:label ?broadername .
+?term <http://ouseful.info/edge> ?broader .
+?broader <http://ouseful.info/edge> ?term 
+} from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+
+ 
+
+} LIMIT 10000
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?termsubject <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader<http://www.w3.org/2004/02/skos/core#broader> ?termsubject .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?termsubject <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+
+ 
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?termsubject <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ 
+
+ 
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+FILTER(?term != ?otherterm)
+} LIMIT 10000
+-----------------
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbpprop:<http://dbpedia.org/property/> 
+SELECT count(?p) ?p
+from <http://dbpedia3.8> where { ?var6 rdf:type ?var. 
+?var6 dbpprop:name ?var0. 
+    ?var6 dbpprop:pages ?var1. 
+    ?var6 dbpprop:isbn ?var2. 
+    ?var6 dbpprop:author ?var3.
+?var6 ?p ?o
+FILTER ( isLiteral(?o))
+FILTER (datatype (?o) = xsd:int 
+||datatype (?o) = xsd:float 
+|| datatype (?o) = xsd:decimal 
+|| datatype (?o) = xsd:double 
+|| datatype (?o) = xsd:integer 
+|| datatype (?o) = xsd:long)
+} 
+Group by ?p
+Order by DESC( count(?p))
+LIMIT 1000
+
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/2004/02/skos/core#broader> ?broader .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+ 
+} LIMIT 10000
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Descriptive_knowledge> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Probability_of_default> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+ ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader<http://www.w3.org/2004/02/skos/core#broader> ?term .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?term <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/Mr.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/Mr.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/Mr.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  OPTIONAL {?sourceUrl rdfs:comment ?exampleTested  .}
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?term <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> 
+
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  OPTIONAL {?sourceUrl rdfs:label ?entryExample } .
+  OPTIONAL {?sourceUrl rdfs:comment ?exampleTested  }.
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+} LIMIT 10000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/D.I.E.> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/D.I.E.> }
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  OPTIONAL {?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )}
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX dbpprop:<http://dbpedia.org/property/> 
+SELECT ?o (count(?o) AS ?count)
+from <http://dbpedia3.8> where { 
+?var6 rdf:type ?var. 
+?var6 dbpprop:name ?var0. 
+?var6 dbpprop:pages ?var1. 
+?var6 dbpprop:isbn ?var2. 
+?var6 dbpprop:author ?var3.
+?var6  dbpprop:releaseDate   ?o
+FILTER ( isLiteral(?o))
+FILTER ( datatype (?o) = xsd:int 
+|| datatype (?o) = xsd:float 
+|| datatype (?o) = xsd:decimal 
+||datatype (?o) = xsd:double 
+|| datatype (?o) = xsd:integer 
+|| datatype (?o) = xsd:long)
+} 
+Group by ?o
+Order by DESC( count(?o))
+LIMIT 1000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  ?sourceUrl rdfs:label ?entryExample  .
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  FILTER ( ?labelprop IN (rdfs:label, foaf:name))
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?entryExample ?exampleTested ?sourceUrl ?indegreeRanking { 
+  # query only for Mr.
+  FILTER ( ?sourceUrl =  <http://dbpedia.org/resource/D.I.E.> )
+  
+  {?sourceUrl rdfs:label ?entryExample  .}UNION{?sourceUrl foaf:name ?entryExample  .}
+  ?sourceUrl rdfs:comment ?exampleTested  .
+  FILTER ( lang(?entryExample) = lang(?exampleTested ) )
+  
+  #subselect:
+  { SELECT count(?in) as ?indegreeRanking {?in ?p <http://dbpedia.org/resource/D.I.E.>} }
+
+} 
+
+LIMIT 100
+-----------------
+
+select ?resource ?abstract from <http://dbpedia3.8> where {
+    VALUES ?resource { <http://dbpedia.org/resource/Thai_language> }
+    ?resource dbpedia-owl:abstract ?abstract . filter (lang(?abstract)='en')
+}
+
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+ 
+prefix gephi:<http://gephi.org/>
+CONSTRUCT{
+?termsubject gephi:label ?termname .
+?broader gephi:label ?broadername .
+?term <http://ouseful.info/edge> ?broader .
+?broader <http://ouseful.info/edge> ?term 
+} from <http://dbpedia3.8> where {
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+ 
+
+ 
+
+} LIMIT 10000
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?termsubject <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader<http://www.w3.org/2004/02/skos/core#broader> ?termsubject .
+ 
+ ?broader <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ ?broader <http://www.w3.org/2000/01/rdf-schema#label> ?broadername .
+
+ ?termsubject <http://www.w3.org/2000/01/rdf-schema#label> ?termname .
+
+ 
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+  ?termsubject <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2009/08/skos-reference/skos.html#Concept> .
+ 
+
+ 
+
+} LIMIT 10000
+-----------------
+select distinct  * from <http://dbpedia3.8> where {
+
+ 
+?termsubject <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Marketing> .
+ ?termsubject  <http://purl.org/dc/terms/subject> ?term .
+
+
+} LIMIT 10000

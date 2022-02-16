@@ -1,0 +1,661 @@
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Bruno Mars"@fr} UNION {?auteur foaf:name "Bruno Mars"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Bruno Mars"@fr} UNION {?auteur foaf:name "Bruno Mars"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jean-Jacques Goldman"@fr} UNION {?auteur foaf:name "Jean-Jacques Goldman"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jean-Jacques Goldman"@fr} UNION {?auteur foaf:name "Jean-Jacques Goldman"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX property:<http://dbpedia.org/property>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Maroon 5"@fr} UNION {?auteur foaf:name "Maroon 5"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Maroon 5"@fr} UNION {?auteur foaf:name "Maroon 5"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Maroon 5"@fr} UNION {?auteur foaf:name "Maroon 5"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Maroon 5"@fr} UNION {?auteur foaf:name "Maroon 5"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jean Ferrat"@fr} UNION {?auteur foaf:name "Jean Ferrat"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jean Ferrat"@fr} UNION {?auteur foaf:name "Jean Ferrat"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Olivier Lafay"@fr} UNION {?auteur foaf:name "Olivier Lafay"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Olivier Lafay"@fr} UNION {?auteur foaf:name "Olivier Lafay"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Nashville Pussy"@fr} UNION {?auteur foaf:name "Nashville Pussy"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Nashville Pussy"@fr} UNION {?auteur foaf:name "Nashville Pussy"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Têtes raides"@fr} UNION {?auteur foaf:name "Têtes raides"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Têtes raides"@fr} UNION {?auteur foaf:name "Têtes raides"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX property:<http://dbpedia.org/property/>
+PREFIX ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+?case ontology:abstract .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/> .
+PREFIX ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+?case ontology:abstract .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/> ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+?case ontology:abstract .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/>;
+PREFIX ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+?case ontology:abstract .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/>
+PREFIX ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+?case ontology:abstract .
+}
+-----------------
+PREFIX property:<http://dbpedia.org/property/>
+PREFIX ontology:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case property:uspage 442 .
+?case property:usvol 553 .
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case prop:usvol 558 .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case prop:usvol 558 .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+SELECT ?abstract from <http://dbpedia3.8> where {
+?<http://dbpedia.org/resource/Saramago> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+  
+} 
+LIMIT 10
+-----------------
+SELECT ?abstract from <http://dbpedia3.8> where {
+?<http://dbpedia.org/resource/Saramago> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract . 
+} 
+LIMIT 10
+-----------------
+SELECT ?abstract from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Saramago> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract . 
+} 
+LIMIT 10
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Olivier Lafay"@fr} UNION {?auteur foaf:name "Olivier Lafay"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Olivier Lafay"@fr} UNION {?auteur foaf:name "Olivier Lafay"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+SELECT ?c from <http://dbpedia3.8> where { 
+	?c rdf:type <http://dbpedia.org/resource/Category:Liberal_democracies> . 
+	OPTIONAL { ?c dbpprop:populationCensus ?p . } 
+	FILTER ( !bound(?p) ) 
+}
+
+-----------------
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/Saramago> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER langMatches( lang(?abstract), ‘en’) }
+}
+-----------------
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/Saramago> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER langMatches( lang(?abstract), 'en') }
+}
+-----------------
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/Civil_engineering> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER langMatches( lang(?abstract), 'en') }
+}
+-----------------
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/Civil_engineering> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+FILTER langMatches( lang(?abstract), 'en') }
+}
+-----------------
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+FILTER langMatches( lang(?abstract), 'en') }
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label Ricci v. DeStefano .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci v. DeStefano" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "New York" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label 'Ricci_v._DeStefano' .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci v. DeStefano" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci v. DeStefano" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci v. DeStefano" .
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case rdfs:label "United States of America" .
+}
+-----------------
+SELECT ?place (AVG(?rain) as ?avgRain)
+from <http://dbpedia3.8> where{ 
+VALUES ?rainPred { dbpprop:janRainMm dbpprop:febRainMm dbpprop:marRainMm dbpprop:aprRainMm dbpprop:mayRainMm dbpprop:junRainMm dbpprop:julRainMm dbpprop:augRainMm dbpprop:sepRainMm dbpprop:octRainMm dbpprop:novRainMm dbpprop:decRainMm }
+
+?place ?rainPred ?rain .
+}
+GROUP BY ?place
+ORDER BY ?avgRain
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?label ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case prop:usvol 388 ;
+prop:uspage 1 .
+OPTIONAL{
+?case rdfs:label ?label .
+}
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+SELECT ?abstract ?label from <http://dbpedia3.8> where {<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#label> ?label .<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .} LIMIT 1
+
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?label ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case prop:usvol 388 ;
+prop:uspage 1 .
+OPTIONAL{
+?case rdfs:label ?label .
+}
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?label),"en"))
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+SELECT ?abstract ?label from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+} LIMIT 1
+
+-----------------
+SELECT ?abstract ?label from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+} LIMIT 1
+
+-----------------
+SELECT ?abstract from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/AccessibleComputing> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+} LIMIT 1
+
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?label ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?label),"en"))
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?label),"en"))
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+SELECT ?abstract from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Autism> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+} LIMIT 1
+
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "United States v. Smith" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Roe v. Wade" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+SELECT ?abstract ?label from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Autism> <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+<http://dbpedia.org/resource/Autism> <http://www.w3.org/2000/01/rdf-schema#comment> ?abstract .
+} LIMIT 1
+
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?full_name ?abstract ?argue_date ?argue_year ?holding ?laws_applied from <http://dbpedia3.8> where {
+?case rdfs:label "Ricci%20v.%20DeStefano" .
+OPTIONAL{
+?case prop:fullname ?full_name .
+}
+OPTIONAL{
+?case ont:abstract ?abstract .
+}
+OPTIONAL{
+?case prop:arguedate ?argue_date .
+}
+OPTIONAL{
+?case prop:argueyear ?argue_year .
+}
+OPTIONAL{
+?case prop:holding ?holding .
+}
+OPTIONAL {
+?case prop:lawsapplied ?laws_applied .
+}
+FILTER (langMatches(lang(?abstract),"en"))
+FILTER (langMatches(lang(?holding),"en"))
+}
+-----------------
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop:<http://dbpedia.org/property/>
+PREFIX ont:<http://dbpedia.org/ontology/>
+SELECT ?case from <http://dbpedia3.8> where {
+?case rdfs:label "Blah" .
+}
+-----------------

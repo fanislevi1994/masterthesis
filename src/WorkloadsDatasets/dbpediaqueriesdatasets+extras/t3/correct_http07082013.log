@@ -1,0 +1,1904 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, encode_for_uri("Orchard Road")) && lang(?title) = 'en') }
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mecontrib: <http://rdf.myexperiment.org/ontologies/contributions/>
+SELECT DISTINCT ?prop ?range from <http://dbpedia3.8> where { 
+                                       <http://dbpedia.org/resource/Water> ?prop ?value .
+                                       ?prop rdfs:range ?range }
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://www.w3.org/2001/XMLSchema#string> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://www.w3.org/2001/XMLSchema#string> }
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mecontrib: <http://rdf.myexperiment.org/ontologies/contributions/>
+SELECT DISTINCT ?prop ?range from <http://dbpedia3.8> where { <http://dbpedia.org/resource/Water> a mecontrib:Workflow .
+                                       <http://dbpedia.org/resource/Water> ?prop ?value .
+                                       ?prop rdfs:range ?range }
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoSenato.rdf/ms5_300697>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/pathbio:Birth/persona.rdf/p300069>}
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?creator rdf:type dbp-owl:ComicsCreator ;
+   dbp-owl:notableWork ?title ;
+   dbp-owl:genre ?genre .
+
+}
+
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?creator rdf:type dbp-owl:ComicsCreator .
+
+}
+
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/S01928>}
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?city a dbp-owl:City;
+  dbp-owl:country dbp:Japan;
+  dbp-owl:populationTotal ?populationTotal . 
+}
+ORDER BY DESC(?populationTotal)
+LIMIT 10
+
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac04_2295>}
+-----------------
+select * from <http://dbpedia3.8> where { {<http://dbpedia.org/resource/Doce_River> <http://www.w3.org/2000/01/rdf-schema#comment> ?valor filter(lang(?valor) = 'pt')} union { <http://dbpedia.org/resource/Doce_River> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?valor }}
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?city rdf:type dbpo:BasketballPlayer .
+}
+ORDER BY DESC(?populationTotal)
+LIMIT 10
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac01_2464>}
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?name rdf:type dbpo:BasketballPlayer .
+}
+LIMIT 10
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?name rdf:type dbp-owl:BasketballPlayer .
+}
+LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+
+SELECT ?filmname ?birth
+from <http://dbpedia3.8> where 
+{
+ ?film foaf:name ?filmname .
+ ?film dbo:starring ?person .
+ ?person dbo:birthDate ?birth ;
+ foaf:name ?name .
+ FILTER (str(?name) = "May Robson")
+}
+-----------------
+PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
+SELECT ?mbox
+from <http://dbpedia3.8> where
+  { ?x foaf:name "Johnny Lee Outlaw" .
+    ?x foaf:mbox ?mbox }
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+ctyvginjokmpl,
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?name rdf:type yago:NationalBasketballAssociationTeams .
+}
+LIMIT 10
+-----------------
+select distinct ?city 
+from <http://dbpedia3.8> where 
+{
+[] <http://dbpedia.org/ontology/city> ?city
+} LIMIT 5000
+ OFFSET  10000
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+PREFIX yago: <http://dbpedia.org/class/yago/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?name rdf:type yago:NationalBasketballAssociationTeams .
+}
+LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?manufacturer ?name ?car
+from <http://dbpedia3.8> where {
+    ?car <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Luxury_vehicles> .
+    ?car foaf:name ?name .
+    ?car dbo:manufacturer ?man .
+    ?man foaf:name ?manufacturer
+}
+ORDER by ?manufacturer ?name
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?manufacturer ?name ?car
+from <http://dbpedia3.8> where {
+    ?car <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Luxury_vehicles> .
+    ?car foaf:name ?name .
+    ?car dbo:manufacturer ?man .
+    ?man foaf:name ?manufacturer
+}
+ORDER by ?manufacturer ?name
+
+-----------------
+PREFIX dbp: <http://dbpedia.org/resource/>
+PREFIX dbp-owl: <http://dbpedia.org/ontology/>
+
+SELECT *
+from <http://dbpedia3.8> where {
+  ?teamName rdf:type yago:NationalBasketballAssociationTeams .
+}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "^Masahiro Nakai$", "i")) }
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "^Ichiro Suzuki$", "i")) }
+-----------------
+select distinct ?member from <http://dbpedia3.8> where {
+
+    {
+        ?member dc:subject category:Members_of_the_United_States_House_of_Representatives .
+    } union {
+        ?member dc:subject [skos:broader category:Members_of_the_United_States_House_of_Representatives] .
+    }
+
+    ?member a db:Person .
+}
+-----------------
+select distinct ?member from <http://dbpedia3.8> where {
+
+    {
+        ?member dc:subject category:Members_of_the_United_States_House_of_Representatives .
+    } union {
+        ?member dc:subject [skos:broader category:Members_of_the_United_States_House_of_Representatives] .
+    }
+
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name ?birth ?death ?person from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person dbo:birthDate ?birth .
+     ?person foaf:name ?name .
+     ?person dbo:deathDate ?death .
+     FILTER (?birth < "1900-01-01"^^xsd:date) .
+}
+ORDER BY ?name
+-----------------
+prefix db: <http://dbpedia.org/ontology/>
+
+select distinct ?member from <http://dbpedia3.8> where {
+
+    {
+        ?member dc:subject category:Members_of_the_United_States_House_of_Representatives .
+    } union {
+        ?member dc:subject [skos:broader category:Members_of_the_United_States_House_of_Representatives] .
+    }
+
+    ?member a db:Person .
+}
+-----------------
+prefix db: <http://dbpedia.org/ontology/>
+
+select distinct ?member from <http://dbpedia3.8> where {
+
+    {
+        ?member dc:subject category:Members_of_the_United_States_House_of_Representatives .
+    } union {
+        ?member dc:subject [skos:broader category:Members_of_the_United_States_House_of_Representatives] .
+    }
+
+    ?member a db:Person .
+}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/pathskos:changeNote/aic.rdf/aic4_00005_7>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr28033>}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT * from <http://dbpedia3.8> where {
+?p a <http://dbpedia.org/ontology/ProgrammingLanguage>.
+?p <http://dbpedia.org/property/influencedBy> ?influencedBy.
+} 
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT * from <http://dbpedia3.8> where {
+?p a <http://dbpedia.org/ontology/ProgrammingLanguage>.
+?p <http://dbpedia.org/property/influencedBy> ?influencedBy.
+} 
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT * from <http://dbpedia3.8> where {
+?subject owl:sameAs ?link.
+?subject rdf:type <http://dbpedia.org/ontology/Writer>
+} LIMIT 20
+-----------------
+Select ?sujeito
+Where
+{
+?sujeito
+<http://dbpedia.org/property/birthPlace>
+<http://dbpedia.org/resource/Brazil>.
+
+?sujeito
+?predicado
+<http://dbpedia.org/ontology/FormulaOneRacer>.
+}
+
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/%C3%88ve_Curie> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/%C3%88ve_Curie> }
+}
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/%C3%88ve_Curie> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/%C3%88ve_Curie> }
+}
+-----------------
+Select ?sujeito
+Where
+{
+?sujeito
+<http://dbpedia.org/ontology/birthPlace>
+<http://dbpedia.org/resource/Brazil>.
+
+?sujeito
+?predicado
+<http://dbpedia.org/ontology/FormulaOneRacer>.
+}
+
+-----------------
+SELECT ?resource ?value
+from <http://dbpedia3.8> where { ?resource <http://dbpedia.org/ontology/author> ?value }
+ORDER BY ?resource ?value
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/%C3%89mile_Gaboriau> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/%C3%89mile_Gaboriau> }
+}
+-----------------
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/%C3%89mile_Gaboriau> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/%C3%89mile_Gaboriau> }
+}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT DISTINCT *
+from <http://dbpedia3.8> where 
+{  ?country rdf:type dbpedia-owl:Country .
+   ?country dcterms:subject ?subject .
+   [] foaf:name "Uruguay"@en .
+   [] dcterms:subject ?subject . 
+}
+-----------------
+Select ?sujeito ?race
+Where
+{
+?sujeito
+<http://dbpedia.org/ontology/firstrace>
+?race.
+
+
+}
+
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT DISTINCT *
+from <http://dbpedia3.8> where 
+{  ?country rdf:type dbpedia-owl:Country .
+   ?country dcterms:subject ?subject .
+   ?country2 foaf:name "Uruguay"@en .
+   ?country2 dcterms:subject ?subject . 
+}
+-----------------
+Select ?sujeito ?race
+Where
+{
+?sujeito
+<http://dbpedia.org/ontology/firstRace>
+?race.
+
+
+}
+
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT DISTINCT *
+from <http://dbpedia3.8> where 
+{  ?country rdf:type dbpedia-owl:Country .
+   ?country dcterms:subject ?subject .
+   ?country2 foaf:name "Uruguay"@en .
+   ?country2 dcterms:subject ?subject . 
+}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/pathbio:Birth/persona.rdf/p50097>}
+-----------------
+Select ?sujeito ?predicado
+Where
+{
+?sujeito
+?predicado
+<http://dbpedia.org/ontology/formulaOneRacer>.
+
+
+
+}
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?name ?birth ?role
+from <http://dbpedia3.8> where{
+?x a foaf:Person ;
+dbpprop:fullname ?name;
+dbpprop:countryofbirth ?birth;
+dbpprop:role ?role.
+} LIMIT 100
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT DISTINCT *
+from <http://dbpedia3.8> where 
+{  ?country a dbpedia-owl:Country ;
+   dcterms:subject ?subject .
+   ?country2 a dbpedia-owl:Country ;
+   rdfs:label "Uruguay"@en ;
+   dcterms:subject ?subject . 
+}
+-----------------
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+SELECT ?name
+from <http://dbpedia3.8> where {
+    ?person foaf:name ?name .
+}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/F04192>}
+-----------------
+select distinct ?o  from <http://dbpedia3.8> where {?s ?p ?o} LIMIT 100
+-----------------
+select distinct ?o  from <http://dbpedia3.8> where {?s ?p ?o} LIMIT 500
+-----------------
+select distinct ?o  from <http://dbpedia3.8> where {?s ?p ?o} LIMIT 1000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select distinct ?concept from <http://dbpedia3.8> where {
+?s a ?concept 
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?x
+from <http://dbpedia3.8> where { ?x  <http://www.w3.org/2001/vcard-rdf/3.0#FN>  "John Smith" }
+-----------------
+select distinct ?p  from <http://dbpedia3.8> where {?s ?p 2} LIMIT 1000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?x
+from <http://dbpedia3.8> where { ?x  <http://www.w3.org/2001/vcard-rdf/3.0#FN>  "durand" }
+-----------------
+select distinct ?p  from <http://dbpedia3.8> where {?s ?p 日本語} LIMIT 1000
+-----------------
+select distinct ?p  from <http://dbpedia3.8> where {?s ?p 日本語} LIMIT 1000
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr22200>}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select * from <http://dbpedia3.8> where {
+   ?categorie rdfs:label "Œuvre conservée au Louvre"@fr .
+   ?oeuvre <http://dbpedia.org/ontology/wikiPageWikiLink> ?categorie
+ } LIMIT 1000
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select * from <http://dbpedia3.8> where {
+   ?categorie rdfs:label "Œuvre conservée au Louvre"@fr .
+   ?oeuvre <http://dbpedia.org/ontology/wikiPageWikiLink> ?categorie
+ } LIMIT 1000
+-----------------
+SELECT COUNT(?uri) AS ?count from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . }
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 0
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 1000
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 3000
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 2000
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 5000
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 4000
+-----------------
+SELECT ?uri ?name from <http://dbpedia3.8> where { ?uri rdf:type dbpedia-owl:University . ?uri foaf:name ?name . } LIMIT 1000 OFFSET 6000
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Jonasz"@fr} UNION {?auteur foaf:name "Michel Jonasz"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Jonasz"@fr} UNION {?auteur foaf:name "Michel Jonasz"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac03_3489>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mr4313_19_10061895>}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Jonasz"@fr} UNION {?auteur foaf:name "Michel Jonasz"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Jonasz"@fr} UNION {?auteur foaf:name "Michel Jonasz"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoSenato.rdf/ms6_36110>}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Apache_Jackrabbit>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Apache_Jackrabbit>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Apache_Jackrabbit>
+-----------------
+PREFIX plants: <http://www.linkeddatatools.com/plants>
+SELECT * from <http://dbpedia3.8> where
+{
+?name plants:family ?family
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+PREFIX plants: <http://www.linkeddatatools.com/plants>
+SELECT * from <http://dbpedia3.8> where
+{
+?name plants:family ?family
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 10 
+-----------------
+DESCRIBE <http://dbpedia.org/resource/>
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/CD1100025227>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mc12_22560_19940407>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr22375>}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Singapore Botanic Gardens", "i") && lang(?title) = 'en') }
+
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Botanic Gardens", "i") && lang(?title) = 'en') }
+
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Botanic Gardens", "i")) }
+
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Singapore Botanic", "i")) }
+
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Singapore", "i")) }
+
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac15_3025>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr22284>}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {["java"] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Arthur Rimbaud"@fr} UNION {?auteur foaf:name "Arthur Rimbaud"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Arthur Rimbaud"@fr} UNION {?auteur foaf:name "Arthur Rimbaud"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name ?birth ?death ?person from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person dbo:birthDate ?birth .
+     ?person foaf:name ?name .
+     ?person dbo:deathDate ?death .
+     FILTER (?birth < "1900-01-01"^^xsd:date) .
+}
+ORDER BY ?name
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name ?birth ?death ?person from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person dbo:birthDate ?birth .
+     ?person foaf:name ?name .
+     ?person dbo:deathDate ?death .
+     FILTER (?birth < "1900-01-01"^^xsd:date) .
+}
+ORDER BY ?name
+-----------------
+PREFIX dbr: <http://dbpedia.org/resource/>
+SELECT * 
+from <http://dbpedia3.8> where { 
+{?s ?p dbr:Ural_Mining_and_Metallurgical_Company}
+UNION
+{dbr:Ural_Mining_and_Metallurgical_Company ?p ?s}
+}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr22319>}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i")) }
+
+-----------------
+PREFIX property: <http://dbpedia.org/property/>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mr4403_19_10061895>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/deputato.rdf/d32010_10>}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/G09684>}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i"))}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; ?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i") || regex(?name, "Hilton Singapore", "i"))}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Hilton Singapore", "i") || regex(?name, "Hilton Singapore", "i"))}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?name, "Hilton Singapore", "i") || regex(?name, "Hilton Singapore", "i"))}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?name, "Hilton Singapore", "i") || regex(?name, "Hilton Singapore", "i"))}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?name, "Tokyo", "i") || regex(?name, "Tokyo", "i"))}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac08_2783>}
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?name ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?name, "Tokyo", "i"))}
+
+-----------------
+PREFIX property: <http://dbpedia.org/property/> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?name ?page ?lat ?long from <http://dbpedia3.8> where {?link property:name ?name; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?name, "Tokyo", "i"))}
+
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/F01997>}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Domenico Scarlatti"@fr} UNION {?auteur foaf:name "Domenico Scarlatti"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Domenico Scarlatti"@fr} UNION {?auteur foaf:name "Domenico Scarlatti"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?person ?bio from <http://dbpedia3.8> where {
+?person dbo:birthPlace <http://dbpedia.org/resource/Pittsburgh> ;
+        rdf:type <http://dbpedia.org/class/yago/AmericanBloggers> ;
+        dbo:abstract ?bio .
+}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/CD3300083427>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mr4405_19_10061895>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/P10633>}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select (count(?date) as ?count) ?film ?date1  { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date1 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING ?count=1 LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select (count(?date) as ?count) ?film ?date1  { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date1 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} HAVING ?count=1 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a dbpedia:ontology/Company 
+} limit 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film ?date1  { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date1 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} HAVING count(?date)=1 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Sarah_Parcak>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film ?date1  { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date1 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company>
+} limit 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film count(?date) AS ? count { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ? count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film, (count(?date) AS ? count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Sarah_Parcak>
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+filter regex(?comp, "ural", "i")
+} limit 10
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/discussione.rdf/disDibNonLeg00740_font1_IdVol7_Voce300_NumTit870_19470927>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/attocamera.rdf/ac13_2302>}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Sarah_Parcak>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Sarah_Parcak>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)==1 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+filter regex(?comp, "ural", "i")
+filter(langMatches(lang(?comp), "en"))
+} limit 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Dallas_Campbell>
+-----------------
+select distinct ?p ?o from <http://dbpedia3.8> where {
+  <http://dbpedia.org/resource/Public_economics> ?p ?o
+}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=2 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Dallas_Campbell>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+} GROUP BY ?film HAVING count(?date)=1 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Dallas_Campbell>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Dallas_Campbell>
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Luda"@fr} UNION {?auteur foaf:name "Luda"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Luda"@fr} UNION {?auteur foaf:name "Luda"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=2 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+?c dbpedia2:locationCountry dbpedia:Russia .
+filter(langMatches(lang(?comp), "en"))
+} limit 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Liz_Bonnin>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Liz_Bonnin>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Liz_Bonnin>
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+?c dbpedia2:locationCountry :Russia .
+filter(langMatches(lang(?comp), "en"))
+} limit 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT distinct *
+from <http://dbpedia3.8> where {
+
+       {?name rdf:type owl:Class . ?name rdfs:subClassOf ?x .}
+       UNION
+       {?name rdf:type owl:Class . ?name rdfs:subClassOf ?x . ?x rdfs:subClassOf ?y .}
+       UNION
+       {?name rdf:type owl:Class . ?name rdfs:subClassOf ?x . ?x rdfs:subClassOf ?y . ?y rdfs:subClassOf ?z .}
+       UNION
+       {?name rdf:type owl:Class . ?name rdfs:subClassOf ?x . ?x rdfs:subClassOf ?y . ?y rdfs:subClassOf ?z . ?z rdfs:subClassOf ?l .}
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?property ?hasValue ?isValueOf
+from <http://dbpedia3.8> where {
+  { <http://dbpedia.org/resource/Pittsburgh> ?property ?hasValue }
+  UNION
+  { ?isValueOf ?property <http://dbpedia.org/resource/Pittsburgh> }
+}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Liz_Bonnin>
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select (count(?comp) as ?num)
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+?c dbpedia2:locationCountry :Russia .
+filter(langMatches(lang(?comp), "en"))
+}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Ancient_Egypt>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date2000 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date2000) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 && count(?date2000)=1 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select ?comp as ?num
+from <http://dbpedia3.8> where{
+?c rdfs:label ?comp .
+?c a <http://dbpedia.org/ontology/Company> .
+?c dbpedia2:locationCountry :Russia .
+filter(langMatches(lang(?comp), "en"))
+}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Ancient_Egypt>
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?population from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Pittsburgh> dbpedia2:populationMetro ?population
+}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbo:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:releaseDate ?date2000 . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date2000) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=1 && count(?date2000)=1 LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?person from <http://dbpedia3.8> where {
+?person dbo:birthPlace <http://dbpedia.org/resource/Pittsburgh> .
+}
+
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Ancient_Egypt>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Ancient_Egypt>
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/P06742>}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Archaeology>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Archaeology>
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Archaeology>
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbpedia-owl:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date . 
+   ?film dbo:country dbr:United_States .  
+   FILTER( xsd:date(?date) > "2000"^^xsd:date ) 
+} GROUP BY ?film HAVING count(?date)=2 LIMIT 10
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Archaeology>
+-----------------
+SELECT DISTINCT lang(?abstract) as ?lang
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Defense_of_Sihang_Warehouse> <http://dbpedia.org/ontology/abstract> ?abstract .
+}
+-----------------
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Defense_of_Sihang_Warehouse> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER ( langMatches(lang(?abstract), "en"))
+}
+-----------------
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Atomic_bombings_of_Hiroshima_and_Nagasaki> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER ( langMatches(lang(?abstract), "en"))
+}
+-----------------
+SELECT DISTINCT lang(?abstract) as ?lang
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/Atomic_bombings_of_Hiroshima_and_Nagasaki> <http://dbpedia.org/ontology/abstract> ?abstract .
+}
+-----------------
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/George_Murray_Rolland> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER ( langMatches(lang(?abstract), "en"))
+}
+-----------------
+SELECT DISTINCT lang(?abstract) as ?lang
+from <http://dbpedia3.8> where {
+<http://dbpedia.org/resource/George_Murray_Rolland> <http://dbpedia.org/ontology/abstract> ?abstract .
+}
+-----------------
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+
+select ?film (count(?date) AS ?count) { 
+   ?film dbpedia-owl:starring ?actor . 
+   ?film rdf:type dbo:Film . 
+   ?film dbo:releaseDate ?date .  
+} GROUP BY ?film HAVING count(?date)=2 LIMIT 10
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/M02717>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/M00767>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mc13_35370_19960509>}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Juan Rulfo"@fr} UNION {?auteur foaf:name "Juan Rulfo"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Juan Rulfo"@fr} UNION {?auteur foaf:name "Juan Rulfo"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Japanese_verb_conjugation>
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/discussione.rdf/disScheda_Tit_15_IdVol574_19730301>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/N00779>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/entiCamera/Clerici_Societa_anonima_Officine_Clerici>}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
+SELECT ?name ?mbox
+from <http://dbpedia3.8> where
+  { ?x foaf:name ?name .
+    ?x foaf:mbox ?mbox }
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf:   <http://xmlns.com/foaf/0.1/>
+SELECT ?name ?mbox
+from <http://dbpedia3.8> where
+  { ?x foaf:name ?name .
+    ?x foaf:mbox ?mbox } LIMIT 10
+-----------------
+select * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/E.C.H._Will> ?p ?v. optional { ?v rdfs:label ?lbl. filter(lang(?lbl)="" || langmatches(lang(?lbl),"EN")) } optional { ?v dbpprop:occupation ?occ. filter(lang(?occ)="" || langmatches(lang(?occ),"EN")) } } order by ?p
+-----------------
+select * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/D-A-S-H> ?p ?v. optional { ?v rdfs:label ?lbl. filter(lang(?lbl)="" || langmatches(lang(?lbl),"EN")) } optional { ?v dbpprop:occupation ?occ. filter(lang(?occ)="" || langmatches(lang(?occ),"EN")) } } order by ?p
+-----------------
+select * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/D-Noy_Muzik> ?p ?v. optional { ?v rdfs:label ?lbl. filter(lang(?lbl)="" || langmatches(lang(?lbl),"EN")) } optional { ?v dbpprop:occupation ?occ. filter(lang(?occ)="" || langmatches(lang(?occ),"EN")) } } order by ?p
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/organoGoverno.rdf/ogr7_19>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/organo.rdf/or11_3_18>}
+-----------------
+select * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/American_Express> ?p ?v. optional { ?v rdfs:label ?lbl. filter(lang(?lbl)="" || langmatches(lang(?lbl),"EN")) } optional { ?v dbpprop:occupation ?occ. filter(lang(?occ)="" || langmatches(lang(?occ),"EN")) } } order by ?p
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/L05758>}
+-----------------
+select * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/American_Express> ?p ?v. optional { ?v rdfs:label ?lbl. filter(lang(?lbl)="" || langmatches(lang(?lbl),"EN")) } optional { ?v dbpprop:occupation ?occ. filter(lang(?occ)="" || langmatches(lang(?occ),"EN")) } } order by ?p
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name ?place from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person foaf:name ?name .
+}
+ORDER BY ?name
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person foaf:name ?name .
+}
+ORDER BY ?name
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Piquemal"@fr} UNION {?auteur foaf:name "Michel Piquemal"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Michel Piquemal"@fr} UNION {?auteur foaf:name "Michel Piquemal"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/ufficioParlamentare.rdf/upr167_11099_19340502>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/BF_12_40194_13>}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Vampire Weekend"@fr} UNION {?auteur foaf:name "Vampire Weekend"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Stéphane Brizé"@fr} UNION {?auteur foaf:name "Stéphane Brizé"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Stéphane Brizé"@fr} UNION {?auteur foaf:name "Stéphane Brizé"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Stéphane Brizé"@fr} UNION {?auteur foaf:name "Stéphane Brizé"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Stéphane Brizé"@fr} UNION {?auteur foaf:name "Stéphane Brizé"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Alan Ball"@fr} UNION {?auteur foaf:name "Alan Ball"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Alan Ball"@fr} UNION {?auteur foaf:name "Alan Ball"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Vampire Weekend"@fr} UNION {?auteur foaf:name "Vampire Weekend"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Ben Affleck"@fr} UNION {?auteur foaf:name "Ben Affleck"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Ben Affleck"@fr} UNION {?auteur foaf:name "Ben Affleck"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/D03906>}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Copthorne", "i")) }
+
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Noémie Lvovsky"@fr} UNION {?auteur foaf:name "Noémie Lvovsky"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Noémie Lvovsky"@fr} UNION {?auteur foaf:name "Noémie Lvovsky"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX rdfs: <http://dbpedia.org/property/> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:name ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Copthorne", "i")) }
+
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Gilles Bourdos"@fr} UNION {?auteur foaf:name "Gilles Bourdos"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "Copthorne", "i")) }
+
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Sam Mendes"@fr} UNION {?auteur foaf:name "Sam Mendes"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Sam Mendes"@fr} UNION {?auteur foaf:name "Sam Mendes"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Depeche mode"@fr} UNION {?auteur foaf:name "Depeche mode"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Depeche mode"@fr} UNION {?auteur foaf:name "Depeche mode"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "François Ozon"@fr} UNION {?auteur foaf:name "François Ozon"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "François Ozon"@fr} UNION {?auteur foaf:name "François Ozon"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX on: <http://dbpedia.org/ontology/>
+SELECT ?releaseDate from <http://dbpedia3.8> where {?flim a on:film; foaf:name "Kunn Fu Panda"@en; on:releaseDate ?releaseDate}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person foaf:name ?name .
+}
+ORDER BY ?name
+-----------------
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX on: <http://dbpedia.org/ontology/>
+SELECT ?releaseDate from <http://dbpedia3.8> where {?flim a on:film; foaf:name "Kunn Fu Panda"@en; on:releaseDate ?releaseDate}
+-----------------
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX on: <http://dbpedia.org/ontology/>
+SELECT ?releaseDate from <http://dbpedia3.8> where {?flim a on:film; foaf:name "Kunn Fu Panda"@en; on:releaseDate ?releaseDate}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person dbo:birthPlace :Berlin .
+     ?person foaf:name ?name .
+}
+ORDER BY ?name
+-----------------
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX on: <http://dbpedia.org/ontology/>
+SELECT ?releaseDate from <http://dbpedia3.8> where {?flim a on:film; foaf:name "Kunn Fu Panda"@en; on:releaseDate ?releaseDate}
+-----------------
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX on: <http://dbpedia.org/ontology/>
+SELECT ?releaseDate from <http://dbpedia3.8> where {?flim a on:film; foaf:name "Kunn Fu Panda"@en; on:releaseDate ?releaseDate}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> PREFIX foaf:<http://xmlns.com/foaf/0.1/> SELECT DISTINCT ?title ?page ?lat ?long from <http://dbpedia3.8> where {?link rdfs:label ?title; foaf:isPrimaryTopicOf ?page; geo:lat ?lat; geo:long ?long . FILTER (regex(?title, "West Sussex", "i")) }
+
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Andrea Segre"@fr} UNION {?auteur foaf:name "Andrea Segre"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Andrea Segre"@fr} UNION {?auteur foaf:name "Andrea Segre"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Mark Schwahn"@fr} UNION {?auteur foaf:name "Mark Schwahn"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Mark Schwahn"@fr} UNION {?auteur foaf:name "Mark Schwahn"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; foaf:name "Kung Fu Panda"; ?a ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; foaf:name "Kung Fu Panda"@en; ?a ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prop: <http://dbpedia.org/property/
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; prop:name "Kung Fu Panda"; ?a ?b}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "John Barry"@fr} UNION {?auteur foaf:name "John Barry"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "John Barry"@fr} UNION {?auteur foaf:name "John Barry"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prop: <http://dbpedia.org/property/
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; prop:name "Kung Fu Panda"@en; ?a ?b}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/entiCamera/Commissione_Stampacchia>}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prop: <http://dbpedia.org/property/
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; prop:name "Kung Fu Panda"@en; ?a ?b}
+-----------------
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/M01003>}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prop: <http://dbpedia.org/property/>
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:film; prop:name "Kung Fu Panda"@en; ?a ?b}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/E00041>}
+-----------------
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where{
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where {
+?uri a foaf:Person ;
+foaf:name ?name;
+foaf:page ?page;
+foaf:nick ?nick.
+} LIMIT 100 
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prop: <http://dbpedia.org/property/>
+PREFIX rs: <http://dbpedia.org/resource/>
+select ?a ?b from <http://dbpedia3.8> where{rs:Kung_Fu_Panda ?a ?b}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Nathaniel Hawthorne"@fr} UNION {?auteur foaf:name "Nathaniel Hawthorne"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/ontology/Berlin> .
+     ?person <http://xmlns.com/foaf/0.1/name> ?name .
+}
+-----------------
+SELECT ?uri ?name ?page ?nick
+from <http://dbpedia3.8> where {
+?uri a foaf:Person ;
+foaf:name ?name ;
+foaf:page ?page ;
+foaf:nick ?nick .
+} LIMIT 100 
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "John Barry"@fr} UNION {?auteur foaf:name "John Barry"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Daft punk"@fr} UNION {?auteur foaf:name "Daft punk"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "John Barry"@fr} UNION {?auteur foaf:name "John Barry"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Daft punk"@fr} UNION {?auteur foaf:name "Daft punk"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Berlin> .
+     ?person <http://xmlns.com/foaf/0.1/name> ?name .
+}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Kung Fu Panda"@en . ?film ?a ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Kung Fu Panda"@en . ?film ?a ?b}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?name from <http://dbpedia3.8> where {
+     ?person <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Berlin> .
+     ?person <http://xmlns.com/foaf/0.1/name> ?name .
+}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Claude Bourguignon"@fr} UNION {?auteur foaf:name "Claude Bourguignon"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Iron Man"@en . ?film ?a ?b}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Claude Bourguignon"@fr} UNION {?auteur foaf:name "Claude Bourguignon"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Iron Man"@en . ?film ?a ?b}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Gilles Bourdos"@fr} UNION {?auteur foaf:name "Gilles Bourdos"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Nathaniel Hawthorne"@fr} UNION {?auteur foaf:name "Nathaniel Hawthorne"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Iron Man"@en . ?film ?a ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Iron Man"@en . ?film on:releaseDate ?a . ?film prop:released ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film . ?film foaf:name "Iron Man"@en . ?film on:releaseDate ?a . ?film prop:released ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Iron Man"@en ; on:releaseDate ?a ; prop:released ?b}
+-----------------
+SELECT *
+from <http://dbpedia3.8> where {
+    ?person foaf:name ?name .
+    ?person foaf:mbox ?email .
+}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Kung Fu Panda"@en ; on:releaseDate ?a ; prop:released ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Kung Fu Panda"@en ; prop:released ?b}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Kung Fu Panda"@en ; prop:released ?b}
+-----------------
+SELECT DISTINCT ?concept
+from <http://dbpedia3.8> where {
+    ?s a ?concept .
+} LIMIT 50
+        
+-----------------
+PREFIX space: <http://purl.org/net/schemas/space/>
+SELECT ?craft
+{
+  ?craft a space:Spacecraft
+}
+LIMIT 50
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/entiCamera/Commissione_parlamentare_d_inchiesta_per_le_spese_delle_terre_liberate_e_redente>}
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>        
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 15000000) .
+}
+  
+-----------------
+SELECT DISTINCT ?type ?long ?lat ?abstract from <http://dbpedia3.8> where { <http://dbpedia.org/resource/Arvo_P�rt> rdf:type ?type  . OPTIONAL {<http://dbpedia.org/resource/Arvo_P�rt> <http://dbpedia.org/ontology/abstract> ?abstract}.FILTER(lang(?abstract) = 'de').OPTIONAL {<http://dbpedia.org/resource/Arvo_P�rt> geo:long  ?long} . OPTIONAL {<http://dbpedia.org/resource/Arvo_P�rt> geo:lat  ?lat} . }
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>        
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 15000000) .
+} LIMIT 100 
+-----------------
+select *
+{
+<http://dbpedia.org/page/Fight_Club> ?p ?o.
+}
+-----------------
+select *
+{
+<http://dbpedia.org/resource/Fight_Club> ?p ?o.
+}
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Kung Fu Panda"@en .optional(?film on:releaseDate ?a . ?film prop:released ?b)}
+-----------------
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 15000000 &&
+            langMatches(lang(?country_name), "EN")) .
+} ORDER BY DESC(?population)
+        
+-----------------
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 115000000 &&
+            langMatches(lang(?country_name), "EN")) .
+} ORDER BY DESC(?population)
+        
+-----------------
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 25000000 &&
+            langMatches(lang(?country_name), "EN")) .
+} ORDER BY DESC(?population)
+        
+-----------------
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+from <http://dbpedia3.8> where {
+    ?country a type:LandlockedCountries ;
+             rdfs:label ?country_name ;
+             prop:populationEstimate ?population .
+    FILTER (?population > 15000000 &&
+            langMatches(lang(?country_name), "EN")) .
+} ORDER BY DESC(?population)
+        
+-----------------
+PREFIX on: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX prop: <http://dbpedia.org/property/>
+select ?a ?b from <http://dbpedia3.8> where{?film a on:Film ; foaf:name "Kung Fu Panda"@en .OPTIONAL {?film on:releaseDate ?a .} OPTIONAL{ ?film prop:released ?b}}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://lod.xdams.org/reload/oad/uodCPC/G04151>}
+-----------------
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+SELECT ?name ?email
+FROM <http://dig.csail.mit.edu/2008/webdav/timbl/foaf.rdf>
+from <http://dbpedia3.8> where {
+    ?person foaf:name ?name .
+    OPTIONAL { ?person foaf:mbox ?email }
+} ORDER BY ?name LIMIT 10 OFFSET 10
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Harlan Coben"@fr} UNION {?auteur foaf:name "Harlan Coben"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Harlan Coben"@fr} UNION {?auteur foaf:name "Harlan Coben"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+DESCRIBE <http://dbpedia.org/resource/Korea>
+-----------------

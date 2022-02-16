@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="dist/lib/openrdf-sesame-2.7.0.jar"/>
+	<classpathentry kind="lib" path="dist/lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="dist/lib/virt_sesame2-2.0.jar"/>
+	<classpathentry kind="lib" path="dist/lib/virtjdbc4-1.0.jar"/>
+	<classpathentry kind="lib" path="dist/VirtuosoExample.jar"/>
+	<classpathentry kind="lib" path="libs/JDBC_lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="libs/JDBC_lib/openrdf-sesame-2.7.0.jar"/>
+	<classpathentry kind="lib" path="libs/JDBC_lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/JDBC_lib/virt_sesame2-2.0.jar"/>
+	<classpathentry kind="lib" path="libs/JDBC_lib/virtjdbc4-1.0.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

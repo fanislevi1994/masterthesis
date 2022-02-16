@@ -1,0 +1,319 @@
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT ?concept
+from <http://dbpedia3.8> where {
+    ?s a ?concept .
+} LIMIT 50
+   
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://data.opendataday.it/resource/dati.bologna/535/distribution/domandeattualiarispscritta-20120401-20120630_20121026082153_0>}
+-----------------
+select *
+from <http://dbpedia3.8> where
+{
+?e <http://dbpedia.org/ontology/series> <http://dbpedia.org/resource/The_Sopranos> .
+?e <http://dbpedia.org/ontology/releaseDate> ?date .
+?e <http://dbpedia.org/ontology/episodeNumber> ?number .
+}
+order by desc(?date)
+-----------------
+SELECT  ?key ?onto from <http://dbpedia3.8> where {
+		<http://dbpedia.org/resource/M%C3%BCnchen> ?onto ?key .
+		}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mc11_20490_19920422>}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr14104>}
+-----------------
+SELECT  ?key ?onto from <http://dbpedia3.8> where {
+		<http://dbpedia.org/resource/London> ?onto ?key .
+		}
+-----------------
+SELECT  ?key ?onto from <http://dbpedia3.8> where {
+		<http://dbpedia.org/resource/London> ?onto ?key .
+		}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/ufficioParlamentare.rdf/up0_26250_618_26_19460625_19460718>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/organo.rdf/o13_1438>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr14310>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/ufficioParlamentare.rdf/upr135_6_19101217>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/pathbio:Birth/persona.rdf/p301564>}
+-----------------
+SELECT ?person from <http://dbpedia3.8> where{
+   ?person dcterms:subject <http://es.dbpedia.org/resource/Categoría:Científicos_de_España>
+}
+-----------------
+PREFIX esdbp: <http://es.dbpedia.org/property/> 
+PREFIX esdbr: <http://es.dbpedia.org/resource/> 
+SELECT ?hijo ?pareja from <http://dbpedia3.8> where { 
+ esdbr:Margaret_Thatcher    esdbp:hijos    ?hijo .
+ ?hijo                      esdbp:cónyuge  ?pareja .
+}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Martin Winckler"@fr} UNION {?auteur foaf:name "Martin Winckler"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Martin Winckler"@fr} UNION {?auteur foaf:name "Martin Winckler"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Martin Winckler"@fr} UNION {?auteur foaf:name "Martin Winckler"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/persona.rdf/pr4079>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/pathrdfs:domain/rif_versioneTestoAtto>}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://data.opendataday.it/resource/dati.bologna/538/distribution/delibereconsiglio-20120401-20120630_20121025163343_0>}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 10
+
+-----------------
+SELECT  STR(?name) AS ?namanegara  STR(?anthem) AS ?national_anthem STR(?currency) AS ?currency STR(?capital) AS ?capital STR(?drive) AS ?drives_on STR(?long) AS ?long STR(?lat) AS ?lat
+from <http://dbpedia3.8> where {
+    ?negara dcterms:subject category:Indonesia .  
+?negara dbpedia-owl:longName ?name . 
+?negara dbpprop:nationalAnthem ?anthem .
+?negara dbpprop:currency ?currency .
+?negara dbpedia-owl:capital ?capital .
+?negara dbpprop:drivesOn ?drive .
+?negara geo:long ?long .
+?negara geo:lat ?lat .
+}
+ORDER BY ASC(?name)
+-----------------
+SELECT  STR(?name) AS ?namanegara  STR(?anthem) AS ?national_anthem STR(?currency) AS ?currency STR(?capital) AS ?capital STR(?drive) AS ?drives_on STR(?long) AS ?long STR(?lat) AS ?lat
+from <http://dbpedia3.8> where {
+    ?negara dcterms:subject category:Japan .  
+?negara dbpedia-owl:longName ?name . 
+?negara dbpprop:nationalAnthem ?anthem .
+?negara dbpprop:currency ?currency .
+?negara dbpedia-owl:capital ?capital .
+?negara dbpprop:drivesOn ?drive .
+?negara geo:long ?long .
+?negara geo:lat ?lat .
+}
+ORDER BY ASC(?name)
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 10
+
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/Rome> ?property ?object.FILTER ((( isIRI(?object) && ?property != <http://xmlns.com/foaf/0.1/depiction> )|| ?property = <http://www.w3.org/2000/01/rdf-schema#label>  || ?property = <http://www.georss.org/georss/point> || ?property = <http://xmlns.com/foaf/0.1/surname> || ?property = <http://xmlns.com/foaf/0.1/name> || ?property = <http://purl.org/dc/elements/1.1/title>))}  ORDER BY ?property
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Pierre Perret"@fr} UNION {?auteur foaf:name "Pierre Perret"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Caroline Terrée"@fr} UNION {?auteur foaf:name "Caroline Terrée"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?city ?abstract ?country ?website ?pop ?thumbnail ?latitude ?longitude ?area from <http://dbpedia3.8> where { ?city rdf:type dbpedia-owl:Place . ?city rdfs:label "Nice"@en . ?city dbpedia-owl:abstract ?abstract . ?city dbpedia-owl:country ?country . OPTIONAL {?city dbpedia-owl:populationTotal ?pop} . OPTIONAL {?city dbpedia-owl:wikiPageExternalLink ?website} . OPTIONAL {?city dbpedia-owl:thumbnail ?thumbnail} . OPTIONAL {?city geo:lat ?latitude} . OPTIONAL {?city geo:long ?longitude} . OPTIONAL {?city dbpedia-owl:area ?area} . ?country rdfs:label "France"@en . FILTER (lang(?abstract) = 'en') }
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mr1000_7_02041860>}
+-----------------
+SELECT DISTINCT ?city ?abstract ?country ?website ?pop ?thumbnail ?latitude ?longitude ?area from <http://dbpedia3.8> where { ?city rdf:type dbpedia-owl:Place . ?city rdfs:label "Sousse"@en . ?city dbpedia-owl:abstract ?abstract . ?city dbpedia-owl:country ?country . OPTIONAL {?city dbpedia-owl:populationTotal ?pop} . OPTIONAL {?city dbpedia-owl:wikiPageExternalLink ?website} . OPTIONAL {?city dbpedia-owl:thumbnail ?thumbnail} . OPTIONAL {?city geo:lat ?latitude} . OPTIONAL {?city geo:long ?longitude} . OPTIONAL {?city dbpedia-owl:area ?area} . ?country rdfs:label "Tunisia"@en . FILTER (lang(?abstract) = 'en') }
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Caroline Terrée"@fr} UNION {?auteur foaf:name "Caroline Terrée"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "David Klass"@fr} UNION {?auteur foaf:name "David Klass"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "David Klass"@fr} UNION {?auteur foaf:name "David Klass"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "David Klass"@fr} UNION {?auteur foaf:name "David Klass"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?property ?domain ?range ?label
+FROM <http://dbpedia.org> from <http://dbpedia3.8> where {
+	?property rdf:type owl:DatatypeProperty .
+  OPTIONAL {?property rdfs:domain ?domain}
+	?property rdfs:range ?range .
+	?property rdfs:label ?label . FILTER (lang(?label) = "en" || lang(?label) = "")
+} LIMIT 1000
+-----------------
+SELECT DISTINCT ?property ?domain ?range ?label
+FROM <http://dbpedia.org> from <http://dbpedia3.8> where {
+	?property rdf:type owl:ObjectProperty .
+  OPTIONAL {?property rdfs:domain ?domain}
+	OPTIONAL {?property rdfs:range ?range .
+	?range rdf:type owl:Class.}
+	?property rdfs:label ?label . FILTER (lang(?label) = "en" || lang(?label) = "")
+} LIMIT 1000
+-----------------
+SELECT DISTINCT ?class ?superclass ?label ?count from <http://dbpedia3.8> where {
+	{?class rdfs:label ?label} FILTER (lang(?label) = "en" || lang(?label) = "")
+	{SELECT ?class ?superclass count(?instance) as ?count {
+		{?class rdf:type owl:Class}
+		{?class rdfs:subClassOf ?superclass}
+		OPTIONAL {?instance rdf:type ?class}
+	}}} LIMIT 1000
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Charlotte Bousquet"@fr} UNION {?auteur foaf:name "Charlotte Bousquet"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Charlotte Bousquet"@fr} UNION {?auteur foaf:name "Charlotte Bousquet"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT ?Museum   (SAMPLE(?name) as ?name)   (SAMPLE(?abstract) as ?abstract)   (SAMPLE(?thumbnail) as ?thumbnail)   (MAX(?latitude) as ?latitude)   (MAX(?longitude) as ?longitude)    (SAMPLE(?website) as ?website)
+  (SAMPLE(?homepage) as ?homepage)   (SAMPLE(?wikilink) as ?wikilink)
+from <http://dbpedia3.8> where {   ?Museum a dbpedia-owl:Museum ;   dbpprop:name ?name ; dbpedia-owl:abstract ?abstract ;  dbpedia-owl:thumbnail ?thumbnail ; 
+          geo:lat ?latitude ;   geo:long ?longitude ;     dbpprop:website ?website ;    foaf:homepage ?homepage ;    foaf:isPrimaryTopicOf ?wikilink . 
+FILTER(langMatches(lang(?abstract),"EN"))  FILTER (langMatches(lang(?name),"EN")) } GROUP BY ?Museum
+LIMIT 20
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jim Fergus"@fr} UNION {?auteur foaf:name "Jim Fergus"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Jim Fergus"@fr} UNION {?auteur foaf:name "Jim Fergus"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/mandatoCamera.rdf/mc15_300447_20060421>}
+-----------------
+select ?p, ?o
+from <http://dbpedia3.8> where {
+`iri('http://dbpedia.org/resource/Turo_Asplund')` ?p ?o.
+?o a dbpedia-owl:Person.
+}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr14046>}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Philippe Barbeau"@fr} UNION {?auteur foaf:name "Philippe Barbeau"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object <http://www.w3.org/2002/07/owl#sameAs> <http://dati.camera.it/ocd/seduta.rdf/sr14350>}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 101
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?abstract
+from <http://dbpedia3.8> where {
+{ <http://dbpedia.org/resource/Institut_Eurecom> rdf:type ?abstract .
+}
+}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 102
+-----------------
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?label
+from <http://dbpedia3.8> where {
+{ 
+       ?s rdfs:label ?label . 
+        FILTER (lang(?label) = 'en'). 
+            ?label bif:contains "Rahul" . 
+            ?s dcterms:subject ?sub; 
+               dc:description ?desc;
+               rdf:type ?type
+
+}
+}
+
+-----------------
+SELECT count(?language) ?language from <http://dbpedia3.8> where { ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o . BIND (lang(?o) AS ?language)}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Richard A. Knaak"@fr} UNION {?auteur foaf:name "Richard A. Knaak"@fr}.{{?auteur dbpedia-owl:influencedBy ?influence} UNION {?auteur dbpprop:influences ?influence} UNION {?influence dbpedia-owl:influenced ?auteur} UNION {?influence dbpprop:influenced ?auteur.}}.?influence rdf:type dbpedia-owl:Person.?influence dbpedia-owl:birthDate ?influenceDateBirth.{?influence rdfs:label ?Influences }.FILTER (LANG(?Influences ) = "fr")}
+-----------------
+SELECT count(?language) ?language from <http://dbpedia3.8> where { ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o . BIND (lang(?o) AS ?language)}
+-----------------
+SELECT DISTINCT ?Influences from <http://dbpedia3.8> where {{?auteur rdfs:label "Richard A. Knaak"@fr} UNION {?auteur foaf:name "Richard A. Knaak"@fr}.{{?auteur dbpedia-owl:influenced ?influence} UNION {?auteur dbpprop:influenced ?influence} UNION {?influence dbpedia-owl:influencedBy ?auteur} UNION {?influence dbpprop:influences ?auteur}}{?influence rdfs:label ?Influences}.FILTER (LANG(?Influences) = "fr")}
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+select distinct ?Concept from <http://dbpedia3.8> where {[] a ?Concept} LIMIT 100
+-----------------
+select distinct ?name  ?othername from <http://dbpedia3.8> where
+{
+
+{
+?name a yago:AmericanRacecarDrivers
+}
+OPTIONAL
+{
+?name dbpprop:alternativeNames ?othername
+}
+}
+-----------------
+select distinct ?name  ?othername from <http://dbpedia3.8> where
+{
+
+{
+?name a yago:AmericanRacecarDrivers
+}
+OPTIONAL
+{
+?name dbpprop:alternativeNames ?othername
+}
+}
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT * from <http://dbpedia3.8> where {
+?subject rdf:type <http://dbpedia.org/class/yago/CapitalsInEurope>.
+?subject rdfs:label ?label.
+?subject rdfs:comment ?abstract.
+FILTER (lang(?label) = "en" && lang(?abstract) = "en")
+} LIMIT 20
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/John_Coltrane> ?property ?object.FILTER ((( isIRI(?object) && ?property != <http://xmlns.com/foaf/0.1/depiction> )|| ?property = <http://www.w3.org/2000/01/rdf-schema#label>  || ?property = <http://www.georss.org/georss/point> || ?property = <http://xmlns.com/foaf/0.1/surname> || ?property = <http://xmlns.com/foaf/0.1/name> || ?property = <http://purl.org/dc/elements/1.1/title>))}  ORDER BY ?property
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?type
+from <http://dbpedia3.8> where {
+{ 
+       ?s rdfs:label ?label . 
+        FILTER (lang(?label) = 'en'). 
+            ?label bif:contains " Imagine_Dragons" . 
+            ?s rdf:type ?type
+
+}
+}
+
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {?object ?property <http://dbpedia.org/resource/John_Coltrane>.FILTER(isIRI(?object))} LIMIT 100
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/Billie_Holiday> ?property ?object.FILTER ((( isIRI(?object) && ?property != <http://xmlns.com/foaf/0.1/depiction> )|| ?property = <http://www.w3.org/2000/01/rdf-schema#label>  || ?property = <http://www.georss.org/georss/point> || ?property = <http://xmlns.com/foaf/0.1/surname> || ?property = <http://xmlns.com/foaf/0.1/name> || ?property = <http://purl.org/dc/elements/1.1/title>))}  ORDER BY ?property
+-----------------
+SELECT DISTINCT * from <http://dbpedia3.8> where {<http://dbpedia.org/resource/John_Coltrane> ?property ?object.FILTER ((( isIRI(?object) && ?property != <http://xmlns.com/foaf/0.1/depiction> )|| ?property = <http://www.w3.org/2000/01/rdf-schema#label>  || ?property = <http://www.georss.org/georss/point> || ?property = <http://xmlns.com/foaf/0.1/surname> || ?property = <http://xmlns.com/foaf/0.1/name> || ?property = <http://purl.org/dc/elements/1.1/title>))}  ORDER BY ?property
+-----------------
