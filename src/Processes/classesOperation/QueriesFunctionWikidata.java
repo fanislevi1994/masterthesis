@@ -2143,7 +2143,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
     public void Algo_C(String nodename, int node) throws FileNotFoundException, IOException {
         nodesc = node;
         StringTokenizer st;
-        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test1.tsv"));
+        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test.tsv"));
         String dataRow = TSVFile.readLine();
         while (dataRow != null) {
             st = new StringTokenizer(dataRow, "\t");
@@ -2163,7 +2163,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
             listString = listString.replace("?query=", "").trim();
             this.setDecode(listString);
 
-            //  System.out.println("decoder is " + this.getDecode());
+             // System.out.println("decoder is " + this.getDecode());
             //getQueryLevelC(this.getDecode(), nodename);
             String que = "SELECT DISTINCT ?var1  ?var1Label  ?var2  ?var2Label  ?var3  ?var4 \n"
                     + "WHERE {\n"
@@ -2333,7 +2333,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
         int cou = 0;
         nodesd_node = node;
         StringTokenizer st;
-        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test1.tsv"));
+        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test.tsv"));
         String dataRow = TSVFile.readLine();
         while (dataRow != null) {
 
@@ -2547,7 +2547,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
     public void Algo_Calculation(String nodename, int node) throws FileNotFoundException, IOException {
         nodesd = node;
         StringTokenizer st;
-        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test1.tsv"));
+        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\train.tsv"));
         String dataRow = TSVFile.readLine();
         while (dataRow != null) {
             st = new StringTokenizer(dataRow, "\t");

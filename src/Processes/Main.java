@@ -135,13 +135,22 @@ public class Main {
          /////END test-play4 */
         //operationwiki.Calculate_Random();
         // operationwiki.Algo_Calculation_Random("http://www.bigdata.com/rdf#serviceParam");
-        // for(int i=2;i<5;i++){
-        operationwiki.Algo_D_nodes("http://www.bigdata.com/rdf#serviceParam", 15, 8, 8);//test-play3  dataset
-        // }
-
+        
+         long startTime = System.nanoTime();
+        System.out.println("DurationstartTime is " + startTime);
+        
+         for(int i=2;i<10;i++){
+        operationwiki.Algo_D_nodes("http://www.wikidata.org/entity/Q16970",10,i,i);//test-play3  dataset
+         }
+//http://www.wikidata.org/entity/Q16970
         operationwiki.Calculate();
-        operationwiki.Algo_Calculation("http://www.bigdata.com/rdf#serviceParam", 8);//test-play5 
-        // operationwiki.Calculate_Random();
+        operationwiki.Algo_Calculation("http://www.wikidata.org/entity/Q16970",10);//test-play5 
+        long endTime = System.nanoTime();
+        System.out.println("DurationendTime is " + endTime);
+        long duration = (endTime - startTime);        
+
+
+// operationwiki.Calculate_Random();
         // operationwiki.Algo_Calculation_Random("http://www.bigdata.com/rdf#serviceParam");
       /*   for(int i=2;i<9;i++){
          operationwiki.Algo_D_nodes("http://www.bigdata.com/rdf#serviceParam",9,i,i);//test-play3  dataset
