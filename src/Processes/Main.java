@@ -139,12 +139,12 @@ public class Main {
          long startTime = System.nanoTime();
         System.out.println("DurationstartTime is " + startTime);
         
-         for(int i=2;i<10;i++){
-        operationwiki.Algo_D_nodes("http://www.wikidata.org/entity/Q16970",10,i,i);//test-play3  dataset
+         for(int i=2;i<5;i++){
+        operationwiki.Algo_D_nodes("http://www.wikidata.org/entity/Q571",5,i,i);//test-play3  dataset
          }
 //http://www.wikidata.org/entity/Q16970
         operationwiki.Calculate();
-        operationwiki.Algo_Calculation("http://www.wikidata.org/entity/Q16970",10);//test-play5 
+        operationwiki.Algo_Calculation("http://www.wikidata.org/entity/Q571",5);//test-play5 
         long endTime = System.nanoTime();
         System.out.println("DurationendTime is " + endTime);
         long duration = (endTime - startTime);        

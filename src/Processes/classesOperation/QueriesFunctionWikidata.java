@@ -539,6 +539,11 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
     ArrayList<Float> gather_temp_C_Calculation_Random = new ArrayList<Float>();
     ArrayList<Float> gather_temp_C_Calculation_Predicate_Random = new ArrayList<Float>();
 
+    ArrayList<String> tempAll_C_Update = new ArrayList<String>();
+    
+    ArrayList<String> allobjects = new ArrayList<String>();
+    ArrayList<String> allsubjects = new ArrayList<String>();
+    
     static int nodesmeasure = 0;
     static int edgemeasure = 0;
     static int allqueries = 0;
@@ -678,6 +683,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
     }
 
     public void printTopK_C() {
+        HashMap<String, Integer> tempAll_C_Not_Dubl = new HashMap<String, Integer>();
         FileWriter myWriter = null;
         try {
             myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
@@ -685,12 +691,29 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
             ArrayList<String> tempkey = new ArrayList<String>();
             ArrayList<Integer> tempvalue = new ArrayList<Integer>();
             // System.out.println("ff "+tempAll_C);
-
+            
+            
             for (int g = 0; g < tempAll_C.size(); g++) {
+                tempAll_C_Not_Dubl.put(tempAll_C.get(g), 0);
+            }
+           // System.out.println("ffm "+tempAll_C_Not_Dubl.size());
+            
+            
+           // tempAll_C.clear();
+            for (Map.Entry mapElement : tempAll_C_Not_Dubl.entrySet()) {
+              //  System.out.println("\n"+mapElement.getKey().toString());
+                tempAll_C_Update.add(mapElement.getKey().toString());//fani ayrio edo des to
+            }
+            
+            
+            
+            
+
+            for (int g = 0; g < tempAll_C_Update.size(); g++) {
                 ///System.out.println("ff "+tempAll_C.get(g));
                 for (int h = 0; h < topElementsKeyS_C.size(); h++) {
 
-                    if (tempAll_C.get(g).equals(topElementsKeyS_C.get(h))) {
+                    if (tempAll_C_Update.get(g).equals(topElementsKeyS_C.get(h))) {
                         // System.out.println("ff "+topElementsKeyS_C);
                         tempkey.add(topElementsKeyS_C.get(h));
                         tempvalue.add(topElementsValues_C.get(h));
@@ -1121,6 +1144,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
                             temp_C.add(pattern.getSubjectVar().getValue().toString());
                             rowsc = rowsc + 1;
                             allnodes.add(pattern.getSubjectVar().getValue().toString());
+                            allsubjects.add(pattern.getSubjectVar().getValue().toString());
                         } else if (pattern.getSubjectVar().getValue() == null) {
                             nodesMap_C.put("null", String.valueOf(rows));
                             nodesList_C.add("null");
@@ -1146,6 +1170,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
                         temp_C.add(pattern.getObjectVar().getValue().toString());
                         rowsc = rowsc + 1;
                         allnodes.add(pattern.getObjectVar().getValue().toString());
+                        allobjects.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
                         nodesMap_C.put("null", String.valueOf(rows));
                         nodesList_C.add("null");
@@ -2493,7 +2518,35 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
         // System.out.println("ZAZA "+orderValuesResultLast);
         //   System.out.println("ZAZA tripletsValues "+tripletsValues);
         int paths = 0;
-        for (String e : orderValuesResultLast) {
+        
+        
+        for (String e : orderValuesResultLast  ) {
+            paths=paths+1;
+            
+            for(int j=0;j<allsubjects.size();j++){
+                if( e.equals(allobjects.get(j))  ){
+                    if(e.equals(allobjects.get(j))){
+                     orderPredicatesTempValuesResult.add(allpredicates.get(j));
+                    }
+                
+                }
+            
+            }
+            
+           /*  for(int j=0;j<allobjects.size();j++){
+                if(e.equals(allobjects.get(j))){
+                     orderPredicatesTempValuesResult.add(allpredicates.get(j));
+                
+                }
+            
+            }*/
+            
+            
+           
+            
+
+        }
+       /* for (String e : orderValuesResultLast) {
             paths = paths + 1;
             for (TripletValues e2 : tripletsValues) {
 
@@ -2511,7 +2564,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
 
             }
 
-        }
+        }*/
         System.out.println("Valuesf are " + orderValuesResultLast);
         System.out.println("Pathsf are " + paths);
         //   }
@@ -2547,7 +2600,7 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
     public void Algo_Calculation(String nodename, int node) throws FileNotFoundException, IOException {
         nodesd = node;
         StringTokenizer st;
-        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\train.tsv"));
+        BufferedReader TSVFile = new BufferedReader(new FileReader("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\test\\test.tsv"));
         String dataRow = TSVFile.readLine();
         while (dataRow != null) {
             st = new StringTokenizer(dataRow, "\t");
