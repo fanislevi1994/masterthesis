@@ -44,19 +44,19 @@ public class Main {
         // operationsdb.Algo_C("http://dbpedia.org/resource/Category:German_musicians",2);//9  dataset
         //operationsdb.Algo_C("http://dbpedia.org/resource/Category:French_films",1);//10  dataset
         // operationsdb.Algo_C("http://ufc.br/Fortaleza",1);//10  dataset
-        //  operationsdb.Algo_C("http://dbpedia.org/resource/The_Sopranos",8);
+         // operationsdb.Algo_C("http://dbpedia.org/ontology/SoccerPlayer",5);
         // operationsdb.Algo_C_D("http://dbpedia.org/resource/John_Coltrane",2,1,1);//1 dataset 3
         // operationsdb.Algo_C_D("http://dbpedia.org/ontology/SoccerPlayer",2,1,1);//1 dataset 4
         //     operationsdb.Algo_C_D("http://dbpedia.org/ontology/SoccerPlayer",21,1,1);//1 dataset 9
         //  operationsdb.Algo_C_D("http://dbpedia.org/resource/The_Sopranos",8,3,3);//1 correct_http15062013
-        // operationsdb.Algo_C("http://dbpedia.org/resource/The_Sopranos",8); 
-        //operationsdb.Algo_C("http://dbpedia.org/resource/Albert_Einstein",2);  
-        /* for(int i=2;i<8;i++){
-         operationsdb.Algo_C_D("http://dbpedia.org/resource/The_Sopranos",8,i,i);//5
+        // operationsdb.Algo_C("http://dbpedia.org/resource/The_Sopranos",4); 
+        //operationsdb.Algo_C("http://dbpedia.org/ontology/Band",15);  
+         for(int i=1;i<15;i++){
+         operationsdb.Algo_C_D("http://dbpedia.org/ontology/Band",15,i,i);//5
          }
          
          operationsdb.Calculate();
-         operationsdb.Algo_Calculation("http://dbpedia.org/resource/The_Sopranos");*/
+         operationsdb.Algo_Calculation("http://dbpedia.org/ontology/Band");
         // operationsdb.Calculate_Random();
         // operationsdb.Algo_Calculation_Random("http://dbpedia.org/resource/The_Sopranos");
         //operationsdb.Algo_C("http://dbpedia.org/resource/The_Sopranos",8); 
@@ -136,7 +136,7 @@ public class Main {
         //operationwiki.Calculate_Random();
         // operationwiki.Algo_Calculation_Random("http://www.bigdata.com/rdf#serviceParam");
         
-         long startTime = System.nanoTime();
+       /*  long startTime = System.nanoTime();
         System.out.println("DurationstartTime is " + startTime);
         
          for(int i=2;i<5;i++){
@@ -147,7 +147,7 @@ public class Main {
         operationwiki.Algo_Calculation("http://www.wikidata.org/entity/Q571",5);//test-play5 
         long endTime = System.nanoTime();
         System.out.println("DurationendTime is " + endTime);
-        long duration = (endTime - startTime);        
+        long duration = (endTime - startTime);     */   
 
 
 // operationwiki.Calculate_Random();

@@ -464,13 +464,15 @@ public class QueriesFunctionDBpedia {
     static int gloNode = 0;
     static int in11 = 0;
     static int in22 = 0;
+    int kaou=0;
     String endvar = null;
 
     static int resvir = 0;
     HashMap<String, String> nodesMap = new HashMap<String, String>();
     HashMap<String, Integer> nodeMapFrequency = new HashMap<String, Integer>();
     ArrayList<String> nodesList = new ArrayList<>();
-
+    
+    String flaglit=null;
     int rowsfor = 0;
     HashMap<String, String> propertyMap = new HashMap<String, String>();
     HashMap<String, Integer> propertyMapFrequency = new HashMap<String, Integer>();
@@ -588,6 +590,11 @@ public class QueriesFunctionDBpedia {
     ArrayList<String> temp_C_Calculation_Predicate_Random = new ArrayList<String>();
     ArrayList<Float> gather_temp_C_Calculation_Random = new ArrayList<Float>();
     ArrayList<Float> gather_temp_C_Calculation_Predicate_Random = new ArrayList<Float>();
+    
+    ArrayList<String> allobjects = new ArrayList<String>();
+    ArrayList<String> allsubjects = new ArrayList<String>();
+    
+    ArrayList<String> tempAll_C_Update = new ArrayList<String>();
 
     static int nodesmeasure = 0;
     static int edgemeasure = 0;
@@ -1088,7 +1095,8 @@ public class QueriesFunctionDBpedia {
     public void algorithmPaths() {
 
         Collections.sort(tableValues);
-        System.out.println("table values are " + tableValues + " size is " + tableValues.size());
+        if(tableValues.size()!=0){
+   //     System.out.println("table values are " + tableValues + " size is " + tableValues.size());
         //  System.out.println("Min is " + tableValues.get(0));
         int np = Integer.valueOf(tableValues.get(0).getNumberPath());
         ArrayList<String> temp = new ArrayList<String>();
@@ -1113,7 +1121,7 @@ public class QueriesFunctionDBpedia {
             }
             finalFreq.put(mapElement.getKey().toString(), count);
         }
-        System.out.println("ok hierf");
+       // System.out.println("ok hierf");
         Map.Entry<String, Integer> maxEntry = null;
 
         for (Map.Entry<String, Integer> entry : finalFreq.entrySet()) {
@@ -1121,16 +1129,16 @@ public class QueriesFunctionDBpedia {
                 maxEntry = entry;
             }
         }
-        System.out.println(moreSemantic);
-        System.out.println("more s ias " + moreSemantic.get(gloNode));
-        System.out.println("final path is " + maxEntry.getKey());
+        //System.out.println(moreSemantic);
+      //  System.out.println("more s ias " + moreSemantic.get(gloNode));
+      //  System.out.println("final path is " + maxEntry.getKey());
         ArrayList<String> orderValues = new ArrayList<String>();
 
         String tempVar = null;
         String[] myData = maxEntry.getKey().split("=, ");
         for (String s : myData) {
             tempVar = s.replace("=,", "").replace(" =", "").replace("{", "").replace("}", "");
-            System.out.println(" splitted " + tempVar);
+          //  System.out.println(" splitted " + tempVar);
 
             orderValues.add(tempVar.trim());
 
@@ -1149,10 +1157,10 @@ public class QueriesFunctionDBpedia {
         String append = "";
         ArrayList<String> orderTempValuesResult = new ArrayList<String>();
         ArrayList<String> orderPredicatesTempValuesResult = new ArrayList<String>();
-        System.out.println("Glo name isi " + gloName + " more semantic " + moreSemantic.get(gloNode) + " semantics are " + moreSemantic);
+       // System.out.println("Glo name isi " + gloName + " more semantic " + moreSemantic.get(gloNode) + " semantics are " + moreSemantic);
         append = append + gloName;
         for (String e : orderValuesResult) {
-            System.out.println(e);
+            //System.out.println(e);
             if (!e.equals(gloName) && !e.equals(moreSemantic.get(gloNode))) {
                 orderTempValuesResult.add(e);
 
@@ -1165,7 +1173,7 @@ public class QueriesFunctionDBpedia {
 
         }
         append = " , " + append + moreSemantic.get(gloNode);
-        System.out.println("zaza " + append);
+      //  System.out.println("zaza " + append);
 
         String[] arrOfStr = append.split(",");
 
@@ -1175,8 +1183,56 @@ public class QueriesFunctionDBpedia {
 
         }
         // System.out.println(a);
-
-        for (String e : orderValuesResultLast) {
+ System.out.println("Algorithm paths are "+orderValuesResultLast);
+ int sizeall=0;
+ if(allsubjects.size()<allobjects.size()){
+ sizeall=allsubjects.size();
+ }else{
+ sizeall=allobjects.size();
+ }
+ 
+ System.out.println("allobjsize "+allobjects.size());
+ System.out.println("allsubjsize "+allsubjects.size());
+        for (String e : orderValuesResultLast  ) {         
+            for(int j=0;j<sizeall;j++){
+                if( e.equals(allobjects.get(j)) ||  e.equals(allsubjects.get(j))){ 
+                     System.out.println("Orfani "+allpredicates.get(j));
+                     orderPredicatesTempValuesResult.add(allpredicates.get(j));                  
+                }  
+                
+                 if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){ 
+                     System.out.println("Andfani "+allpredicates.get(j));
+                     orderPredicatesTempValuesResult.add(allpredicates.get(j));                  
+                }  
+            }       
+        }
+        
+     /*    for (String e : orderValuesResultLast  ) {         
+            for(int j=0;j<allobjects.size();j++){
+                if( e.equals(allobjects.get(j)) ||  e.equals(allsubjects.get(j))){                  
+                     System.out.println("Has predicates fani"+allpredicates.get(j));                  
+                }          
+            }       
+        }
+        
+         for (String e : orderValuesResultLast  ) {         
+            for(int j=0;j<allobjects.size();j++){
+                if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){                  
+                     System.out.println("Ha rpedicates fani2 "+allpredicates.get(j));                  
+                }          
+            }       
+        }
+         for (String e : orderValuesResultLast  ) {         
+            for(int j=0;j<allsubjects.size();j++){
+                if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){                  
+                     System.out.println("Ha rpedicates fani3 "+allpredicates.get(j));                  
+                }          
+            }       
+        }*/
+        
+        System.out.println("Has perasi");
+        
+     /*   for (String e : orderValuesResultLast) {
 
             for (TripletValues e2 : tripletsValues) {
 
@@ -1190,8 +1246,8 @@ public class QueriesFunctionDBpedia {
                 // }
             }
 
-        }
-
+        }*/
+        System.out.println("Algorithm paths are "+orderValuesResultLast);
         //  System.out.println("Properties zaza are "+tripletsValues+" size is "+tripletsValues.size());
         // System.out.println("Final nodesC prin "+orderValuesResultLast+" size is "+orderValuesResultLast.size());
         //System.out.println("Final nodesCC prin "+orderValuesResult+" size is "+orderValuesResult.size());
@@ -1202,6 +1258,7 @@ public class QueriesFunctionDBpedia {
         //  System.out.println("Final nodesC "+orderValuesResultLast+" size is "+orderValuesResultLast.size());
         //  System.out.println("Final edges "+orderPredicatesTempValuesResult+" size is "+orderPredicatesTempValuesResult.size());
         setMetrics(orderValuesResultLast, orderPredicatesTempValuesResult);
+        }
     }
 
     public void setMetrics(ArrayList<String> orderValuesResultLast, ArrayList<String> orderPredicatesTempValuesResult) {
@@ -1241,6 +1298,8 @@ public class QueriesFunctionDBpedia {
 
         System.out.println("Final nodes all " + finalNodes);
         System.out.println("Final edges all " + finalEdges);
+        
+        
     }
 
     public void Calculate() {
@@ -1486,19 +1545,35 @@ public class QueriesFunctionDBpedia {
      */
 
     public void printTopK_C() {
+        HashMap<String, Integer> tempAll_C_Not_Dubl = new HashMap<String, Integer>();
         FileWriter myWriter = null;
         try {
             myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
 
             ArrayList<String> tempkey = new ArrayList<String>();
             ArrayList<Integer> tempvalue = new ArrayList<Integer>();
+            
+            for (int g = 0; g < tempAll_C.size(); g++) {
+                tempAll_C_Not_Dubl.put(tempAll_C.get(g), 0);
+            }
+           // System.out.println("ffm "+tempAll_C_Not_Dubl.size());
+            
+            
+           // tempAll_C.clear();
+            for (Map.Entry mapElement : tempAll_C_Not_Dubl.entrySet()) {
+              //  System.out.println("\n"+mapElement.getKey().toString());
+                tempAll_C_Update.add(mapElement.getKey().toString());//fani ayrio edo des to
+            }
+            
+            
+            
             // System.out.println("ff "+tempAll_C);
 
-            for (int g = 0; g < tempAll_C.size(); g++) {
+            for (int g = 0; g < tempAll_C_Update.size(); g++) {
                 ///System.out.println("ff "+tempAll_C.get(g));
                 for (int h = 0; h < topElementsKeyS_C.size(); h++) {
 
-                    if (tempAll_C.get(g).equals(topElementsKeyS_C.get(h))) {
+                    if (tempAll_C_Update.get(g).equals(topElementsKeyS_C.get(h))) {
                         // System.out.println("ff "+topElementsKeyS_C);
                         tempkey.add(topElementsKeyS_C.get(h));
                         tempvalue.add(topElementsValues_C.get(h));
@@ -1671,7 +1746,14 @@ public class QueriesFunctionDBpedia {
                 topElementsValues_C.add(entry.getValue());
             }
             myWriter.close();
+            
+            if(kaou==0){
             printTopK_C();
+            kaou=2;
+            
+            }
+            
+            
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -1925,6 +2007,9 @@ public class QueriesFunctionDBpedia {
         System.out.println("klasmaPredicate Arithm prin bi " + arithmPredicate);
         System.out.println("Klasma paranomPredicate prin bi " + paranomPredicate);
         System.out.println("klasmaPredicate prin bi " + klasmaPredicate);
+        
+        
+        System.out.println("Valuesnoulisx are"+temp_C_Calculation_Predicate+" "+calculateEdgesArray);
         gather_temp_C_Calculation_Predicate.add(klasmaPredicate);
         GetResults();
     }
@@ -2377,33 +2462,107 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                    System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
+               //     System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
+                      
+                        char[] ch=pattern.getSubjectVar().getValue().toString().toCharArray();   
+                     for(int i=0;i<ch.length;i++){    
+                       // System.out.println("char at "+i+" index is: "+ch[i]); 
+                        if(ch[i]=='"'||ch[i]=='^'){
+                       // System.out.println("nouli");
+                         flaglit="yes";
+                        }else{
+                          flaglit="no";
+                        }
+                     }
+                        if(flaglit!="yes"){
                         rowsthird = rowsthird + 1;
                         nodesMap_C.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsthird));
                         nodesList_C.add(pattern.getSubjectVar().getValue().toString());
                         temp_C.add(pattern.getSubjectVar().getValue().toString());
 
                         allnodes.add(pattern.getSubjectVar().getValue().toString());
+                        allsubjects.add(pattern.getSubjectVar().getValue().toString());
+                        
+                        
+                        
+                        }else{
+                        rowsthird = rowsthird + 1;
+                        nodesMap_C.put("null", String.valueOf(rowsthird));
+                        nodesList_C.add("null");
+                        temp_C.add("null");
+                        }
+                        
+                        
                     } else if (pattern.getSubjectVar().getValue() == null) {
 
+                            nodesMap_C.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsthird));
+                        nodesList_C.add(pattern.getSubjectVar().getName().toString());
+                        temp_C.add(pattern.getSubjectVar().getName().toString());
+
+                        allnodes.add(pattern.getSubjectVar().getName().toString());
+                        allsubjects.add(pattern.getSubjectVar().getName().toString());
+                        
+                        
+                        
+                        
+                        
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c(query, pattern.getSubjectVar().getName());
+                           // VirtuosoResult_c(query, pattern.getSubjectVar().getName());
 
                         }
                     }
 
                     if (pattern.getObjectVar().getValue() != null) {
+                        
+                        
+                      char[] ch=pattern.getObjectVar().getValue().toString().toCharArray();   
+                     for(int i=0;i<ch.length;i++){    
+                       // System.out.println("char at "+i+" index is: "+ch[i]); 
+                        if(ch[i]=='"'||ch[i]=='^'){
+                       // System.out.println("nouli");
+                         flaglit="yes";
+                        }else{
+                          flaglit="no";
+                        }
+                     }
+                     
+                     if(flaglit!="yes"){
                         rowsthird = rowsthird + 1;
                         nodesMap_C.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsthird));
                         nodesList_C.add(pattern.getObjectVar().getValue().toString());
                         temp_C.add(pattern.getObjectVar().getValue().toString());
 
                         allnodes.add(pattern.getObjectVar().getValue().toString());
+                        allobjects.add(pattern.getObjectVar().getValue().toString());
+                     }else{
+                      rowsthird = rowsthird + 1;
+                        nodesMap_C.put("null", String.valueOf(rowsthird));
+                        nodesList_C.add("null");
+                        temp_C.add("null");
+                     
+                     }
+                        
+                        
+                        
+                        
                     } else if (pattern.getObjectVar().getValue() == null) {
 
+                        
+                        
+                         rowsthird = rowsthird + 1;
+                        nodesMap_C.put(pattern.getObjectVar().getName().toString(), String.valueOf(rowsthird));
+                        nodesList_C.add(pattern.getObjectVar().getName().toString());
+                        temp_C.add(pattern.getObjectVar().getName().toString());
+
+                        allnodes.add(pattern.getObjectVar().getName().toString());
+                        allobjects.add(pattern.getObjectVar().getName().toString());
+                        
+                        
+                        
+                        
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c(query, pattern.getObjectVar().getName());
+                           // VirtuosoResult_c(query, pattern.getObjectVar().getName());
                         }
 
                     }
@@ -2412,15 +2571,17 @@ public class QueriesFunctionDBpedia {
 
                         allpredicates.add(pattern.getPredicateVar().getValue().toString());
                     } else if (pattern.getPredicateVar().getValue() == null) {
-
+                        
+                        allpredicates.add(pattern.getPredicateVar().getName().toString());
+                        allpredicates.add("null");
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_pre(query, pattern.getPredicateVar().getName());
+                           // VirtuosoResult_c_pre(query, pattern.getPredicateVar().getName());
                         }
 
                     }
 
                 }
-                System.out.println("//////////////////////// inv " + nodename + " tempc " + temp_C);
+               // System.out.println("//////////////////////// inv " + nodename + " tempc " + temp_C);
                 int flag = 0;
                 for (String e : temp_C) {
                     if (e.equals(nodename)) {
@@ -2463,7 +2624,7 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                    System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
+                 //   System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
 
                         nodesmeasure = nodesmeasure + 1;
@@ -2512,7 +2673,7 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                    System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
+                   // System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
 
                         temp_C_Calculation.add(pattern.getSubjectVar().getValue().toString());
@@ -2520,7 +2681,8 @@ public class QueriesFunctionDBpedia {
                     } else if (pattern.getSubjectVar().getValue() == null) {
 
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation(query, pattern.getSubjectVar().getName());
+                             temp_C_Calculation.add(pattern.getSubjectVar().getName().toString());
+                           // VirtuosoResult_c_Calculation(query, pattern.getSubjectVar().getName());
 
                         }
                     }
@@ -2532,8 +2694,8 @@ public class QueriesFunctionDBpedia {
                     } else if (pattern.getPredicateVar().getValue() == null) {
 
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation_Predicate(query, pattern.getPredicateVar().getName());
-
+                           // VirtuosoResult_c_Calculation_Predicate(query, pattern.getPredicateVar().getName());
+ temp_C_Calculation_Predicate.add(pattern.getPredicateVar().getName().toString());
                         }
                     }
 
@@ -2543,12 +2705,13 @@ public class QueriesFunctionDBpedia {
                     } else if (pattern.getObjectVar().getValue() == null) {
 
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation(query, pattern.getObjectVar().getName());
+                           // VirtuosoResult_c_Calculation(query, pattern.getObjectVar().getName());
+                        temp_C_Calculation.add(pattern.getObjectVar().getName().toString());
                         }
 
                     }
                 }
-                System.out.println("//////////////////////// temp_C_Calculation " + nodename + " tempc " + temp_C_Calculation);
+              //  System.out.println("//////////////////////// temp_C_Calculation " + nodename + " tempc " + temp_C_Calculation);
                 int flag = 0;
                 for (String e : temp_C_Calculation) {
                     if (e.equals(nodename)) {
@@ -2556,9 +2719,9 @@ public class QueriesFunctionDBpedia {
                     }
                 }
                 if (flag == 1) {
-                    //  tempAll_C.addAll(temp_C_Calculation);
-                    System.out.println("temp_C_Calculation " + temp_C_Calculation);
-                    System.out.println("temp_C_Calculation_Predicate " + temp_C_Calculation_Predicate);
+                   
+                   // System.out.println("temp_C_Calculation " + temp_C_Calculation);
+                   // System.out.println("temp_C_Calculation_Predicate " + temp_C_Calculation_Predicate);
 
                     CompareCalculation();
 
@@ -2594,15 +2757,15 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                    System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
+                  //  System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
 
                         temp_C_Calculation_Random.add(pattern.getSubjectVar().getValue().toString());
 
                     } else if (pattern.getSubjectVar().getValue() == null) {
-
+temp_C_Calculation_Random.add(pattern.getSubjectVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation_Random(query, pattern.getSubjectVar().getName());
+                          //  VirtuosoResult_c_Calculation_Random(query, pattern.getSubjectVar().getName());
 
                         }
                     }
@@ -2612,9 +2775,9 @@ public class QueriesFunctionDBpedia {
                         temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getValue().toString());
 
                     } else if (pattern.getPredicateVar().getValue() == null) {
-
+temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation_Predicate_Random(query, pattern.getPredicateVar().getName());
+                          //  VirtuosoResult_c_Calculation_Predicate_Random(query, pattern.getPredicateVar().getName());
 
                         }
                     }
@@ -2623,9 +2786,9 @@ public class QueriesFunctionDBpedia {
 
                         temp_C_Calculation_Random.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
-
+ temp_C_Calculation_Random.add(pattern.getObjectVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_c_Calculation_Random(query, pattern.getObjectVar().getName());
+                           // VirtuosoResult_c_Calculation_Random(query, pattern.getObjectVar().getName());
                         }
 
                     }
@@ -2964,7 +3127,7 @@ public class QueriesFunctionDBpedia {
         try {
             while (result.hasNext()) {
                 BindingSet r = result.next();
-                System.out.println("*** TRIPLESINFA0 is *** " + querys + " var " + variable);
+               // System.out.println("*** TRIPLESINFA0 is *** " + querys + " var " + variable);
 
                 // if(querys.contains("select")||querys.contains("SELECT")){
                 Value var = r.getValue(variable);//.stringValue();
@@ -3227,7 +3390,7 @@ public class QueriesFunctionDBpedia {
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
 
             String append2 = append1 + splita1[1];
-            System.out.println("Query after " + append2);
+           // System.out.println("Query after " + append2);
             //  System.out.println("query is "+query);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
@@ -3281,13 +3444,13 @@ public class QueriesFunctionDBpedia {
         int c = 0, cc = 0, in = 0, in2, counter = 0;
         String[] arrOfStr = querys.split("-----------------");
         for (String a : arrOfStr) {
-            System.out.println("////////////////////////querie");
+           // System.out.println("////////////////////////querie");
             c = c + 1;
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
             String query = a;
             try {
-                System.out.println("querie now " + countAA);
+                //System.out.println("querie now " + countAA);
                 countAA = countAA + 1;
                 ParsedQuery parsedQuery = parser.parseQuery(query, null);
                 StatementPatternCollector collector = new StatementPatternCollector();
@@ -3299,7 +3462,7 @@ public class QueriesFunctionDBpedia {
 
                     if (pattern.getSubjectVar().getValue() != null) {
 
-                        System.out.println("sub val " + pattern.getSubjectVar().getValue() + " namee " + pattern.getSubjectVar().getName());
+                       // System.out.println("sub val " + pattern.getSubjectVar().getValue() + " namee " + pattern.getSubjectVar().getName());
                         subjectMap_D_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsd_nodesubject));
                         subjectList_D_node.add(pattern.getSubjectVar().getValue().toString());
                         encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getValue().toString());
@@ -3311,8 +3474,21 @@ public class QueriesFunctionDBpedia {
 
                     } else if (pattern.getSubjectVar().getValue() == null) {
                         //  VirtuosoResult2(a, pattern.getSubjectVar().getName());
+                        
+                        
+                        
+                         subjectMap_D_node.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsd_nodesubject));
+                        subjectList_D_node.add(pattern.getSubjectVar().getName().toString());
+                        encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getName().toString());
+                        encoderDikstraString.add(pattern.getSubjectVar().getName().toString());
+                        encoderDikstraInteger.add(rowsd_node);
+                        rowsd_nodesubject = rowsd_nodesubject + 1;
+                        rowsd_node = rowsd_node + 1;
+                        subjectList_D_node_Global.add(pattern.getSubjectVar().getName().toString());
+                        
+                        
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_d_2(a, pattern.getSubjectVar().getName());
+                          //  VirtuosoResult_d_2(a, pattern.getSubjectVar().getName());
 
                         }
                     }
@@ -3327,8 +3503,20 @@ public class QueriesFunctionDBpedia {
                         rowsd_node = rowsd_node + 1;
                         objectList_D_node_Global.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
+                        
+                        
+                        
+                        objectMap_D_node.put(pattern.getObjectVar().getName().toString(), String.valueOf(rowsd_nodeobject));
+                        objectList_D_node.add(pattern.getObjectVar().getName().toString());
+                        encoderDikstra.put(rowsd_node, pattern.getObjectVar().getName().toString());
+                        encoderDikstraString.add(pattern.getObjectVar().getName().toString());
+                        encoderDikstraInteger.add(rowsd_node);
+                        rowsd_nodeobject = rowsd_nodeobject + 1;
+                        rowsd_node = rowsd_node + 1;
+                        objectList_D_node_Global.add(pattern.getObjectVar().getName().toString());
+                        
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_d(a, pattern.getObjectVar().getName());
+                           // VirtuosoResult_d(a, pattern.getObjectVar().getName());
 
                         }
                     }
@@ -3338,8 +3526,9 @@ public class QueriesFunctionDBpedia {
                         propertyListV_D_node.add(pattern.getPredicateVar().getValue().toString());
 
                     } else if (pattern.getPredicateVar().getValue() == null) {
+                        propertyListV_D_node.add(pattern.getPredicateVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                            VirtuosoResult_d_3(a, pattern.getPredicateVar().getName());
+                         //   VirtuosoResult_d_3(a, pattern.getPredicateVar().getName());
                             System.out.println("Propertyyy has nulll value");
 
                         }
@@ -3380,7 +3569,7 @@ public class QueriesFunctionDBpedia {
 
                     cfaa = cfaa + 1;
                     in11 = in11 + 1;
-                    System.out.println("inza1 " + in11);
+                  //  System.out.println("inza1 " + in11);
 
                 }
 
@@ -3414,9 +3603,9 @@ public class QueriesFunctionDBpedia {
                     }
 
                 }
-                System.out.println("size after  encoderDikstra " + encoderDikstra.size() + " is " + encoderDikstra);
-                System.out.println("size after  subjectList_D_node " + subjectList_D_node.size() + " is " + subjectList_D_node);
-                System.out.println("size after  objectList_D_node " + objectList_D_node.size() + " is " + objectList_D_node);
+             //   System.out.println("size after  encoderDikstra " + encoderDikstra.size() + " is " + encoderDikstra);
+              //  System.out.println("size after  subjectList_D_node " + subjectList_D_node.size() + " is " + subjectList_D_node);
+              //  System.out.println("size after  objectList_D_node " + objectList_D_node.size() + " is " + objectList_D_node);
 
                 this.dikstraSF(subjectList_D_node, propertyListV_D_node, objectList_D_node, code);
                 System.out.println("lastfani time1 is " + time1);

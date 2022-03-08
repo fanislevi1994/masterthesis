@@ -1,0 +1,94 @@
+nodes
+
+bridge k=6
+sopranis k=5
+
+name=15
+city=15
+http://dbpedia.org/class/yago/CapitalsInEurope=15
+http://dbpedia.org/ontology/Settlement=15
+http://dbpedia.org/ontology/Place=15
+http://dbpedia.org/resource/London=15
+http://dbpedia.org/resource/California=15
+http://dbpedia.org/ontology/Book=15
+http://dbpedia.org/resource/Category:French_films=15
+http://dbpedia.org/ontology/Organisation=15
+http://dbpedia.org/ontology/Band=15
+http://dbpedia.org/resource/Category:Luxury_vehicles=15
+
+
+
+//////////////////////////////////////
+http://dbpedia.org/class/yago/CapitalsInEurope k=10
+Total nodes coverage 0.9869791667442769
+Total edges coverage 0.0
+//////////////////////////////////////
+http://dbpedia.org/ontology/Settlement k=15
+Total nodes coverage 0.9279961462678581
+Total edges coverage 0.06124909787342466
+http://dbpedia.org/ontology/Settlement k=10
+Total nodes coverage 0.83612250254072 
+Total edges coverage 0.06124909787342466
+http://dbpedia.org/ontology/Settlement k=5
+Total nodes coverage 0.7200925504339153
+Total edges coverage 0.0
+//////////////////////////////////////
+http://dbpedia.org/ontology/Place k=15
+Total nodes coverage 0.9362745109726401
+Total edges coverage 0.06862745214911069
+http://dbpedia.org/ontology/Place k=10
+Total nodes coverage 0.7107843143098495
+Total edges coverage 0.06862745214911069
+http://dbpedia.org/ontology/Place k=5
+Total nodes coverage 0.5637254907804377
+Total edges coverage 0.0686274521491106
+////////////////////////////////////////
+http://dbpedia.org/resource/London k=15
+Total nodes coverage 0.41349650859832765
+Total edges coverage 0.01
+http://dbpedia.org/resource/London k=10
+Total nodes coverage 0.33692807376384737
+Total edges coverage 0.01
+http://dbpedia.org/resource/London k=5
+Total nodes coverage 0.3054995024204254
+Total edges coverage 0.01
+//////////////////////////////////
+http://dbpedia.org/resource/California k=15
+Total nodes coverage 0.7872685206433138
+Total edges coverage 0.0
+http://dbpedia.org/resource/California k=10
+Total nodes coverage 0.6446759284784397
+Total edges coverage 0.0
+http://dbpedia.org/resource/California k=5
+Total nodes coverage 0.6293981536808941
+Total edges coverage 0.04
+////////////////////////
+http://dbpedia.org/ontology/Book k=15
+Total nodes coverage 0.597414972952434
+Total edges coverage 0.04489796119076865
+http://dbpedia.org/ontology/Book k=10
+Total nodes coverage 0.553129258113248
+Total edges coverage 0.04489796119076865
+http://dbpedia.org/ontology/Book k=5
+Total nodes coverage 0.4196598666054862
+Total edges coverage 0.04489796119076865
+////////////////////////////////////////
+http://dbpedia.org/resource/Category:French_films k=15
+Total nodes coverage 0.9912087904227959
+Total edges coverage 0.02087912094462049
+http://dbpedia.org/resource/Category:French_films k=10
+Total nodes coverage 0.9642857149407104
+Total edges coverage 0.02087912094462049
+http://dbpedia.org/resource/Category:French_films k=5
+Total nodes coverage 0.5043956047067275
+Total edges coverage 0.02087912094462049
+//////////////////////////////////////////
+http://dbpedia.org/ontology/Organisation κ=15
+Total nodes coverage 0.7971326176838208
+Total edges coverage 0.0
+http://dbpedia.org/ontology/Organisation κ=10
+Total nodes coverage 0.7684587855492869
+Total edges coverage 0.0
+http://dbpedia.org/ontology/Organisation κ=5
+Total nodes coverage 0.6878136231373715
+Total edges coverage 0.0
