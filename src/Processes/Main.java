@@ -96,8 +96,8 @@ public class Main {
          operationsdb8.Algo_Calculation("http://dbpedia.org/ontology/Organisation");*/
 
         //////AND for random dbpedia
-        QueriesFunctionDBpedia randomdb = new QueriesFunctionDBpedia();
-        randomdb.testRandom(10); //max 40 nodes
+        // QueriesFunctionDBpedia randomdb = new QueriesFunctionDBpedia();
+        //  randomdb.testRandom(5); //max 40 nodes
 
         /*All nodes for wikiDATA
          http://www.bigdata.com/rdf#serviceParam
@@ -167,8 +167,8 @@ public class Main {
          }
          operationwiki8.Calculate();
          operationwiki8.Algo_Calculation("http://www.wikidata.org/entity/Q183",k2);*/
-      //  QueriesFunctionWikidata randomwiki = new QueriesFunctionWikidata();
-        // randomwiki.testRandom(5);
+        QueriesFunctionWikidata randomwiki = new QueriesFunctionWikidata();
+        randomwiki.testRandom();
     }
 
 }

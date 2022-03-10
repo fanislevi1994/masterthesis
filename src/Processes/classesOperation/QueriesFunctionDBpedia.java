@@ -1012,14 +1012,14 @@ public class QueriesFunctionDBpedia {
         System.out.println("fanis");
     }
 
-    public void testRandom(int nodes) throws IOException {
+    public void testRandom() throws IOException {
         int min = 2;
         int max = 8;//limits for randomeness generator
         System.out.println("Random value in int from " + min + " to " + max + ":");
         int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
         System.out.println(random_int);
 
-        for (int k = 0; k < nodes; k++) {
+        for (int k = 0; k < 10; k++) {
             Calculate_Random();
             random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
             ArrayList<String> temp = new ArrayList<String>();

@@ -2013,11 +2013,11 @@ public class QueriesFunctionWikidata implements Comparator<QueriesFunctionWikida
         System.out.println("final path is " + maxEntry.getKey());
     }
 
-    public void testRandom(int nodes) throws IOException {
-        int min = 0;
-        int max = 15;
+    public void testRandom() throws IOException {
+        int min = 10;
+        int max = 25;
         int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        for (int k = 0; k < nodes; k++) {
+        for (int k = 0; k < 10; k++) {
             Calculate_Random();
             random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
             ArrayList<String> temp = new ArrayList<String>();
