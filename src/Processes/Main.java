@@ -97,7 +97,7 @@ public class Main {
 
         //////AND for random dbpedia
         // QueriesFunctionDBpedia randomdb = new QueriesFunctionDBpedia();
-        //  randomdb.testRandom(5); //max 40 nodes
+        //  randomdb.testRandom(); //max 40 nodes
 
         /*All nodes for wikiDATA
          http://www.bigdata.com/rdf#serviceParam
