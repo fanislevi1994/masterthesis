@@ -1,0 +1,5 @@
+Topf 5 nodes are  a frequency 45
+Topf 5 nodes are  con frequency 7
+Topf 5 nodes are  c frequency 30
+Topf 5 nodes are  city frequency 11
+Topf 5 nodes are  e frequency 57

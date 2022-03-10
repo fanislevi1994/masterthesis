@@ -1,0 +1,66 @@
+select ?from ?to from <http://dbpedia3.8> where {?wto a <http://dbpedia.org/ontology/Book>.
+   ?wto <http://dbpedia.org/ontology/country> ?wfrom.
+   ?wfrom a <http://dbpedia.org/ontology/PopulatedPlace>.
+   ?wto <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?to.
+   ?wfrom <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?from.
+
+}
+-----------------
+construct {?s ?o ?o} from <http://dbpedia.org> from <http://dbpedia3.8> where {?s ?x <http://dbpedia.org/ontology/Book> . ?s ?p ?o }
+-----------------
+construct {?s ?p ?o} from <http://dbpedia.org> from <http://dbpedia3.8> where {?s ?x <http://dbpedia.org/ontology/Book> . ?s ?p ?o }
+-----------------
+select distinct ?film from <http://dbpedia3.8> where {
+?film a <http://dbpedia.org/ontology/book>
+} LIMIT 10
+-----------------
+select distinct ?film from <http://dbpedia3.8> where {
+?film a <http://dbpedia.org/ontology/books>
+} LIMIT 10
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT ?title ?authorSurName ?authorGivenName ?publisher ?releaseDate ?genre ?countryName 
+from <http://dbpedia3.8> where {
+?x  rdf:type <http://dbpedia.org/ontology/Book>.
+{
+?x <http://dbpedia.org/property/name> ?title.
+?x <http://dbpedia.org/ontology/author> ?author.
+?author foaf:surname ?authorSurName.
+OPTIONAL{
+?author foaf:givenName ?authorGivenName.
+?x <http://dbpedia.org/property/publisher> ?publisher.
+?x <http://dbpedia.org/property/releaseDate> ?releaseDate.
+?x <http://dbpedia.org/property/genre> ?genre.
+?x <http://dbpedia.org/ontology/country> ?country. 
+?country <http://dbpedia.org/property/conventionalLongName> ?countryName. 
+
+}
+
+}
+}
+
+-----------------
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?book
+from <http://dbpedia3.8> where { ?book rdf:type <http://dbpedia.org/ontology/Book> } 
+LIMIT 100
+OFFSET 23806
+-----------------

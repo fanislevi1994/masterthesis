@@ -156,8 +156,6 @@ public class QueriesFunctionDBpedia {
         return uri;
     }
 
-    //graphname: Name of graph in Virtuoso 
-    //file: File name
     public URI uploadGraphInVirtuoso(String graphName, File file) {
         try {
             this.uri = repository.getValueFactory().createURI(graphName);
@@ -190,28 +188,18 @@ public class QueriesFunctionDBpedia {
         openConnection();
         TupleQueryResult result = executeSparqlQuery(queriesdatabase);
         try {
-            System.out.println("*** TRIPLES ***");
             while (result.hasNext()) {
-                System.out.println("*** TRIPLESIN ***");
                 BindingSet r = result.next();
             }
         } catch (QueryEvaluationException ex) {
             Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            //   k=k+1;
-            System.out.println("*** TRIPLESOUT1 ***");
-            //  printTriples(queriesdatabase);
-
-            System.out.println("*** TRIPLESOUT2 ***");
             System.out.println("finally block executed");
         }
 
         terminateConnection();
     }
 
-    //dikstra start
-    // function to form edge between two vertices
-    // source and dest
     private static void addEdge(ArrayList<ArrayList<Integer>> adj, int i, int j) {
         adj.get(i).add(j);
         adj.get(j).add(i);
@@ -219,10 +207,7 @@ public class QueriesFunctionDBpedia {
     private String e;
 
     public void dikstraSF(ArrayList<String> object, ArrayList<String> propertyListV_D_nodes, ArrayList<String> subject, int sources) {
-      //  int source =0;
-
-        // System.out.println("sizes are "+object.size()+"--"+subject.size()+"--"+propertyListV_D_node.size());
-        int v = 1011;// subject.size();
+        int v = 1011;
         ArrayList<ArrayList<Integer>> adj
                 = new ArrayList<ArrayList<Integer>>(v);
         for (int i = 0; i < v; i++) {
@@ -232,98 +217,49 @@ public class QueriesFunctionDBpedia {
         int x = 0;
         int y = 0;
         int z = 0;
-
         String a = null, b = null, c = null;
-        // if(subjectList_D_node.size()!=0||objectList_D_node.size()!=0){
-        //   if((!subjectList_D_node.isEmpty()||!objectList_D_node.isEmpty())|| (!subjectList_D_node.isEmpty()&&!objectList_D_node.isEmpty())   ){
         for (int i = 0; i < subjectList_D_node.size(); i++) {
             for (Map.Entry<Integer, String> entry : encoderDikstra.entrySet()) {
-
                 if (objectList_D_node.get(i).equals(entry.getValue())) {
                     x = entry.getKey();
                     a = entry.getValue();
                 }
-
                 if (subjectList_D_node.get(i).equals(entry.getValue())) {
                     y = entry.getKey();
                     c = entry.getValue();
                 }
-
-                System.out.println("addEdge(adj," + x + "," + y + ");");
+                //System.out.println("addEdge(adj," + x + "," + y + ");");
                 addEdge(adj, x, y);
-
             }
-
         }
-
-        System.out.println("Sizes are " + subjectList_D_node.size() + " 2 " + propertyListV_D_node.size() + " 3 " + objectList_D_node.size());
         for (int g = 0; g < subjectList_D_node.size(); g++) {
-
             if ((subjectList_D_node.size() == propertyListV_D_node.size()) && (propertyListV_D_node.size() == objectList_D_node.size())) {
                 tripletsValues.add(new TripletValues(subjectList_D_node.get(g), propertyListV_D_node.get(g), objectList_D_node.get(g)));
-
             }
-
         }
-
-        //fsni
-        System.out.println("---- objectList_D_node " + objectList_D_node + " encoder sizec" + objectList_D_node.size() + "");
-        System.out.println("---- subjectList_D_node " + subjectList_D_node + " encoder sizec" + subjectList_D_node.size() + "");
-        System.out.println("---- encoder " + encoderDikstra + " encoder sizec" + encoderDikstra.size() + "");
         int size = moreSemantic.size();
         for (Map.Entry<Integer, String> entry : encoderDikstra.entrySet()) {
-            //System.out.println("ok aa ------------------------------mayrr    hhhh>");
-            System.out.println("out entry.getValue() " + entry.getValue() + " moreSemantic.get(gloNode)" + moreSemantic.get(gloNode) + " glo fan " + moreSemantic.get(gloFan));
-
-            //   for(int l=0;l<size;l++){
             if (entry.getValue().equals(moreSemantic.get(gloFan))) {//4 beauty
-                System.out.println("Its innnnn xaxa");
-                // gathercode.add(entry.getKey());
-                // System.out.println("---- entry.getValue() "+entry.getValue()+" moreSemantic.get(gloFan)"+moreSemantic.get(2) );
                 int dest = entry.getKey();
-                System.out.println("Destinatioon value is " + entry.getValue() + " of key " + entry.getKey() + " and sources " + sources);
                 printShortestDistance(adj, sources, dest, v, propertyListV_D_node);
                 System.out.println("ok aa ------------------------------> sources " + sources + " destination " + dest);
             }
-
-            // }
         }
-        //  }
     }
     static int allc = 0;
 
-    // a modified version of BFS that stores predecessor
-    // of each vertex in array pred
-    // and its distance from source in array dist
     private static boolean BFS(ArrayList<ArrayList<Integer>> adj, int src,
             int dest, int v, int pred[], int dist[]) {
-        // a queue to maintain queue of vertices whose
-        // adjacency list is to be scanned as per normal
-        // BFS algorithm using LinkedList of Integer type
         LinkedList<Integer> queue = new LinkedList<Integer>();
-
-        // boolean array visited[] which stores the
-        // information whether ith vertex is reached
-        // at least once in the Breadth first search
         boolean visited[] = new boolean[v];
-
-        // initially all vertices are unvisited
-        // so v[i] for all i is false
-        // and as no path is yet constructed
-        // dist[i] for all i set to infinity
         for (int i = 0; i < v; i++) {
             visited[i] = false;
             dist[i] = Integer.MAX_VALUE;
             pred[i] = -1;
         }
-
-        // now source is first to be visited and
-        // distance from source to itself should be 0
         visited[src] = true;
         dist[src] = 0;
         queue.add(src);
-
-        // bfs Algorithm
         while (!queue.isEmpty()) {
             int u = queue.remove();
             for (int i = 0; i < adj.get(u).size(); i++) {
@@ -332,9 +268,6 @@ public class QueriesFunctionDBpedia {
                     dist[adj.get(u).get(i)] = dist[u] + 1;
                     pred[adj.get(u).get(i)] = u;
                     queue.add(adj.get(u).get(i));
-
-                    // stopping condition (when we find
-                    // our destination)
                     if (adj.get(u).get(i) == dest) {
                         return true;
                     }
@@ -346,37 +279,25 @@ public class QueriesFunctionDBpedia {
     static String values = ",", ss = ",";
     static int lengthpath = 0;
     static int time1 = 0;
-
     static int time2 = 0;
 
-    // function to print the shortest distance and path
-    // between source vertex and destination vertex
     private static void printShortestDistance(
             ArrayList<ArrayList<Integer>> adj,
             int s, int dest, int v, ArrayList<String> propertiesValues) {
-        System.out.println("true until noewww%%%%%%%%%%%%%%%%%%%%%%%%%%-----==========================>");
         time1 = time1 + 1;
-        System.out.println("times are1 " + time1);
         Triplet<String, Integer> valuesSort = new Triplet<>("", 1);
         ArrayList<TableValues> allValues = new ArrayList<TableValues>();
         ArrayList<String> test = new ArrayList<String>();
         HashMap<String, String> tempPath = new HashMap<String, String>();
         values = ",";
         lengthpath = 0;
-
-        // predecessor[i] array stores predecessor of
-        // i and distance array stores distance of i
-        // from s
         int pred[] = new int[v];
         int dist[] = new int[v];
-
         if (BFS(adj, s, dest, v, pred, dist) == false) {
             System.out.println("Given source and destination"
                     + "are not connected");
             return;
         }
-
-        // LinkedList to store path
         LinkedList<Integer> path = new LinkedList<Integer>();
         int crawl = dest;
         path.add(crawl);
@@ -384,21 +305,17 @@ public class QueriesFunctionDBpedia {
             path.add(pred[crawl]);
             crawl = pred[crawl];
         }
-        //System.out.println("\n Shortest path length is: " + dist[dest]);
         lengthpath = dist[dest];
         String append = "";
         String append2 = "";
         String fin = "";
-        // System.out.println("Path is ::");
         for (int i = path.size() - 1; i >= 0; i--) {
             System.out.print("\n" + path.get(i) + " ");
             append = append + path.get(i) + " ";
 
         }
-
         allValues.add(new TableValues(append, String.valueOf(dist[dest]), 1, ""));
         time2 = time2 + 1;
-        System.out.println("times are2 " + time2);
         for (Map.Entry<Integer, String> entry : encoderDikstra.entrySet()) {
             for (int i = path.size() - 1; i >= 0; i--) {
                 if (entry.getKey().equals(path.get(i))) {
@@ -414,16 +331,9 @@ public class QueriesFunctionDBpedia {
         glob = glob + 1;
         pairsvValues.put(append, dist[dest]);
         tableValues.add(new TableValues(append, String.valueOf(dist[dest]), glob, String.valueOf(tempPath)));
-
-        System.out.println("Properties its time are " + propertiesValues);
-       // for(String e:propertyListV_D_node){
-
-        // }
-        System.out.println("trueFANIS until noewww%%%%%%%%%%%%%%%%%%%%%%%%%%  endddd-----==========================>");
-
     }
     static int allqueries = 0;
-    // static int allqueries=0;
+    String filesinputs = null;
     static int xaxa = 0;
     static int cctrue = 0;
     static int ccfalse = 0;
@@ -455,7 +365,6 @@ public class QueriesFunctionDBpedia {
     int nodesa = 0;
     int count = 0;
     static int gloFan = 0;
-    //cfaa2
     static int cfaa5 = 0;
     static int cfaa4 = 0;
     static int cfaa3 = 0;
@@ -464,15 +373,13 @@ public class QueriesFunctionDBpedia {
     static int gloNode = 0;
     static int in11 = 0;
     static int in22 = 0;
-    int kaou=0;
+    int kaou = 0;
     String endvar = null;
-
     static int resvir = 0;
     HashMap<String, String> nodesMap = new HashMap<String, String>();
     HashMap<String, Integer> nodeMapFrequency = new HashMap<String, Integer>();
     ArrayList<String> nodesList = new ArrayList<>();
-    
-    String flaglit=null;
+    String flaglit = null;
     int rowsfor = 0;
     HashMap<String, String> propertyMap = new HashMap<String, String>();
     HashMap<String, Integer> propertyMapFrequency = new HashMap<String, Integer>();
@@ -548,11 +455,9 @@ public class QueriesFunctionDBpedia {
 
     ArrayList<String> objectList_D_node_Global = new ArrayList<String>();
 
-    //dikstra
     static HashMap<Integer, String> encoderDikstra = new HashMap<Integer, String>();
     static HashMap<String, Integer> pairsvValues = new HashMap<String, Integer>();
 
-    // ArrayList<TableValues> list = new ArrayList<>();
     ArrayList<String> encoderDikstraString = new ArrayList<String>();
     ArrayList<Integer> encoderDikstraInteger = new ArrayList<Integer>();
     ArrayList<String> dikstraSubject = new ArrayList<String>();
@@ -590,10 +495,10 @@ public class QueriesFunctionDBpedia {
     ArrayList<String> temp_C_Calculation_Predicate_Random = new ArrayList<String>();
     ArrayList<Float> gather_temp_C_Calculation_Random = new ArrayList<Float>();
     ArrayList<Float> gather_temp_C_Calculation_Predicate_Random = new ArrayList<Float>();
-    
+
     ArrayList<String> allobjects = new ArrayList<String>();
     ArrayList<String> allsubjects = new ArrayList<String>();
-    
+
     ArrayList<String> tempAll_C_Update = new ArrayList<String>();
 
     static int nodesmeasure = 0;
@@ -607,45 +512,34 @@ public class QueriesFunctionDBpedia {
             if (fileEntry.isDirectory()) {
                 listFilesForFolderDBpedia(fileEntry);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\dbpedia3.8-correct\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder(readBytesFile(filePath));
-                System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
-    /*DBpedia folder*/
 
+    /*DBpedia folder*/
     public void listFilesForFolderDBpedia_B(final File folder) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
                 listFilesForFolderDBpedia_B(fileEntry);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\dbpedia3.8-correct\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_B(readBytesFile(filePath));
-                System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
-    /*DBpedia folder*/
 
+    /*DBpedia folder*/
     public void listFilesForFolderDBpedia_C(final File folder, String nodename) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-
                 listFilesForFolderDBpedia_C(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_C(readBytesFile(filePath), nodename);
                 System.out.println("file now is " + filePath);
                 System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
@@ -653,32 +547,22 @@ public class QueriesFunctionDBpedia {
     public void listFilesForFolderDBpedia_metrisis(final File folder, String nodename) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-
                 listFilesForFolderDBpedia_metrisis(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_metrisis(readBytesFile(filePath), nodename);
-                System.out.println("file now is " + filePath);
-                System.out.println("Queries metrisis isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
-    /*DBpedia folder*/
 
+    /*DBpedia folder*/
     public void listFilesForFolderDBpedia_C_Calculation(final File folder, String nodename) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-
                 listFilesForFolderDBpedia_C_Calculation(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_C_Calculation(readBytesFile(filePath), nodename);
-                System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
@@ -686,15 +570,10 @@ public class QueriesFunctionDBpedia {
     public void listFilesForFolderDBpedia_C_Calculation_Random(final File folder, String nodename) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-
                 listFilesForFolderDBpedia_C_Calculation_Random(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpediaqueriesdatasets+extras\\t3\\" + fileEntry.getName().toString() + "";
                 Parser_folder_C_Calculation_Random(readBytesFile(filePath), nodename);
-                System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
@@ -705,48 +584,24 @@ public class QueriesFunctionDBpedia {
             if (fileEntry.isDirectory()) {
                 listFilesForFolderDBpedia_C(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_C_D(readBytesFile(filePath), nodename);
-                System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
 
-    /*DBpedia folder*///for queries
-   /* public void listFilesForFolderDBpedia_C_D(final File folder, String nodename) throws IOException {
-     for (final File fileEntry : folder.listFiles()) {
-     if (fileEntry.isDirectory()) {
-     listFilesForFolderDBpedia_C(fileEntry, nodename);
-     } else {
-     String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\" + fileEntry.getName().toString() + "";
-     Parser_folder_C_D(readBytesFile(filePath), nodename);
-     System.out.println("file now is " + filePath);
-     System.out.println("map isfa ---------------------------------*******************");
-
-     // printNodesMap();
-     }
-     }
-     }*/
     /*DBpedia folder*/
     public void listFilesForFolderDBpedia_D(final File folder, String nodename) throws IOException {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
                 listFilesForFolderDBpedia_C(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\dbpedia3.8-correct\\" + fileEntry.getName().toString() + "";
-
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 Parser_folder_C(readBytesFile(filePath), nodename);
                 System.out.println("file now is " + filePath);
-                System.out.println("map isfa ---------------------------------*******************");
-
-                // printNodesMap();
             }
         }
     }
-    /*store querie in structures*/
 
     /*DBpedia folder*/
     public void listFilesForFolderDBpedia_D_nodes(final File folder, String nodename) throws IOException, MalformedQueryException {
@@ -754,45 +609,22 @@ public class QueriesFunctionDBpedia {
             if (fileEntry.isDirectory()) {
                 listFilesForFolderDBpedia_D_nodes(fileEntry, nodename);
             } else {
-                String filePath = "C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\dbpedia3.8-correct\\" + fileEntry.getName().toString() + "";
-
-//  getNodes(readBytesFile(filePath), nodename);
-                //getQueryLevelD_node(readBytesFile(filePath), nodename);
+                String filePath = "src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\" + fileEntry.getName().toString() + "";
                 convertArrayListToMap();
-                // getNodes2(readBytesFile(filePath), nodename);
-                // Parser_folder_D(readBytesFile(filePath), nodename);/////////fanxx
-
                 Parser_folder_D_Node(readBytesFile(filePath), nodename);
-        //getQueryLevelD_node(readBytesFile(filePath), nodename);
-
-                /*  System.out.println("////////////////////////size obejct map is " + objectMap_D_node.size() + " size object list is " + objectList_D_node.size());
-
-                 System.out.println("////////////////////////size obejct map is " + subjectMap_D_node.size() + " size subject list is " + subjectList_D_node.size());
-
-                 System.out.println("////////////////////////size property map is " + propertyMap_D_node.size() + " size property list is " + propertyList_D_node.size());
-               
-                 //  comperator();
-                 System.out.println("file now is " + filePath);
-                 System.out.println("map isfa ---------------------------------*******************");*/
-                // printNodesMap();
             }
         }
     }
 
     public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
-        // Create a list from elements of HashMap 
         List<Map.Entry<String, Integer>> list
                 = new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
-
-        // Sort the list 
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                     Map.Entry<String, Integer> o2) {
                 return (o1.getValue()).compareTo(o2.getValue());
             }
         });
-
-        // put data from sorted list to hashmap  
         HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {
             temp.put(aa.getKey(), aa.getValue());
@@ -810,8 +642,8 @@ public class QueriesFunctionDBpedia {
         }
         return content;
     }
-    /*sort frequency by value*/
 
+    /*sort frequency by value*/
     public static Map<String, Integer> sortByValue(final Map<String, Integer> wordCounts) {
 
         return wordCounts.entrySet()
@@ -819,73 +651,51 @@ public class QueriesFunctionDBpedia {
                 .sorted((Map.Entry.<String, Integer>comparingByValue().reversed()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
-    /*all proccess get folder files and final print frequency*/
 
+    /*all proccess get folder files and final print frequency*/
     public void Algo_A(int node) throws IOException {
         nodesa = node;
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t2\\");
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
         listFilesForFolderDBpedia(folder);
-        System.out.println("Node frequency start");
         getNodeFrequency();
-        System.out.println("Print frequency start");
         printNodesFrequencyOrder();
     }
-    /*all proccess get folder files and final print frequency*/
 
+    /*all proccess get folder files and final print frequency*/
     public void Algo_B(int node) throws IOException {
         nodesb = node;
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t22\\");
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
         listFilesForFolderDBpedia_B(folder);
-        System.out.println("Node frequency start");
         getNodeFrequency_B();
-        System.out.println("Print frequency start");
         printNodesFrequencyOrder_B();
     }
-    /*all proccess get folder files and final print frequency*/
 
-    public void Algo_C(String nodename, int node) throws IOException {
+    /*all proccess get folder files and final print frequency*/
+    public void Algo_C(String nodename, int node, String filenamevar) throws IOException {
         nodesc = node;
+        filesinputs = filenamevar;
         System.out.println("algo c node " + nodesc);
         String host = "139.91.210.38/";
         String port = "1111";
         String username = "dba";
         String password = "dba";
         String graphName2 = "http://localhost:8890/dbpedia3.8";
-        //  terminateConnection();
         start(host, port, username, password);
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");//fnanis t3
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");//fnanis t3
         listFilesForFolderDBpedia_C(folder, nodename);
-        System.out.println("Allqueries are  " + allqueries);
-        System.out.println("Node frequency start");
         getNodeFrequency_C();
-        System.out.println("Print frequency start");
         printNodesFrequencyOrder_C();
-
-        System.out.println("All nodes" + allnodes);
-        System.out.println("All predicates" + allpredicates);
-        //terminateConnection();
         System.out.println("End algo");
     }
 
     public void Algo_Metrisis(String nodename, int node) throws IOException {
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");//fnanis t3
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");//fnanis t3
         listFilesForFolderDBpedia_metrisis(folder, nodename);
-
-        System.out.println("Analytics are nodes " + nodesmeasure + " edges " + edgemeasure + " all queries " + queriesnumber + " bad queries " + nodesbad);
     }
 
     public void Calculate_Random() {
-
         System.out.println("Prin calculate calculateNodesArray " + calculateNodesArray);
         System.out.println("Prin calculate calculateEdgesArray " + calculateEdgesArray);
-
-        /* 
-        
-        
-        
-         System.out.println("Meta calculate calculateNodesArray "+calculateNodesArray);
-         System.out.println("Meta calculate calculateEdgesArray "+calculateEdgesArray);*/
-        /////////////////////////start soprano
         calculateNodesArrayRandom.add("http://dbpedia.org/resource/Tom_Cruise");
         calculateNodesArrayRandom.add("http://dbpedia.org/resource/Argentina");
         calculateNodesArrayRandom.add("http://dbpedia.org/ontology/Organisation");
@@ -969,48 +779,13 @@ public class QueriesFunctionDBpedia {
         calculateEdgesArrayRandom.add("http://dbpedia.org/property/directedby");
         calculateEdgesArrayRandom.add("http://dbpedia.org/property/entrant");
         calculateEdgesArrayRandom.add("http://dbpedia.org/ontology/basedOn");
-
-        System.out.println("Meta calculate calculateNodesArrayRandom " + calculateNodesArrayRandom);
-        System.out.println("Meta calculate calculateEdgesArrayRandom " + calculateEdgesArrayRandom);
-    //////////////////END SOPRANO
-
-        //start 5 dataset
-     /*   calculateNodesArray.add("http://dbpedia.org/ontology/Country");
-         calculateNodesArray.add("http://dbpedia.org/resource/Albert_Einstein");
-         calculateNodesArray.add("http://dbpedia.org/resource/Frank_Henenlotter");
-         calculateNodesArray.add("http://dbpedia.org/ontology/Person");
-       
-         calculateNodesArray.add("http://dbpedia.org/resource/Welwyn_Garden_City");
-         calculateNodesArray.add("http://dbpedia.org/ontology/Brain");
-         calculateNodesArray.add("http://dbpedia.org/resource/Jimmy_Glass");
-         calculateNodesArray.add("http://dbpedia.org/resource/Rome");
-        
-         calculateEdgesArray.add("http://dbpedia.org/ontology/developer");
-         calculateEdgesArray.add("http://dbpedia.org/ontology/notableIdea");
-         calculateEdgesArray.add("http://dbpedia.org/ontology/mainInterest");
-         calculateEdgesArray.add("http://dbpedia.org/ontology/birthPlace");
-    
-         calculateEdgesArray.add("http://dbpedia.org/ontology/influenced");
-         calculateEdgesArray.add("http://dbpedia.org/ontology/era");
-         calculateEdgesArray.add("http://dbpedia.org/ontology/birthDate");
-        
-        
-         System.out.println("Meta calculate calculateNodesArray "+calculateNodesArray);
-         System.out.println("Meta calculate calculateEdgesArray "+calculateEdgesArray);*/
-        //end 5 datatset
     }
 
     public void Algo_Random(String value) {
-
         moreSemantic.add(values);
-
     }
 
     public void FinalResult() {
-
-        System.out.println("FinalResultgather_temp_C_Calculation are " + gather_temp_C_Calculation);
-        System.out.println("FinalResultgather_temp_C_Calculation_Predicate are " + gather_temp_C_Calculation_Predicate);
-
         double sum = 0;
         for (int v = 0; v < gather_temp_C_Calculation.size(); v++) {
             sum = sum + gather_temp_C_Calculation.get(v);
@@ -1019,19 +794,13 @@ public class QueriesFunctionDBpedia {
         for (int v = 0; v < gather_temp_C_Calculation_Predicate.size(); v++) {
             sumPr = sumPr + gather_temp_C_Calculation_Predicate.get(v);
         }
-
         System.out.println("///////////////////FINAL RESULT///////////////////////////");
         System.out.println("Total nodes coverage " + sum / gather_temp_C_Calculation.size());
         System.out.println("Total edges coverage " + sumPr / gather_temp_C_Calculation_Predicate.size());
         System.out.println("///////////////////END RESULT///////////////////////////");
-
     }
 
     public void FinalResultRandom() {
-
-        System.out.println("gather_temp_C_Calculation_Random are " + gather_temp_C_Calculation_Random);
-        System.out.println("gather_temp_C_Calculation_Predicate_Random are " + gather_temp_C_Calculation_Predicate_Random);
-
         double sum = 0;
         for (int v = 0; v < gather_temp_C_Calculation_Random.size(); v++) {
             sum = sum + gather_temp_C_Calculation_Random.get(v);
@@ -1040,266 +809,148 @@ public class QueriesFunctionDBpedia {
         for (int v = 0; v < gather_temp_C_Calculation_Predicate_Random.size(); v++) {
             sumPr = sumPr + gather_temp_C_Calculation_Predicate_Random.get(v);
         }
-
         System.out.println("///////////////////FINAL RESULT///////////////////////////");
         System.out.println("Total nodes coverage " + sum / gather_temp_C_Calculation_Random.size());
         System.out.println("Total edges coverage " + sumPr / gather_temp_C_Calculation_Predicate_Random.size());
         System.out.println("///////////////////END RESULT///////////////////////////");
-
     }
 
     public void Algo_Calculation_Random(String nodename) throws IOException {
-
+        filesinputs="";
         String host = "139.91.210.38/";
         String port = "1111";
         String username = "dba";
         String password = "dba";
         String graphName2 = "http://localhost:8890/dbpedia3.8";
-
         start(host, port, username, password);
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");//fnanis t3
+        final File folder = new File("src\\WorkloadsDatasets\\dbpediaqueriesdatasets+extras\\t3\\");
         listFilesForFolderDBpedia_C_Calculation_Random(folder, nodename);
-        //  System.out.println("Allqueries are  "+ allqueries);
-        // System.out.println("Node frequency start");
-        // getNodeFrequency_C();
-        //System.out.println("Print frequency start");
-        //printNodesFrequencyOrder_C();
-
         FinalResultRandom();
-
-        //  FinalResult();
-        //     System.out.println("End algo random all");
     }
 
     public void Algo_Calculation(String nodename) throws IOException {
-
         String host = "139.91.210.38/";
         String port = "1111";
         String username = "dba";
         String password = "dba";
         String graphName2 = "http://localhost:8890/dbpedia3.8";
-
         start(host, port, username, password);
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");//fnanis t3
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");//fnanis t3
         listFilesForFolderDBpedia_C_Calculation(folder, nodename);
-        //  System.out.println("Allqueries are  "+ allqueries);
-        // System.out.println("Node frequency start");
-        // getNodeFrequency_C();
-        //System.out.println("Print frequency start");
-        //printNodesFrequencyOrder_C();
-
         FinalResult();
         System.out.println("End algo all");
     }
 
     public void algorithmPaths() {
-
         Collections.sort(tableValues);
-        if(tableValues.size()!=0){
-   //     System.out.println("table values are " + tableValues + " size is " + tableValues.size());
-        //  System.out.println("Min is " + tableValues.get(0));
-        int np = Integer.valueOf(tableValues.get(0).getNumberPath());
-        ArrayList<String> temp = new ArrayList<String>();
-        for (int r = 0; r < tableValues.size(); r++) {
-            if (Integer.valueOf(tableValues.get(r).getNumberPath()) <= Integer.valueOf(tableValues.get(0).getNumberPath())) {
-                temp.add(tableValues.get(r).getDecode());
-            }
-        }
-
-        HashMap<String, String> tempFreq = new HashMap<String, String>();
-        HashMap<String, Integer> finalFreq = new HashMap<String, Integer>();
-        for (String s : temp) {
-            tempFreq.put(s, "");
-        }
-
-        for (Map.Entry mapElement : tempFreq.entrySet()) {
-            int count = 0;
-            for (String e : temp) {
-                if (e.equals(mapElement.getKey().toString())) {
-                    count = count + 1;
+        if (tableValues.size() != 0) {
+            int np = Integer.valueOf(tableValues.get(0).getNumberPath());
+            ArrayList<String> temp = new ArrayList<String>();
+            for (int r = 0; r < tableValues.size(); r++) {
+                if (Integer.valueOf(tableValues.get(r).getNumberPath()) <= Integer.valueOf(tableValues.get(0).getNumberPath())) {
+                    temp.add(tableValues.get(r).getDecode());
                 }
             }
-            finalFreq.put(mapElement.getKey().toString(), count);
-        }
-       // System.out.println("ok hierf");
-        Map.Entry<String, Integer> maxEntry = null;
-
-        for (Map.Entry<String, Integer> entry : finalFreq.entrySet()) {
-            if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-                maxEntry = entry;
+            HashMap<String, String> tempFreq = new HashMap<String, String>();
+            HashMap<String, Integer> finalFreq = new HashMap<String, Integer>();
+            for (String s : temp) {
+                tempFreq.put(s, "");
             }
-        }
-        //System.out.println(moreSemantic);
-      //  System.out.println("more s ias " + moreSemantic.get(gloNode));
-      //  System.out.println("final path is " + maxEntry.getKey());
-        ArrayList<String> orderValues = new ArrayList<String>();
-
-        String tempVar = null;
-        String[] myData = maxEntry.getKey().split("=, ");
-        for (String s : myData) {
-            tempVar = s.replace("=,", "").replace(" =", "").replace("{", "").replace("}", "");
-          //  System.out.println(" splitted " + tempVar);
-
-            orderValues.add(tempVar.trim());
-
-        }
-
-        ArrayList<String> orderValuesResult = new ArrayList<String>();
-
-        ArrayList<String> orderValuesResultLast = new ArrayList<String>();
-        for (String e : orderValues) {
-            if (!e.equals("")) {
-                orderValuesResult.add(e);
-
-            }
-
-        }
-        String append = "";
-        ArrayList<String> orderTempValuesResult = new ArrayList<String>();
-        ArrayList<String> orderPredicatesTempValuesResult = new ArrayList<String>();
-       // System.out.println("Glo name isi " + gloName + " more semantic " + moreSemantic.get(gloNode) + " semantics are " + moreSemantic);
-        append = append + gloName;
-        for (String e : orderValuesResult) {
-            //System.out.println(e);
-            if (!e.equals(gloName) && !e.equals(moreSemantic.get(gloNode))) {
-                orderTempValuesResult.add(e);
-
-            }
-
-        }
-        append = append + " , ";
-        for (String e : orderTempValuesResult) {
-            append = append + e + " , ";
-
-        }
-        append = " , " + append + moreSemantic.get(gloNode);
-      //  System.out.println("zaza " + append);
-
-        String[] arrOfStr = append.split(",");
-
-        for (String a : arrOfStr) {
-
-            orderValuesResultLast.add(a.trim());
-
-        }
-        // System.out.println(a);
- System.out.println("Algorithm paths are "+orderValuesResultLast);
- int sizeall=0;
- if(allsubjects.size()<allobjects.size()){
- sizeall=allsubjects.size();
- }else{
- sizeall=allobjects.size();
- }
- 
- System.out.println("allobjsize "+allobjects.size());
- System.out.println("allsubjsize "+allsubjects.size());
-        for (String e : orderValuesResultLast  ) {         
-            for(int j=0;j<sizeall;j++){
-                if( e.equals(allobjects.get(j)) ||  e.equals(allsubjects.get(j))){ 
-                     System.out.println("Orfani "+allpredicates.get(j));
-                     orderPredicatesTempValuesResult.add(allpredicates.get(j));                  
-                }  
-                
-                 if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){ 
-                     System.out.println("Andfani "+allpredicates.get(j));
-                     orderPredicatesTempValuesResult.add(allpredicates.get(j));                  
-                }  
-            }       
-        }
-        
-     /*    for (String e : orderValuesResultLast  ) {         
-            for(int j=0;j<allobjects.size();j++){
-                if( e.equals(allobjects.get(j)) ||  e.equals(allsubjects.get(j))){                  
-                     System.out.println("Has predicates fani"+allpredicates.get(j));                  
-                }          
-            }       
-        }
-        
-         for (String e : orderValuesResultLast  ) {         
-            for(int j=0;j<allobjects.size();j++){
-                if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){                  
-                     System.out.println("Ha rpedicates fani2 "+allpredicates.get(j));                  
-                }          
-            }       
-        }
-         for (String e : orderValuesResultLast  ) {         
-            for(int j=0;j<allsubjects.size();j++){
-                if( e.equals(allobjects.get(j)) &&  e.equals(allsubjects.get(j))){                  
-                     System.out.println("Ha rpedicates fani3 "+allpredicates.get(j));                  
-                }          
-            }       
-        }*/
-        
-        System.out.println("Has perasi");
-        
-     /*   for (String e : orderValuesResultLast) {
-
-            for (TripletValues e2 : tripletsValues) {
-
-                if (e.equals(e2.getSubject())) {
-                    orderPredicatesTempValuesResult.add(e2.getPredicate());
-
+            for (Map.Entry mapElement : tempFreq.entrySet()) {
+                int count = 0;
+                for (String e : temp) {
+                    if (e.equals(mapElement.getKey().toString())) {
+                        count = count + 1;
+                    }
                 }
-
-                //  if(e.equals(e2.getObject())){
-                //  orderPredicatesTempValuesResult.add(e2.getPredicate());
-                // }
+                finalFreq.put(mapElement.getKey().toString(), count);
             }
+            Map.Entry<String, Integer> maxEntry = null;
+            for (Map.Entry<String, Integer> entry : finalFreq.entrySet()) {
+                if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+                    maxEntry = entry;
+                }
+            }
+            ArrayList<String> orderValues = new ArrayList<String>();
+            String tempVar = null;
+            String[] myData = maxEntry.getKey().split("=, ");
+            for (String s : myData) {
+                tempVar = s.replace("=,", "").replace(" =", "").replace("{", "").replace("}", "");
+                orderValues.add(tempVar.trim());
+            }
+            ArrayList<String> orderValuesResult = new ArrayList<String>();
+            ArrayList<String> orderValuesResultLast = new ArrayList<String>();
+            for (String e : orderValues) {
+                if (!e.equals("")) {
+                    orderValuesResult.add(e);
+                }
+            }
+            String append = "";
+            ArrayList<String> orderTempValuesResult = new ArrayList<String>();
+            ArrayList<String> orderPredicatesTempValuesResult = new ArrayList<String>();
+            append = append + gloName;
+            for (String e : orderValuesResult) {
+                if (!e.equals(gloName) && !e.equals(moreSemantic.get(gloNode))) {
+                    orderTempValuesResult.add(e);
+                }
+            }
+            append = append + " , ";
+            for (String e : orderTempValuesResult) {
+                append = append + e + " , ";
 
-        }*/
-        System.out.println("Algorithm paths are "+orderValuesResultLast);
-        //  System.out.println("Properties zaza are "+tripletsValues+" size is "+tripletsValues.size());
-        // System.out.println("Final nodesC prin "+orderValuesResultLast+" size is "+orderValuesResultLast.size());
-        //System.out.println("Final nodesCC prin "+orderValuesResult+" size is "+orderValuesResult.size());
-        orderValuesResultLast.remove(0);
-
-        // System.out.println("Final nodesA "+orderValues);
-        // System.out.println("Final nodesB "+orderValuesResult);
-        //  System.out.println("Final nodesC "+orderValuesResultLast+" size is "+orderValuesResultLast.size());
-        //  System.out.println("Final edges "+orderPredicatesTempValuesResult+" size is "+orderPredicatesTempValuesResult.size());
-        setMetrics(orderValuesResultLast, orderPredicatesTempValuesResult);
+            }
+            append = " , " + append + moreSemantic.get(gloNode);
+            String[] arrOfStr = append.split(",");
+            for (String a : arrOfStr) {
+                orderValuesResultLast.add(a.trim());
+            }
+            System.out.println("Algorithm paths are " + orderValuesResultLast);//Here are ouptut user paths for k that select
+            int sizeall = 0;
+            if (allsubjects.size() < allobjects.size()) {
+                sizeall = allsubjects.size();
+            } else {
+                sizeall = allobjects.size();
+            }
+            for (String e : orderValuesResultLast) {
+                for (int j = 0; j < sizeall; j++) {
+                    if (e.equals(allobjects.get(j)) || e.equals(allsubjects.get(j))) {
+                        orderPredicatesTempValuesResult.add(allpredicates.get(j));
+                    }
+                    if (e.equals(allobjects.get(j)) && e.equals(allsubjects.get(j))) {
+                        orderPredicatesTempValuesResult.add(allpredicates.get(j));
+                    }
+                }
+            }
+            orderValuesResultLast.remove(0);
+            setMetrics(orderValuesResultLast, orderPredicatesTempValuesResult);
         }
     }
 
     public void setMetrics(ArrayList<String> orderValuesResultLast, ArrayList<String> orderPredicatesTempValuesResult) {
-
         int sizeProperties = orderValuesResultLast.size();
-
         HashMap<String, String> uniqueProperties = new HashMap<String, String>();
         ArrayList<String> subTempEdges = new ArrayList<String>();
         ArrayList<String> subFinalEdges = new ArrayList<String>();
         for (String e : orderPredicatesTempValuesResult) {
             uniqueProperties.put(e, "");
-
         }
         for (Map.Entry<String, String> entry : uniqueProperties.entrySet()) {
             subTempEdges.add(entry.getKey());
         }
-
         if (orderValuesResultLast.size() > 0) {
-
             sizeProperties = orderValuesResultLast.size() - 1;
         }
-
         for (int y = 0; y < sizeProperties; y++) {
             subFinalEdges.add(subTempEdges.get(y));
-
         }
-
-        System.out.println("Final nodes last " + orderValuesResultLast);
-        System.out.println("Final last " + subFinalEdges);
-
         finalNodes.addAll(orderValuesResultLast);
         finalEdges.addAll(subFinalEdges);
         print();
     }
 
     public void print() {
-
         System.out.println("Final nodes all " + finalNodes);
         System.out.println("Final edges all " + finalEdges);
-        
-        
     }
 
     public void Calculate() {
@@ -1318,102 +969,71 @@ public class QueriesFunctionDBpedia {
         for (Map.Entry<String, String> entry : calculateEdges.entrySet()) {
             calculateEdgesArray.add(entry.getKey());
         }
-
-        //   System.out.println("calculate nodes "+calculateNodesArray);
-        //  System.out.println("calculate edges "+calculateEdgesArray);
     }
 
-    public void Algo_C_D(String nodename, int moreSem, int nodeSem, int gloFans) throws IOException {
+    public void Algo_C_D(String nodename, int moreSem, int nodeSem, int gloFans, String filevar) throws IOException {
         String host = "139.91.210.38/";
         String port = "1111";
         String username = "dba";
         String password = "dba";
         String graphName2 = "http://localhost:8890/dbpedia3.8";
-
         start(host, port, username, password);
         gloFan = gloFans;
-
+        filesinputs = filevar;
         gloVar = moreSem;
         gloNode = nodeSem;
         gloName = nodename;
-
-        Algo_C(nodename, gloVar);
-
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");
+        Algo_C(nodename, gloVar, filesinputs);
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
         listFilesForFolderDBpedia_C_D(folder, nodename);
-        System.out.println("Node frequency start");
         algorithmPaths();
-        System.out.println(" Queries are " + cfaa5 + " start node " + cfaa2 + " end node with start node " + cfaa3 + " end node " + cfaa4);
-
-        System.out.println("vars are " + resvir);//resvir
-
         System.out.println("End algo");
     }
-    /*all proccess get folder files and final print frequency*/
 
+    /*all proccess get folder files and final print frequency*/
     public void Algo_D(String nodename, int node) throws IOException {
         nodesd = node;
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
         listFilesForFolderDBpedia_D(folder, nodename);
-        //  getNodeFrequency_D();
-        // System.out.println("Print frequency start");
-        // printNodesFrequencyOrder_D();
     }
-    /*all proccess get folder files and final print frequency*/
 
-    public void Algo_D_nodes(String nodename, int numbernodes, int node, int moreSem) throws IOException, MalformedQueryException {//fan
+    /*all proccess get folder files and final print frequency*/
+    public void Algo_D_nodes(String nodename, int numbernodes, int node, int moreSem, String filenamevar) throws IOException, MalformedQueryException {//fan
+        filesinputs = filenamevar;
         gloVar = moreSem;
         gloName = nodename;
         nodesd = node;
-        Algo_C(nodename, gloVar);
-        System.out.println("hi fanis7777777777777777777777777");
-        final File folder = new File("C:\\Users\\fanis\\Desktop\\metaptixiakall\\metaptixiako\\kondilakis\\metaptixiaki-ergasia\\queries\\t3\\");
-
+        Algo_C(nodename, gloVar, filesinputs);
+        final File folder = new File("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
         listFilesForFolderDBpedia_D_nodes(folder, nodename);
-        //System.out.println("size is " + nodesList_C_node.size() + " map size is " + nodesMap_C_node.size());
-        // getQueryLevelD_node("","");
-        // getNodeFrequency_D();
-        //System.out.println("Print frequency start");
-        //  printNodesFrequencyOrder_D();
-        System.out.println("last ======++++++++++++++++++++++++++++++++++++++=");
     }
 
     public void test() {
         System.out.println("fanis");
-        // List<Triplet<String, String>> test = new ArrayList<>();
-
     }
 
-    public void testRandmom() throws IOException {
+    public void testRandom(int nodes) throws IOException {
         int min = 2;
-        int max = 8;
-
-        //Generate random int value from 50 to 100 
+        int max = 8;//limits for randomeness generator
         System.out.println("Random value in int from " + min + " to " + max + ":");
         int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
         System.out.println(random_int);
 
-        for (int k = 0; k < 1; k++) {
+        for (int k = 0; k < nodes; k++) {
             Calculate_Random();
             random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
-
             ArrayList<String> temp = new ArrayList<String>();
             ArrayList<String> temp2 = new ArrayList<String>();
             for (int a = 0; a < random_int; a++) {
                 temp.add(calculateNodesArrayRandom.get(a));
             }
-
             for (int a = 0; a < random_int; a++) {
                 temp2.add(calculateEdgesArrayRandom.get(a));
             }
-
             calculateNodesArrayRandom.clear();
             calculateNodesArrayRandom = temp;
-
             calculateEdgesArrayRandom.clear();
             calculateEdgesArrayRandom = temp2;
-
-            // System.out.println("Vars are "+calculateNodesArrayRandom);
             Algo_Calculation_Random("http://dbpedia.org/ontology/Organisation");
         }
 
@@ -1421,15 +1041,11 @@ public class QueriesFunctionDBpedia {
 
     /*print subject frequency DBpedia order*/
     public void printSubjectsFrequencyOrderDBpedia() {
-        //   System.out.println("///////////////// print subject map size " + nodeMapFrequency.size());
-        //   System.out.println("///////////////// print subject list size " + nodesList.size());
-
         int count = 0;
         int sum = 0;
         final Map<String, Integer> sortedByCount = sortByValue(nodeMapFrequency);
         try {
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\fanisddd1.txt");
-
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\dbpedia\\" + filesinputs + "\\");
             for (Map.Entry<String, Integer> entry : sortedByCount.entrySet()) {
                 sum = sum + entry.getValue();
                 count = count + 1;
@@ -1438,72 +1054,36 @@ public class QueriesFunctionDBpedia {
                 myWriter.write(allsentence);
             }
             myWriter.close();
-            System.out.println("Successfully wrote to the file. sum is " + sum);
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
     }
 
     public void printTopK_A() {
-        /*  FileWriter myWriter = null;
-         try {
-         myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputDBpediasff.txt");
-         for (int i = 0; i < nodesa; i++) {
-         System.out.println("loni");
-         System.out.println("Top " + nodesa + " nodes are " + topElementsKeyS_A.get(i) + " with frequency " + topElementsValues_A.get(i));
-         /* String allsentence = "Top " + nodesa + " nodes are  " + topElementsKeyS_A.get(i) + " frequency "
-         + topElementsValues_A.get(i) + "\n";*/
-
-        /*   String allsentence=String.valueOf(i);
-         myWriter.write("test");
-         }
-         } catch (IOException ex) {
-         Logger.getLogger(QueriesFunctionWikidata.class.getName()).log(Level.SEVERE, null, ex);
-         } finally {
-         try {
-         myWriter.close();
-         } catch (IOException ex) {
-         Logger.getLogger(QueriesFunctionWikidata.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         }*/
-        System.out.println("/////////////////");
         int sum = 0;
-        // final Map<String, Integer> sortedByCount = sortByValue(nodeMapFrequency);//it was 
         int count = 0;
         try {
-
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\ocheck1aaa.txt");
-
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\ocheck1aaa.txt");
             for (int i = 0; i < nodesa; i++) {
                 // myWriter.write("aaa");
                 String allsentence = "Top " + nodesa + " nodes are  " + topElementsKeyS_A.get(i) + " frequency "
                         + topElementsValues_A.get(i) + "\n";
-
-                // String allsentence=String.valueOf(i)+",";
-                // String allsentence=topElementsValues_A.get(i)+",";
                 myWriter.write(allsentence);
-               // System.out.println("loni");
-                // System.out.println("Top " + nodesa + " nodes are " + topElementsKeyS_A.get(i) + " with frequency " + topElementsValues_A.get(i));
-
-                // System.out.println("writerr---");
             }
 
             myWriter.close();
-            //  printTopK_A();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
     }
 
     public void printTopK_B() {
         FileWriter myWriter = null;
         try {
-            myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
+            myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\topKNodesDBpedia.txt");
             for (int i = 0; i < nodesb; i++) {
                 System.out.println("Top " + nodesb + " nodes are " + topElementsKeyS_B.get(i) + " with frequency " + topElementsValues_B.get(i));
                 String allsentence = "Top " + nodesb + " nodes are  " + topElementsKeyS_B.get(i) + " frequency "
@@ -1520,80 +1100,29 @@ public class QueriesFunctionDBpedia {
             }
         }
     }
-    /*
-     public void printTopK_C() {
-     FileWriter myWriter = null;
-     try {
-     myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
-     for (int i = 0; i < nodesc; i++) {
-     System.out.println("Topf " + nodesc + " nodes are " + topElementsKeyS_C.get(i) + " with frequency " + topElementsValues_C.get(i));
-     moreSemantic.add(topElementsKeyS_C.get(i));
-     String allsentence = "Topf " + nodesc + " nodes are  " + topElementsKeyS_C.get(i) + " frequency "
-     + topElementsValues_C.get(i) + "\n";
-     myWriter.write(allsentence);
-     }
-     } catch (IOException ex) {
-     Logger.getLogger(QueriesFunctionWikidata.class.getName()).log(Level.SEVERE, null, ex);
-     } finally {
-     try {
-     myWriter.close();
-     } catch (IOException ex) {
-     Logger.getLogger(QueriesFunctionWikidata.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-     }
-     */
 
     public void printTopK_C() {
         HashMap<String, Integer> tempAll_C_Not_Dubl = new HashMap<String, Integer>();
         FileWriter myWriter = null;
         try {
-            myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
-
+            myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\topKNodesDBpedia.txt");
             ArrayList<String> tempkey = new ArrayList<String>();
             ArrayList<Integer> tempvalue = new ArrayList<Integer>();
-            
             for (int g = 0; g < tempAll_C.size(); g++) {
                 tempAll_C_Not_Dubl.put(tempAll_C.get(g), 0);
             }
-           // System.out.println("ffm "+tempAll_C_Not_Dubl.size());
-            
-            
-           // tempAll_C.clear();
             for (Map.Entry mapElement : tempAll_C_Not_Dubl.entrySet()) {
-              //  System.out.println("\n"+mapElement.getKey().toString());
-                tempAll_C_Update.add(mapElement.getKey().toString());//fani ayrio edo des to
+                tempAll_C_Update.add(mapElement.getKey().toString());
             }
-            
-            
-            
-            // System.out.println("ff "+tempAll_C);
-
             for (int g = 0; g < tempAll_C_Update.size(); g++) {
-                ///System.out.println("ff "+tempAll_C.get(g));
                 for (int h = 0; h < topElementsKeyS_C.size(); h++) {
-
                     if (tempAll_C_Update.get(g).equals(topElementsKeyS_C.get(h))) {
-                        // System.out.println("ff "+topElementsKeyS_C);
                         tempkey.add(topElementsKeyS_C.get(h));
                         tempvalue.add(topElementsValues_C.get(h));
                     }
-
                 }
-
-                /* System.out.println("Topf " + nodesc + " nodes are " + topElementsKeyS_C.get(g) + " with frequency " + topElementsValues_C.get(g));
-                 moreSemantic.add(topElementsKeyS_C.get(g));
-                 String allsentence = "Topf nodes are  " + topElementsKeyS_C.get(g) + " frequency "
-                 + topElementsValues_C.get(g) + "\n";
-                 myWriter.write(allsentence);*/
             }
-
-            System.out.println("tempkey are " + tempkey);
-
-            System.out.println("tempvalue are " + tempvalue);
-
             if (nodesc <= tempkey.size()) {
-
                 for (int i = 0; i < nodesc; i++) {
                     System.out.println("Topf " + nodesc + " nodes are " + tempkey.get(i) + " with frequency " + tempvalue.get(i));
                     moreSemantic.add(tempkey.get(i));
@@ -1601,24 +1130,9 @@ public class QueriesFunctionDBpedia {
                             + tempvalue.get(i) + "\n";
                     myWriter.write(allsentence);
                 }
-
             } else {
                 System.out.println("size not compact");
-
             }
-
-            /*   for (int i = 0; i < nodesc; i++) {
-             System.out.println("Topf " + nodesc + " nodes are " + topElementsKeyS_C.get(i) + " with frequency " + topElementsValues_C.get(i));
-                
-                
-                
-               
-                
-             moreSemantic.add(topElementsKeyS_C.get(i));
-             String allsentence = "Topf " + nodesc + " nodes are  " + topElementsKeyS_C.get(i) + " frequency "
-             + topElementsValues_C.get(i) + "\n";
-             myWriter.write(allsentence);
-             }*/
         } catch (IOException ex) {
             Logger.getLogger(QueriesFunctionWikidata.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -1633,7 +1147,7 @@ public class QueriesFunctionDBpedia {
     public void printTopK_D() {
         FileWriter myWriter = null;
         try {
-            myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputkana2.txt");
+            myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\topKNodesDBpedia.txt");
             for (int i = 0; i < nodesd; i++) {
                 System.out.println("Top " + nodesd + " properties are " + topElementsKeyS_D.get(i) + " with frequency " + topElementsValues_D.get(i));
                 String allsentence = "Top " + nodesd + " properties are  " + topElementsKeyS_D.get(i) + " frequency "
@@ -1650,21 +1164,17 @@ public class QueriesFunctionDBpedia {
             }
         }
     }
-    /*print subject frequency order*/
 
+    /*print subject frequency order*/
     public void printNodesFrequencyOrder() {
         System.out.println("/////////////////");
         int sum = 0;
         final Map<String, Integer> sortedByCount = sortByValue(nodeMapFrequency);//it was 
         int count = 0;
         try {
-
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputDBpediasf.txt");
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\outputDBpediasf.txt");
             for (Map.Entry<String, Integer> entry : sortedByCount.entrySet()) {
                 count = count + 1;
-                System.out.println("in printNodesFrequencyOrder ");
-                /* System.out.println("Nodesa = " + entry.getKey()
-                 + ", Frequency = " + entry.getValue());*/
                 sum = sum + entry.getValue();
                 String allsentence = "Querie " + count + " node " + entry.getKey() + " frequency "
                         + entry.getValue() + " sum " + sum + "\n";
@@ -1672,7 +1182,6 @@ public class QueriesFunctionDBpedia {
                 myWriter.write(allsentence);
                 topElementsKeyS_A.add(entry.getKey());
                 topElementsValues_A.add(entry.getValue());
-
             }
             myWriter.close();
             printTopK_A();
@@ -1685,17 +1194,13 @@ public class QueriesFunctionDBpedia {
 
     /*print subject frequency order*/
     public void printNodesFrequencyOrder_B() {
-        System.out.println("/////////////////");
         int sum = 0;
         final Map<String, Integer> sortedByCount = sortByValue(propertyMapFrequency);
         int count = 0;
         try {
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputDBpedias.txt");
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\outputDBpedias.txt");
             for (Map.Entry<String, Integer> entry : sortedByCount.entrySet()) {
                 count = count + 1;
-                // System.out.println("list size fani is " + propertyList.size());
-                /* System.out.println("Nodesa = " + entry.getKey()
-                 + ", Frequency = " + entry.getValue());*/
                 sum = sum + entry.getValue();
                 String allsentence = "Querie  for outputDBpedia2 " + count + " property " + entry.getKey() + " frequency "
                         + entry.getValue() + " sum " + sum + "\n";
@@ -1712,48 +1217,32 @@ public class QueriesFunctionDBpedia {
             e.printStackTrace();
         }
     }
+
     /*print subject frequency order*/
-
     public void printNodesFrequencyOrder_C() {
-        //LinkedHashMap preserve the ordering of elements in which they are inserted
         LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
-
-//Use Comparator.reverseOrder() for reverse ordering
         nodeMapFrequency_C.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-
-//System.out.println("Reversefan Sorted Map   : " + reverseSortedMap);
-        System.out.println("/////////////////");
         int sum = 0;
-        //final Map<String, Integer> sortedByCount = sortByValue(nodeMapFrequency_C);
         int count = 0;
         try {
-
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputDBpedia5.txt");
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\allnodesFrequencyDBpedia.txt");
             for (Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
                 count = count + 1;
-                // System.out.println("list size fani is " + nodesList_C.size());
-                /* System.out.println("Nodesa = " + entry.getKey()
-                 + ", Frequency = " + entry.getValue());*/
                 sum = sum + entry.getValue();
                 String allsentence = "Querie  for outputDBpedia2 " + count + " property " + entry.getKey() + " frequency "
                         + entry.getValue() + " sum " + sum + "\n";
-
                 myWriter.write(allsentence);
                 topElementsKeyS_C.add(entry.getKey());
                 topElementsValues_C.add(entry.getValue());
             }
             myWriter.close();
-            
-            if(kaou==0){
-            printTopK_C();
-            kaou=2;
-            
+            if (kaou == 0) {
+                printTopK_C();
+                kaou = 2;
             }
-            
-            
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -1763,20 +1252,17 @@ public class QueriesFunctionDBpedia {
 
     /*print subject frequency order*/
     public void printNodesFrequencyOrder_D() {
-        System.out.println("FREQ  D");
         int sum = 0;
         final Map<String, Integer> sortedByCount = sortByValue(propertyMapFrequency_D);
         int count = 0;
         try {
-
-            FileWriter myWriter = new FileWriter("C:\\Users\\fanis\\Desktop\\outputDBpedia15.txt");
+            FileWriter myWriter = new FileWriter("src\\WorkloadsDatasets\\outputs\\outputDBpedia15.txt");
             for (Map.Entry<String, Integer> entry : sortedByCount.entrySet()) {
                 count = count + 1;
                 System.out.println("list size fani is " + propertyList_D.size());
                 sum = sum + entry.getValue();
                 String allsentence = "Querie  for outputDBpedia2 " + count + " property " + entry.getKey() + " frequency "
                         + entry.getValue() + " sum " + sum + "\n";
-
                 myWriter.write(allsentence);
                 topElementsKeyS_D.add(entry.getKey());
                 topElementsValues_D.add(entry.getValue());
@@ -1802,10 +1288,9 @@ public class QueriesFunctionDBpedia {
             nodeMapFrequency.put(node, freqnode);
             freqnode = 0;
         }
-        //  System.out.println("get node frequency map is " + nodesMap.size());
     }
-    /*get subject frequency testing*/
 
+    /*get subject frequency testing*/
     public void getNodeFrequency_B() {
         int freqproperty = 0;
         for (String node : propertyMap.keySet()) {
@@ -1817,27 +1302,9 @@ public class QueriesFunctionDBpedia {
             propertyMapFrequency.put(node, freqproperty);
             freqproperty = 0;
         }
-        System.out.println("get node frequency map is " + propertyMap.size());
     }
     int counterr = 0;
-    /*get subject frequency testing*/
 
-    /* public void getNodeFrequency_C() {
-     int freqnodec = 0;
-     for (String node : nodesMap_C.keySet()) {
-     for (int i = 0; i < nodesList_C.size(); i++) {
-     if (node.trim().equals(nodesList_C.get(i).trim())) {
-     freqnodec = freqnodec + 1;
-     }
-     }          
-     nodeMapFrequency_C.put(node, freqnodec);
-     freqnodec = 0;
-     }
-     for (Map.Entry<String, Integer> entry : nodeMapFrequency_C.entrySet()) {         
-     counterr = counterr + entry.getValue();
-     }
-     }
-     */
     public void getNodeFrequency_C() {
         int freqnodec = 0;
         for (String node : nodesMap_C.keySet()) {
@@ -1866,10 +1333,7 @@ public class QueriesFunctionDBpedia {
             propertyMapFrequency_D.put(node, freqnodec);
             freqnodec = 0;
         }
-        System.out.println("size map is " + propertyMap_D.size());
     }
-    /*get
-     /*get predicate frequency*/
 
     public void getPredicateFrequencyDBpedia() {
         System.out.println("rpedicate frequency swf");
@@ -1882,10 +1346,7 @@ public class QueriesFunctionDBpedia {
             }
             propertyMapFrequency.put(property, freqsubject);
             freqsubject = 0;
-
-            // System.out.println("Size subject is "+subjectListSWDF.size());
         }
-        System.out.println("Size property is " + propertyList.size());
     }
 
     /*store querie in structures for DBpeia*/
@@ -1894,8 +1355,6 @@ public class QueriesFunctionDBpedia {
         String[] arrOfStr = querys.split("-----------------", 1116000);
         for (String a : arrOfStr) {
             c = c + 1;
-
-            //  System.out.println("querie is  " + a);
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
             String query = a;
@@ -1925,8 +1384,6 @@ public class QueriesFunctionDBpedia {
             }
             counter = counter + 1;
         }
-
-        System.out.println("Queries are " + c + " and list size is " + nodesList.size() + "node are" + rows + "node map is " + nodesMap.size() + " false are " + cc);
     }
 
     /*store querie in structures for DBpeia*/
@@ -1935,8 +1392,6 @@ public class QueriesFunctionDBpedia {
         String[] arrOfStr = querys.split("-----------------", 1116000);
         for (String a : arrOfStr) {
             c = c + 1;
-
-            // System.out.println("querie is  " + a);
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
             String query = a;
@@ -1957,26 +1412,19 @@ public class QueriesFunctionDBpedia {
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
-
             }
             counter = counter + 1;
         }
-
-        System.out.println("Queriesfaaa are fanis " + c + " and list size is" + propertyList.size() + "propertiesfa are" + rowssec + "property map is " + propertyMap.size() + " false are " + cc);
     }
 
     public void GetResults() {
-
         System.out.println("GetResultsgather_temp_C_Calculation are " + gather_temp_C_Calculation);
         System.out.println("GetResultsgather_temp_C_Calculation_Predicate are " + gather_temp_C_Calculation_Predicate);
-
     }
 
     public void GetResultsRandom() {
-
         System.out.println("gather_temp_C_Calculation_Random are " + gather_temp_C_Calculation_Random);
         System.out.println("gather_temp_C_Calculation_Predicate_Random are " + gather_temp_C_Calculation_Predicate_Random);
-
     }
 
     public void CompareCalculation() {
@@ -1990,9 +1438,6 @@ public class QueriesFunctionDBpedia {
         }
         float paranom = temp_C_Calculation.size();
         float klasma = arithm / paranom;
-        System.out.println("Klasma Arithm prin bi " + arithm);
-        System.out.println("Klasma paranom prin bi " + paranom);
-        System.out.println("Klasma prin bi " + klasma);
         gather_temp_C_Calculation.add(klasma);
         float arithmPredicate = 0;
         for (int i = 0; i < calculateEdgesArray.size(); i++) {
@@ -2004,39 +1449,24 @@ public class QueriesFunctionDBpedia {
         }
         float paranomPredicate = temp_C_Calculation_Predicate.size();
         float klasmaPredicate = arithmPredicate / paranomPredicate;
-        System.out.println("klasmaPredicate Arithm prin bi " + arithmPredicate);
-        System.out.println("Klasma paranomPredicate prin bi " + paranomPredicate);
-        System.out.println("klasmaPredicate prin bi " + klasmaPredicate);
-        
-        
-        System.out.println("Valuesnoulisx are"+temp_C_Calculation_Predicate+" "+calculateEdgesArray);
         gather_temp_C_Calculation_Predicate.add(klasmaPredicate);
         GetResults();
     }
 
     public void CompareCalculationRandomsss() {
         float arithm = 0;
-        System.out.println("sizes are " + calculateNodesArrayRandom.size() + "cc " + temp_C_Calculation_Random.size());
         for (int i = 0; i < calculateNodesArrayRandom.size(); i++) {
             for (int j = 0; j < temp_C_Calculation_Random.size(); j++) {
-                // System.out.println("aaaaaaaaaaaaaaaaaaaaaxaxaxaxzzzzzzzzzzzz");
                 if (calculateNodesArrayRandom.get(i).trim().equals(temp_C_Calculation_Random.get(j).trim())) {
                     arithm = arithm + 1;
-
-                    System.out.println("aaaaaaaaaaaaaaaaaaaaaxaxaxax");
                 }
             }
         }
         float paranom = temp_C_Calculation_Random.size();
-
         float klasma = 0;
         if (paranom != 0) {
             klasma = arithm / paranom;
         }
-
-        System.out.println("Klasma Arithm prin bi " + arithm);
-        System.out.println("Klasma paranom prin bi " + paranom);
-        System.out.println("Klasma prin bi " + klasma);
         gather_temp_C_Calculation_Random.add(klasma);
         float arithmPredicate = 0;
         for (int i = 0; i < calculateEdgesArrayRandom.size(); i++) {
@@ -2053,9 +1483,6 @@ public class QueriesFunctionDBpedia {
             klasmaPredicate = arithmPredicate / paranomPredicate;
 
         }
-        System.out.println("klasmaPredicate Arithm prin bi " + arithmPredicate);
-        System.out.println("Klasma paranomPredicate prin bi " + paranomPredicate);
-        System.out.println("klasmaPredicate prin bi " + klasmaPredicate);
         gather_temp_C_Calculation_Predicate_Random.add(klasmaPredicate);
         GetResultsRandom();
     }
@@ -2065,13 +1492,10 @@ public class QueriesFunctionDBpedia {
         String port = "1111";
         String username = "dba";
         String password = "dba";
-      //  String graphName2 = "http://localhost:8890/dbpedia3.8";
-
         start(host, port, username, password);
         System.out.println("VirtuosoResult ");
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         int c = 0, in = 0, in2, counter = 0;
-
         String append2 = ""
                 + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
                 + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
@@ -2089,65 +1513,48 @@ public class QueriesFunctionDBpedia {
                 + "{ <http://dbpedia.org/resource/Institut_Eurecom> rdf:type ?abstract .\n"
                 + "}\n"
                 + "}";
-
-        System.out.println("Query after8 " + append2);
-
         openConnection();
         TupleQueryResult result = executeSparqlQuery(append2);
         try {
             while (result.hasNext()) {
                 BindingSet r = result.next();
                 System.out.println("in");
-                  //  String var2 = r.getValue(variable).stringValue();
+                //  String var2 = r.getValue(variable).stringValue();
 
             }
         } catch (QueryEvaluationException ex) {
             Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
         } finally {
             System.out.println("Alless guttenndaaaa");
-            // continue;
         }
-        //  }
-
-        System.out.println("Alless guttenn");
     }
 
-    public void VirtuosoResult_c(String querys, String variable) {
+    public void VirtuosoResult_c(String querys, String variable) {//use this funcgtion to run queries for virtuoso
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         int c = 0, in = 0, in2, counter = 0;
         String[] arrOfStr = querys.split("-----------------");
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
         SPARQLParserFactory factory = new SPARQLParserFactory();
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
-
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
             System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
-
             String append2 = append1 + splita1[1];
-
-            System.out.println("Query after8 " + append2);
-
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
                         rowsthird = rowsthird + 1;
                         nodesMap_C.put(var2, String.valueOf(rowsthird));
                         nodesList_C.add(var2);
@@ -2162,18 +1569,13 @@ public class QueriesFunctionDBpedia {
                         temp_C.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_c_Calculation(String querys, String variable) {
@@ -2183,7 +1585,6 @@ public class QueriesFunctionDBpedia {
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -2191,43 +1592,30 @@ public class QueriesFunctionDBpedia {
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
             String append2 = append1 + splita1[1];
-            System.out.println("Query after7 " + append2);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                         temp_C_Calculation.add(var2);
-
                         break;
                     } else {
-
                         temp_C_Calculation.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_c_Calculation_Random(String querys, String variable) {
@@ -2237,7 +1625,6 @@ public class QueriesFunctionDBpedia {
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -2245,43 +1632,30 @@ public class QueriesFunctionDBpedia {
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
             String append2 = append1 + splita1[1];
-            System.out.println("Query after6 " + append2);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                         temp_C_Calculation_Random.add(var2);
-
                         break;
                     } else {
-
                         temp_C_Calculation_Random.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_c_Calculation_Predicate_Random(String querys, String variable) {
@@ -2291,7 +1665,6 @@ public class QueriesFunctionDBpedia {
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -2299,28 +1672,20 @@ public class QueriesFunctionDBpedia {
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
             String append2 = append1 + splita1[1];
-            System.out.println("Query after5 " + append2);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                         temp_C_Calculation_Predicate_Random.add(var2);
-
                         break;
                     } else {
-
                         temp_C_Calculation_Predicate_Random.add("null");
                         break;
                     }
@@ -2331,11 +1696,8 @@ public class QueriesFunctionDBpedia {
 
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_c_Calculation_Predicate(String querys, String variable) {
@@ -2345,7 +1707,6 @@ public class QueriesFunctionDBpedia {
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -2353,42 +1714,31 @@ public class QueriesFunctionDBpedia {
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
             String append2 = append1 + splita1[1];
-            System.out.println("Query after4 " + append2);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                         temp_C_Calculation_Predicate.add(var2);
-
                         break;
                     } else {
-
                         temp_C_Calculation_Predicate.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
 
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
         System.out.println("Alless guttenn");
     }
 
@@ -2399,7 +1749,6 @@ public class QueriesFunctionDBpedia {
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -2407,42 +1756,30 @@ public class QueriesFunctionDBpedia {
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
             String append2 = append1 + splita1[1];
-            System.out.println("Query after1 " + append2);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                         allpredicates.add(var2);
-
                         break;
                     } else {
-
                         allpredicates.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
         System.out.println("Alless guttenn");
     }
 
@@ -2462,126 +1799,72 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-               //     System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
-                      
-                        char[] ch=pattern.getSubjectVar().getValue().toString().toCharArray();   
-                     for(int i=0;i<ch.length;i++){    
-                       // System.out.println("char at "+i+" index is: "+ch[i]); 
-                        if(ch[i]=='"'||ch[i]=='^'){
-                       // System.out.println("nouli");
-                         flaglit="yes";
-                        }else{
-                          flaglit="no";
+                        char[] ch = pattern.getSubjectVar().getValue().toString().toCharArray();
+                        for (int i = 0; i < ch.length; i++) {
+                            if (ch[i] == '"' || ch[i] == '^') {
+                                flaglit = "yes";
+                            } else {
+                                flaglit = "no";
+                            }
                         }
-                     }
-                        if(flaglit!="yes"){
-                        rowsthird = rowsthird + 1;
-                        nodesMap_C.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsthird));
-                        nodesList_C.add(pattern.getSubjectVar().getValue().toString());
-                        temp_C.add(pattern.getSubjectVar().getValue().toString());
-
-                        allnodes.add(pattern.getSubjectVar().getValue().toString());
-                        allsubjects.add(pattern.getSubjectVar().getValue().toString());
-                        
-                        
-                        
-                        }else{
-                        rowsthird = rowsthird + 1;
-                        nodesMap_C.put("null", String.valueOf(rowsthird));
-                        nodesList_C.add("null");
-                        temp_C.add("null");
+                        if (flaglit != "yes") {
+                            rowsthird = rowsthird + 1;
+                            nodesMap_C.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsthird));
+                            nodesList_C.add(pattern.getSubjectVar().getValue().toString());
+                            temp_C.add(pattern.getSubjectVar().getValue().toString());
+                            allnodes.add(pattern.getSubjectVar().getValue().toString());
+                            allsubjects.add(pattern.getSubjectVar().getValue().toString());
+                        } else {
+                            rowsthird = rowsthird + 1;
+                            nodesMap_C.put("null", String.valueOf(rowsthird));
+                            nodesList_C.add("null");
+                            temp_C.add("null");
                         }
-                        
-                        
                     } else if (pattern.getSubjectVar().getValue() == null) {
-
-                            nodesMap_C.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsthird));
+                        nodesMap_C.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsthird));
                         nodesList_C.add(pattern.getSubjectVar().getName().toString());
                         temp_C.add(pattern.getSubjectVar().getName().toString());
-
                         allnodes.add(pattern.getSubjectVar().getName().toString());
                         allsubjects.add(pattern.getSubjectVar().getName().toString());
-                        
-                        
-                        
-                        
-                        
-                        if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c(query, pattern.getSubjectVar().getName());
-
-                        }
                     }
-
                     if (pattern.getObjectVar().getValue() != null) {
-                        
-                        
-                      char[] ch=pattern.getObjectVar().getValue().toString().toCharArray();   
-                     for(int i=0;i<ch.length;i++){    
-                       // System.out.println("char at "+i+" index is: "+ch[i]); 
-                        if(ch[i]=='"'||ch[i]=='^'){
-                       // System.out.println("nouli");
-                         flaglit="yes";
-                        }else{
-                          flaglit="no";
+                        char[] ch = pattern.getObjectVar().getValue().toString().toCharArray();
+                        for (int i = 0; i < ch.length; i++) {
+                            if (ch[i] == '"' || ch[i] == '^') {
+                                flaglit = "yes";
+                            } else {
+                                flaglit = "no";
+                            }
                         }
-                     }
-                     
-                     if(flaglit!="yes"){
-                        rowsthird = rowsthird + 1;
-                        nodesMap_C.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsthird));
-                        nodesList_C.add(pattern.getObjectVar().getValue().toString());
-                        temp_C.add(pattern.getObjectVar().getValue().toString());
-
-                        allnodes.add(pattern.getObjectVar().getValue().toString());
-                        allobjects.add(pattern.getObjectVar().getValue().toString());
-                     }else{
-                      rowsthird = rowsthird + 1;
-                        nodesMap_C.put("null", String.valueOf(rowsthird));
-                        nodesList_C.add("null");
-                        temp_C.add("null");
-                     
-                     }
-                        
-                        
-                        
-                        
+                        if (flaglit != "yes") {
+                            rowsthird = rowsthird + 1;
+                            nodesMap_C.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsthird));
+                            nodesList_C.add(pattern.getObjectVar().getValue().toString());
+                            temp_C.add(pattern.getObjectVar().getValue().toString());
+                            allnodes.add(pattern.getObjectVar().getValue().toString());
+                            allobjects.add(pattern.getObjectVar().getValue().toString());
+                        } else {
+                            rowsthird = rowsthird + 1;
+                            nodesMap_C.put("null", String.valueOf(rowsthird));
+                            nodesList_C.add("null");
+                            temp_C.add("null");
+                        }
                     } else if (pattern.getObjectVar().getValue() == null) {
-
-                        
-                        
-                         rowsthird = rowsthird + 1;
+                        rowsthird = rowsthird + 1;
                         nodesMap_C.put(pattern.getObjectVar().getName().toString(), String.valueOf(rowsthird));
                         nodesList_C.add(pattern.getObjectVar().getName().toString());
                         temp_C.add(pattern.getObjectVar().getName().toString());
-
                         allnodes.add(pattern.getObjectVar().getName().toString());
                         allobjects.add(pattern.getObjectVar().getName().toString());
-                        
-                        
-                        
-                        
-                        if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c(query, pattern.getObjectVar().getName());
-                        }
-
                     }
-
                     if (pattern.getPredicateVar().getValue() != null) {
-
                         allpredicates.add(pattern.getPredicateVar().getValue().toString());
                     } else if (pattern.getPredicateVar().getValue() == null) {
-                        
                         allpredicates.add(pattern.getPredicateVar().getName().toString());
                         allpredicates.add("null");
-                        if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c_pre(query, pattern.getPredicateVar().getName());
-                        }
-
                     }
-
                 }
-               // System.out.println("//////////////////////// inv " + nodename + " tempc " + temp_C);
                 int flag = 0;
                 for (String e : temp_C) {
                     if (e.equals(nodename)) {
@@ -2611,7 +1894,6 @@ public class QueriesFunctionDBpedia {
         String[] arrOfStr = querys.split("-----------------");
         for (String a : arrOfStr) {
             c = c + 1;
-
             allqueries = allqueries + 1;
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
@@ -2624,11 +1906,8 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                 //   System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
-
                         nodesmeasure = nodesmeasure + 1;
-
                     } else if (pattern.getSubjectVar().getValue() == null) {
                         nodesmeasure = nodesmeasure + 1;
                     }
@@ -2637,24 +1916,19 @@ public class QueriesFunctionDBpedia {
                     } else if (pattern.getObjectVar().getValue() == null) {
                         nodesmeasure = nodesmeasure + 1;
                     }
-
                     if (pattern.getPredicateVar().getValue() != null) {
                         edgemeasure = edgemeasure + 1;
                     } else if (pattern.getPredicateVar().getValue() == null) {
                         edgemeasure = edgemeasure + 1;
                     }
-
                 }
-
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
                 nodesbad = nodesbad + 1;
-
             }
             counter = counter + 1;
         }
-
     }
 
     public void Parser_folder_C_Calculation(String querys, String nodename) {
@@ -2673,45 +1947,32 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                   // System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
-
                         temp_C_Calculation.add(pattern.getSubjectVar().getValue().toString());
-
                     } else if (pattern.getSubjectVar().getValue() == null) {
-
                         if (!query.contains("DESCRIBE")) {
-                             temp_C_Calculation.add(pattern.getSubjectVar().getName().toString());
-                           // VirtuosoResult_c_Calculation(query, pattern.getSubjectVar().getName());
-
+                            temp_C_Calculation.add(pattern.getSubjectVar().getName().toString());
+                            // VirtuosoResult_c_Calculation(query, pattern.getSubjectVar().getName());
                         }
                     }
-
                     if (pattern.getPredicateVar().getValue() != null) {
-
                         temp_C_Calculation_Predicate.add(pattern.getPredicateVar().getValue().toString());
-
                     } else if (pattern.getPredicateVar().getValue() == null) {
-
                         if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c_Calculation_Predicate(query, pattern.getPredicateVar().getName());
- temp_C_Calculation_Predicate.add(pattern.getPredicateVar().getName().toString());
+                            // VirtuosoResult_c_Calculation_Predicate(query, pattern.getPredicateVar().getName());
+                            temp_C_Calculation_Predicate.add(pattern.getPredicateVar().getName().toString());
                         }
                     }
-
                     if (pattern.getObjectVar().getValue() != null) {
-
                         temp_C_Calculation.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
-
                         if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c_Calculation(query, pattern.getObjectVar().getName());
-                        temp_C_Calculation.add(pattern.getObjectVar().getName().toString());
+                            // VirtuosoResult_c_Calculation(query, pattern.getObjectVar().getName());
+                            temp_C_Calculation.add(pattern.getObjectVar().getName().toString());
                         }
 
                     }
                 }
-              //  System.out.println("//////////////////////// temp_C_Calculation " + nodename + " tempc " + temp_C_Calculation);
                 int flag = 0;
                 for (String e : temp_C_Calculation) {
                     if (e.equals(nodename)) {
@@ -2719,12 +1980,7 @@ public class QueriesFunctionDBpedia {
                     }
                 }
                 if (flag == 1) {
-                   
-                   // System.out.println("temp_C_Calculation " + temp_C_Calculation);
-                   // System.out.println("temp_C_Calculation_Predicate " + temp_C_Calculation_Predicate);
-
                     CompareCalculation();
-
                 }
                 flag = 0;
                 temp_C_Calculation = new ArrayList<String>();
@@ -2736,9 +1992,6 @@ public class QueriesFunctionDBpedia {
             }
             counter = counter + 1;
         }
-        //   for (String e : tempAll_C) {
-        // System.out.println("temp fani is is " + e);
-        //  }  
     }
 
     public void Parser_folder_C_Calculation_Random(String querys, String nodename) {
@@ -2757,117 +2010,42 @@ public class QueriesFunctionDBpedia {
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                  //  System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
-
                         temp_C_Calculation_Random.add(pattern.getSubjectVar().getValue().toString());
-
                     } else if (pattern.getSubjectVar().getValue() == null) {
-temp_C_Calculation_Random.add(pattern.getSubjectVar().getName().toString());
+                        temp_C_Calculation_Random.add(pattern.getSubjectVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                          //  VirtuosoResult_c_Calculation_Random(query, pattern.getSubjectVar().getName());
-
+                            //  VirtuosoResult_c_Calculation_Random(query, pattern.getSubjectVar().getName());
                         }
                     }
-
                     if (pattern.getPredicateVar().getValue() != null) {
-
                         temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getValue().toString());
-
                     } else if (pattern.getPredicateVar().getValue() == null) {
-temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toString());
+                        temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                          //  VirtuosoResult_c_Calculation_Predicate_Random(query, pattern.getPredicateVar().getName());
+                            //  VirtuosoResult_c_Calculation_Predicate_Random(query, pattern.getPredicateVar().getName());
 
                         }
                     }
-
                     if (pattern.getObjectVar().getValue() != null) {
-
                         temp_C_Calculation_Random.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
- temp_C_Calculation_Random.add(pattern.getObjectVar().getName().toString());
+                        temp_C_Calculation_Random.add(pattern.getObjectVar().getName().toString());
                         if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_c_Calculation_Random(query, pattern.getObjectVar().getName());
+                            // VirtuosoResult_c_Calculation_Random(query, pattern.getObjectVar().getName());
                         }
-
                     }
                 }
-                System.out.println("//////////////////////// temp_C_Calculation " + nodename + " tempc " + temp_C_Calculation);
-
                 CompareCalculationRandomsss();
                 temp_C_Calculation_Random = new ArrayList<String>();
                 temp_C_Calculation_Predicate_Random = new ArrayList<String>();
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
-
             }
             counter = counter + 1;
         }
-        //   for (String e : tempAll_C) {
-        // System.out.println("temp fani is is " + e);
-        //  }  
     }
-
-    /*store querie in structures for DBpeia*/
-    /*
-     public void Parser_folder_C(String querys, String nodename) {
-     int c = 0, cc = 0, in = 0, in2, counter = 0;
-     String[] arrOfStr = querys.split("-----------------");
-     for (String a : arrOfStr) {
-     c = c + 1;
-     SPARQLParserFactory factory = new SPARQLParserFactory();
-     QueryParser parser = factory.getParser();
-     String query = a;
-     try {
-     ParsedQuery parsedQuery = parser.parseQuery(query, null);
-     StatementPatternCollector collector = new StatementPatternCollector();
-     TupleExpr tupleExpr = parsedQuery.getTupleExpr();
-     tupleExpr.visit(collector);
-     for (StatementPattern pattern : collector.getStatementPatterns()) {
-     in = in + 1;
-     System.out.println("Subjectaa " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue());
-     if (pattern.getSubjectVar().getValue() != null) {
-     rowsthird = rowsthird + 1;
-     nodesMap_C.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsthird));
-     nodesList_C.add(pattern.getSubjectVar().getValue().toString());
-     temp_C.add(pattern.getSubjectVar().getValue().toString());
-     }
-
-     if (pattern.getObjectVar().getValue() != null) {
-     rowsthird = rowsthird + 1;
-     nodesMap_C.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsthird));
-     nodesList_C.add(pattern.getObjectVar().getValue().toString());
-     temp_C.add(pattern.getObjectVar().getValue().toString());
-     }
-     }
-     System.out.println("//////////////////////// inv" + nodename);
-     int flag = 0;
-     for (String e : temp_C) {
-     if (e.equals(nodename)) {
-     flag = 1;
-     }
-     }
-     if (flag == 1) {
-     tempAll_C.addAll(temp_C);
-     System.out.println("Its has " + temp_C);
-     }
-     flag = 0;
-     temp_C = new ArrayList<String>();
-     } catch (MalformedQueryException e) {
-     e.printStackTrace();
-     cc = cc + 1;
-
-     }
-     counter = counter + 1;
-     }
-     for (String e : tempAll_C) {
-     System.out.println("temp fani is is " + e);
-     }  
-     }
-    
-     */
 
     /*store querie in structures for DBpeia*/
     public void Parser_folder_D(String querys, String nodename) {
@@ -2885,18 +2063,7 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
-                    System.out.println("patsaaa ------------------------------------------------------------------- " + pattern);
-                    // System.out.println("predicate " + pattern.getPredicateVar().getValue());
-                  /*  if (pattern.getPredicateVar().getValue() != null) {
-                     rowsfor = rowsfor + 1;
-                     propertyMap_D.put(pattern.getPredicateVar().getValue().toString(), String.valueOf(rowsthird));
-                     propertyList_D.add(pattern.getPredicateVar()
-                     .getValue().toString());
-                     temp_D.add(pattern.getPredicateVar().getValue().toString());                    
-                     }*/
-
                 }
-                System.out.println("////////////////////////");
                 int flag = 0;
                 for (String e : temp_D) {
                     if (e.equals(/*"http://www.wikidata.org/entity/Q1284"*/nodename)) {
@@ -2909,43 +2076,22 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 }
                 flag = 0;
                 temp_D = new ArrayList<String>();
-                /*   System.out.println("Size temp are kooooooooooooooooooooooooooo====>>>>"+temp.size());
-                 for(String e:temp){
-                 System.out.println("Nodes temp are"+e);
-                 if(e.equals(nodes)){
-                 System.out.println("Its inn xaxaxa"+e);
-                 tempAll.addAll(temp);
-                 }
-                    
-                 }
-                 System.out.println("Size tempAll are aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa====>>>>"+tempAll.size());
-                 temp = new ArrayList<String>();*/
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
-
             }
             counter = counter + 1;
-
-            // System.out.println("line end fani and " + counter);
         }
         for (String e : tempAll_D) {
             System.out.println("temp fani is is " + e);
         }
-
-        System.out.println("Queries are " + c + " and list size is" + propertyList_D.size() + "subject are" + rowsfor + "subject map is " + propertyMap_D.size() + " false are " + cc);
-
-        // tempAll= new ArrayList<String>();
     }
-    /*store querie in structures for DBpeia*/
 
+    /*store querie in structures for DBpeia*/
     public void Parser_folder_D_Node(String querys, String nodename) throws MalformedQueryException {
         int c = 0, cc = 0, in = 0, in2, counter = 0;
-
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         String[] arrOfStr = querys.split("-----------------", 1116000);
-        //System.out.println("quries are "+querys);
-        // try {
         for (String a : arrOfStr) {
             c = c + 1;
             SPARQLParserFactory factory = new SPARQLParserFactory();
@@ -2957,147 +2103,22 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
             TupleExpr tupleExpr = parsedQuery.getTupleExpr();
             tupleExpr.visit(collector);
             for (StatementPattern pattern : collector.getStatementPatterns()) {
-
                 in = in + 1;
-                System.out.println("patsaaakii ------------------------------------------------------------------- " + pattern);
-
-                /*       System.out.println("=================================================>>>>");
-                 System.out.println("lit2 " + Literals.getIntValue(pattern.getSubjectVar().getValue(), 1));
-                 System.out.println("lit2 " + Literals.getIntValue(pattern.getObjectVar().getValue(), 1));             
-                 if (pattern.getSubjectVar().getValue() != null) {
-                 System.out.println("sub val " + pattern.getSubjectVar().getValue());
-
-                   
-                 subjectMap_D_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsd_nodesubject));
-                 subjectList_D_node.add(pattern.getSubjectVar().getValue().toString());
-                 encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getValue().toString());
-                 encoderDikstraString.add(pattern.getSubjectVar().getValue().toString());
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodesubject = rowsd_nodesubject + 1;
-                 rowsd_node = rowsd_node + 1;
-                 subjectList_D_node_Global.add(pattern.getSubjectVar().getValue().toString());
-
-                   
-                 } else if (pattern.getSubjectVar().getValue() == null) {
-                 subjectList_D_node.add("null");
-                  
-                 encoderDikstraString.add("null");
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodesubject = rowsd_nodesubject + 1;
-                  
-                 subjectList_D_node_Global.add("null");
-                 }
-
-                
-                 if (pattern.getPredicateVar().getValue() != null) {
-                 propertyMapV_D_node.put(pattern.getPredicateVar().getValue().toString(), String.valueOf(rowsd_nodeproperty));
-                 propertyListV_D_node.add(pattern.getPredicateVar().getValue().toString());
-                 encoderDikstra.put(rowsd_node, pattern.getPredicateVar().getValue().toString());
-                 encoderDikstraString.add(pattern.getPredicateVar().getValue().toString());
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodeproperty = rowsd_nodeproperty + 1;
-                 rowsd_node = rowsd_node + 1;
-                 propertyListV_D_node_Global.add(pattern.getPredicateVar().getValue().toString());
-                 } else if (pattern.getPredicateVar().getValue() == null) {
-                 propertyListV_D_node.add("null");
-                  
-                 encoderDikstraString.add("null");
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodeobject = rowsd_nodeproperty + 1;
-            
-                 propertyListV_D_node_Global.add("null");
-                 }
-               
-                 if (pattern.getObjectVar().getValue() != null) {
-                 
-                 objectMap_D_node.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsd_nodeobject));
-                 objectList_D_node.add(pattern.getObjectVar().getValue().toString());
-                 encoderDikstra.put(rowsd_node, pattern.getObjectVar().getValue().toString());
-                 encoderDikstraString.add(pattern.getObjectVar().getValue().toString());
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodeobject = rowsd_nodeobject + 1;
-                 rowsd_node = rowsd_node + 1;
-                 objectList_D_node_Global.add(pattern.getObjectVar().getValue().toString());
-
-                 // }
-                 } else if (pattern.getObjectVar().getValue() == null) {
-                 objectList_D_node.add("null");
-             
-                 encoderDikstraString.add("null");
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodeobject = rowsd_nodeobject + 1;
-          
-                 objectList_D_node_Global.add("null");
-                 }*/
             }
-            System.out.println("////////////////////////" + countAA);
-
-            //  System.out.println("size objectList_D_node "+objectList_D_node+" size predicate "+propertyListV_D_node+"size subjectList_D_node "+subjectList_D_node);
-            //System.out.println("size objectList_D_node "+objectList_D_node.size()+" size predicate "+propertyListV_D_node.size()+"size subjectList_D_node "+subjectList_D_node.size()+" times "+countAA);
-          /*  int code = 33;
-             for (Map.Entry mapElement : encoderDikstra.entrySet()) {
-
-             if (mapElement.getValue().equals(nodename)) {
-             code = Integer.valueOf(mapElement.getKey().toString());
-             }
-
-             }*/
-            System.out.println("hoerr");
-
-            //this.dikstraSF(subjectList_D_node, propertyListV_D_node, objectList_D_node, code);
-            //  int counter = 0;
-            //    System.out.println("hoerr2");
-            /*   test = tableValues;    
-             int freq = 0;
-             for (int p = 0; p < tableValues.size(); p++) {
-             for (int l = 0; l < tableValues.size(); l++) {
-
-             if (tableValues.get(p).getPath().equals(tableValues.get(l).getPath())) {
-             freq = freq + 1;
-
-             }
-             }
-             tableValuesDatas.add(new TableValuesDatas(tableValues.get(p).getPath().toString(), tableValues.get(p).getNumberPath(), String.valueOf(freq)));
-             freq = 0;
-             }  */
             encoderDikstra.clear();
             objectMap_D_node.clear();
             objectList_D_node.clear();
             rowsd_nodeobject = 0;
-
             subjectMap_D_node.clear();
             subjectList_D_node.clear();
             rowsd_nodesubject = 0;
-
             encoderDikstraString.clear();
             encoderDikstraInteger.clear();
-
             pairsvValues.clear();
             rowsd_node = 0;
-
         }
 
     }
-    /*
-     public void VirtuosoResult(String graphName) {
-     String query = "select distinct ?subject ?predicate ?object from <" + graphName + "> where  {?subject ?predicate ?object} limit 40";
-     openConnection();
-     TupleQueryResult result = executeSparqlQuery(query);
-     try {
-     System.out.println("*** TRIPLESAAA ***");
-     while (result.hasNext()) {
-     BindingSet r = result.next();
-     String subject = r.getValue("subject").stringValue();
-     String predicate = r.getValue("predicate").stringValue();
-     String object = r.getValue("object").stringValue();
-
-     System.out.println(subject + " - " + predicate + " - " + object);
-     }
-     } catch (QueryEvaluationException ex) {
-     Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     terminateConnection();
-     }*/
 
     public void VirtuosoResult2(String querys, String variable) {
         ArrayList<TableValues> test = new ArrayList<TableValues>();
@@ -3106,16 +2127,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         int flag = 1;
         int xx = 0;
         int end = 0;
-
-        // String query = arrOfStr[loop];
-        //System.out.println("quwriess are "+query);
-        //String[] arrOfStrw = query.split("where", 2);
-        // System.out.println("append 1 "+arrOfStrw[0]);
-        // System.out.println("append 2 "+arrOfStrw[1]);
-        // String newstring=arrOfStrw[0]+" from <http://localhost:8890/dbpedia3.8> where "+arrOfStrw[1];
-        // System.out.println("new string "+newstring);
-        // String query = "select distinct ?subject ?predicate ?object  where  {?subject ?predicate ?object} limit 1";
-        System.out.println("VirtuosoResult2 ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -3127,16 +2138,9 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         try {
             while (result.hasNext()) {
                 BindingSet r = result.next();
-               // System.out.println("*** TRIPLESINFA0 is *** " + querys + " var " + variable);
-
-                // if(querys.contains("select")||querys.contains("SELECT")){
                 Value var = r.getValue(variable);//.stringValue();
-                System.out.println("fsni2 vsl sre " + var);
-
                 if (var != null) {
                     String var2 = r.getValue(variable).stringValue();
-                    System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
-
                     subjectMap_D_node.put(var2, String.valueOf(rowsd_nodeobject));
                     subjectList_D_node.add(var2);
                     encoderDikstra.put(rowsd_node, var2);
@@ -3155,42 +2159,22 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                     rowsd_node = rowsd_node + 1;
                     subjectList_D_node_Global.add("null");
                     break;
-                    //  System.out.println("Subject val " + pattern.getSubjectVar().getValue() + " Subject name "+pattern.getSubjectVar().getName());
                 }
-
-                          //  System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query+" variable is "+var);
-                /* objectMap_D_node.put(var, String.valueOf(rowsd_nodeobject));
-                 subjectList_D_node.add(var);
-                 encoderDikstra.put(rowsd_node, var);
-                 encoderDikstraString.add(var);
-                 encoderDikstraInteger.add(rowsd_node);
-                 rowsd_nodesubject = rowsd_nodesubject + 1;
-                 rowsd_node = rowsd_node + 1;
-                 subjectList_D_node_Global.add(var);*/
-                //  endvar=var;
-                // }else{
-                // System.out.println("Not");
-                //}
             }
         } catch (QueryEvaluationException ex) {
             Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
         } finally {
             System.out.println("Alless guttenndaaaa");
-            // continue;
         }
-
-        System.out.println("Alless guttenn");
     }
 
-    public void VirtuosoResult(String querys, String variable) {
+    public void VirtuosoResult(String querys, String variable) {//use this function for query virtuoso
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         int c = 0, in = 0, in2, counter = 0;
         String[] arrOfStr = querys.split("-----------------");
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -3202,12 +2186,9 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         try {
             while (result.hasNext()) {
                 BindingSet r = result.next();
-                Value var = r.getValue(variable);/*.stringValue();*/
-
-                System.out.println("fsni vsl sre " + var);
+                Value var = r.getValue(variable);
                 if (var != null) {
                     String var2 = r.getValue(variable).stringValue();
-                    System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
                     objectMap_D_node.put(var2, String.valueOf(rowsd_nodeobject));
                     objectList_D_node.add(var2);
                     encoderDikstra.put(rowsd_node, var2);
@@ -3228,16 +2209,12 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                     objectList_D_node_Global.add("null");
                     break;
                 }
-
             }
         } catch (QueryEvaluationException ex) {
             Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
         } finally {
             System.out.println("Alless guttenndaaaa");
-            // continue;
         }
-
         System.out.println("Alless guttenn");
     }
 
@@ -3248,7 +2225,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -3257,44 +2233,30 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         String query = arrOfStr[loop];
 
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
-
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
-
             String append2 = append1 + splita1[1];
-            System.out.println("Query afteraa " + append2);
-            //  System.out.println("query is "+query);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
                         propertyListV_D_node.add(var2);
                         break;
                     } else {
                         propertyListV_D_node.add("null");
-
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_d_2(String querys, String variable) {
@@ -3304,7 +2266,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
@@ -3313,26 +2274,17 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         String query = arrOfStr[loop];
 
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
-
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
-
             String append2 = append1 + splita1[1];
-            System.out.println("Query after3 " + append2);
-            //  System.out.println("query is "+query);
-
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
                         subjectMap_D_node.put(var2, String.valueOf(rowsd_nodesubject));
                         subjectList_D_node.add(var2);
                         encoderDikstra.put(rowsd_node, var2);
@@ -3357,15 +2309,11 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
 
         }
-
-        System.out.println("Alless guttenn");
     }
 
     public void VirtuosoResult_d(String querys, String variable) {
@@ -3375,34 +2323,24 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         int flag = 1;
         int xx = 0;
         int end = 0;
-        System.out.println("VirtuosoResult ");
         end = arrOfStr.length;
         c = c + 1;
         cc = cc + 1;
         SPARQLParserFactory factory = new SPARQLParserFactory();
         QueryParser parser = factory.getParser();
         String query = arrOfStr[loop];
-
         if (!query.contains("ASK") && query.contains("http://dbpedia3.8")) {
-            System.out.println("Query before " + query);
             String[] splita1 = query.split("http://dbpedia3.8", 2);
-
             String append1 = splita1[0] + "http://localhost:8890/dbpedia3.8";
-
             String append2 = append1 + splita1[1];
-           // System.out.println("Query after " + append2);
-            //  System.out.println("query is "+query);
             openConnection();
             TupleQueryResult result = executeSparqlQuery(append2);
             try {
                 while (result.hasNext()) {
                     BindingSet r = result.next();
                     Value var = r.getValue(variable);/*.stringValue();*/
-
-                    System.out.println("fsni vsl sre " + var);
                     if (var != null) {
                         String var2 = r.getValue(variable).stringValue();
-                        System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query + " variable is " + var2);
                         objectMap_D_node.put(var2, String.valueOf(rowsd_nodeobject));
                         objectList_D_node.add(var2);
                         encoderDikstra.put(rowsd_node, var2);
@@ -3423,34 +2361,27 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         objectList_D_node_Global.add("null");
                         break;
                     }
-
                 }
             } catch (QueryEvaluationException ex) {
                 Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
 
             } finally {
                 System.out.println("Alless guttenndaaaa");
-                // continue;
             }
         }
-
-        System.out.println("Alless guttenn");
     }
+
     /*store querie in structures for DBpeia*/
-
     public void Parser_folder_C_D(String querys, String nodename) {
-
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         int c = 0, cc = 0, in = 0, in2, counter = 0;
         String[] arrOfStr = querys.split("-----------------");
         for (String a : arrOfStr) {
-           // System.out.println("////////////////////////querie");
             c = c + 1;
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
             String query = a;
             try {
-                //System.out.println("querie now " + countAA);
                 countAA = countAA + 1;
                 ParsedQuery parsedQuery = parser.parseQuery(query, null);
                 StatementPatternCollector collector = new StatementPatternCollector();
@@ -3459,10 +2390,7 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
                     in = in + 1;
                     cfaa5 = cfaa5 + 1;
-
                     if (pattern.getSubjectVar().getValue() != null) {
-
-                       // System.out.println("sub val " + pattern.getSubjectVar().getValue() + " namee " + pattern.getSubjectVar().getName());
                         subjectMap_D_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsd_nodesubject));
                         subjectList_D_node.add(pattern.getSubjectVar().getValue().toString());
                         encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getValue().toString());
@@ -3471,13 +2399,8 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_nodesubject = rowsd_nodesubject + 1;
                         rowsd_node = rowsd_node + 1;
                         subjectList_D_node_Global.add(pattern.getSubjectVar().getValue().toString());
-
                     } else if (pattern.getSubjectVar().getValue() == null) {
-                        //  VirtuosoResult2(a, pattern.getSubjectVar().getName());
-                        
-                        
-                        
-                         subjectMap_D_node.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsd_nodesubject));
+                        subjectMap_D_node.put(pattern.getSubjectVar().getName().toString(), String.valueOf(rowsd_nodesubject));
                         subjectList_D_node.add(pattern.getSubjectVar().getName().toString());
                         encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getName().toString());
                         encoderDikstraString.add(pattern.getSubjectVar().getName().toString());
@@ -3485,14 +2408,7 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_nodesubject = rowsd_nodesubject + 1;
                         rowsd_node = rowsd_node + 1;
                         subjectList_D_node_Global.add(pattern.getSubjectVar().getName().toString());
-                        
-                        
-                        if (!query.contains("DESCRIBE")) {
-                          //  VirtuosoResult_d_2(a, pattern.getSubjectVar().getName());
-
-                        }
                     }
-
                     if (pattern.getObjectVar().getValue() != null) {
                         objectMap_D_node.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsd_nodeobject));
                         objectList_D_node.add(pattern.getObjectVar().getValue().toString());
@@ -3503,9 +2419,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_node = rowsd_node + 1;
                         objectList_D_node_Global.add(pattern.getObjectVar().getValue().toString());
                     } else if (pattern.getObjectVar().getValue() == null) {
-                        
-                        
-                        
                         objectMap_D_node.put(pattern.getObjectVar().getName().toString(), String.valueOf(rowsd_nodeobject));
                         objectList_D_node.add(pattern.getObjectVar().getName().toString());
                         encoderDikstra.put(rowsd_node, pattern.getObjectVar().getName().toString());
@@ -3514,48 +2427,27 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_nodeobject = rowsd_nodeobject + 1;
                         rowsd_node = rowsd_node + 1;
                         objectList_D_node_Global.add(pattern.getObjectVar().getName().toString());
-                        
-                        if (!query.contains("DESCRIBE")) {
-                           // VirtuosoResult_d(a, pattern.getObjectVar().getName());
-
-                        }
                     }
-
-                    //////////////////
                     if (pattern.getPredicateVar().getValue() != null) {
                         propertyListV_D_node.add(pattern.getPredicateVar().getValue().toString());
-
                     } else if (pattern.getPredicateVar().getValue() == null) {
                         propertyListV_D_node.add(pattern.getPredicateVar().getName().toString());
-                        if (!query.contains("DESCRIBE")) {
-                         //   VirtuosoResult_d_3(a, pattern.getPredicateVar().getName());
-                            System.out.println("Propertyyy has nulll value");
-
-                        }
-
                     }
-
-                    //////////////////////
                 }
                 for (Map.Entry mapElement : encoderDikstra.entrySet()) {
-
                     if (mapElement.getValue().equals(nodename)) {
                         code = Integer.valueOf(mapElement.getKey().toString());
                     }
                     if (moreSemantic.get(gloNode).equals(mapElement.getValue())) {
                         endNode = 25;
-
                     }
-
                 }
-
                 if (endNode == 25) {
                     cfaa4 = cfaa4 + 1;
                 } else {
                     endNode = 34;
                 }
                 if (code != 33) {
-
                     cfaa2 = cfaa2 + 1;
                     in22 = in22 + 1;
                     if (endNode == 25) {
@@ -3563,20 +2455,13 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                     } else {
                         endNode = 34;
                     }
-
                 } else {
                     code = 33;
-
                     cfaa = cfaa + 1;
                     in11 = in11 + 1;
-                  //  System.out.println("inza1 " + in11);
-
                 }
-
                 if (subjectList_D_node.size() > objectList_D_node.size()) {
-
                     for (int i = 0; i < subjectList_D_node.size(); i++) {
-
                         objectMap_D_node.put("null", String.valueOf(rowsd_nodeobject));
                         objectList_D_node.add("null");
                         encoderDikstra.put(rowsd_node, "null");
@@ -3585,12 +2470,9 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_nodeobject = rowsd_nodeobject + 1;
                         rowsd_node = rowsd_node + 1;
                         objectList_D_node_Global.add("null");
-
                     }
-
                 } else if (subjectList_D_node.size() < objectList_D_node.size()) {
                     for (int i = 0; i < objectList_D_node.size(); i++) {
-
                         subjectMap_D_node.put("null", String.valueOf(rowsd_nodesubject));
                         subjectList_D_node.add("null");
                         encoderDikstra.put(rowsd_node, "null");
@@ -3599,261 +2481,46 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsd_nodesubject = rowsd_nodesubject + 1;
                         rowsd_node = rowsd_node + 1;
                         subjectList_D_node_Global.add("null");
-
                     }
-
                 }
-             //   System.out.println("size after  encoderDikstra " + encoderDikstra.size() + " is " + encoderDikstra);
-              //  System.out.println("size after  subjectList_D_node " + subjectList_D_node.size() + " is " + subjectList_D_node);
-              //  System.out.println("size after  objectList_D_node " + objectList_D_node.size() + " is " + objectList_D_node);
-
                 this.dikstraSF(subjectList_D_node, propertyListV_D_node, objectList_D_node, code);
-                System.out.println("lastfani time1 is " + time1);
-                System.out.println("lastfani time2 is " + time2);
                 test = tableValues;
                 int freq = 0;
-                System.out.println(" b3");
                 for (int p = 0; p < tableValues.size(); p++) {
                     for (int l = 0; l < tableValues.size(); l++) {
-
                         if (tableValues.get(p).getPath().equals(tableValues.get(l).getPath())) {
                             freq = freq + 1;
-
                         }
                     }
                     tableValuesDatas.add(new TableValuesDatas(tableValues.get(p).getPath().toString(), tableValues.get(p).getNumberPath(), String.valueOf(freq)));
                     freq = 0;
                 }
-
                 encoderDikstra.clear();
                 objectMap_D_node.clear();
                 objectList_D_node.clear();
                 rowsd_nodeobject = 0;
-
                 subjectMap_D_node.clear();
                 subjectList_D_node.clear();
                 rowsd_nodesubject = 0;
-
                 propertyListV_D_node.clear();
-
                 encoderDikstraString.clear();
                 encoderDikstraInteger.clear();
-
                 pairsvValues.clear();
                 rowsd_node = 0;
-
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
-
             }
             counter = counter + 1;
-            System.out.println("////////////////////////QUERY END");
         }
 
     }
 
-    /*public void Parser_folder_C_D(String querys, String nodename) {
-     ArrayList<TableValues> test = new ArrayList<TableValues>();
-     int c = 0, cc = 0, in = 0, in2, counter = 0;
-     String[] arrOfStr = querys.split("-----------------", 1116000);
-     for (String a : arrOfStr) {
-     c = c + 1;
-     SPARQLParserFactory factory = new SPARQLParserFactory();
-     QueryParser parser = factory.getParser();
-     String query = a;
-     try {
-     System.out.println("semantics are " + moreSemantic);
-     countAA = countAA + 1;
-     ParsedQuery parsedQuery = parser.parseQuery(query, null);
-     StatementPatternCollector collector = new StatementPatternCollector();
-     TupleExpr tupleExpr = parsedQuery.getTupleExpr();
-     tupleExpr.visit(collector);
-     for (StatementPattern pattern : collector.getStatementPatterns()) {
-     in = in + 1;
-     cfaa5=cfaa5+1;
-     System.out.println("Subject " + pattern.getSubjectVar().getValue() + "Object " + pattern.getObjectVar().getValue() + " COUNT " + countAA);
-     if (pattern.getSubjectVar().getValue() != null) {
-     System.out.println("sub val " + pattern.getSubjectVar().getValue());
-
-     //   if (!pattern.getSubjectVar().getValue().equals("\"POINT(17 53)\"^^<http://www.opengis.net/ont/geosparql#wktLiteral>") && !pattern.getSubjectVar().getValue().equals("\"POINT(17 53)\"^^<http://www.opengis.net/ont/geosparql#wktLiteral>") && !pattern.getSubjectVar().getValue().equals("\"de,en\"") && !pattern.getSubjectVar().getValue().equals("\"en,da,de,es,fr,jp,nl,no,ru,sv,zh\"") && !pattern.getSubjectVar().getValue().equals("\"nl,fr,en,de,it,es,no,pt\"") && !pattern.getSubjectVar().getValue().equals("\"tt0053589\"") && !pattern.getSubjectVar().getValue().equals("\"fr,en\"") && !pattern.getSubjectVar().getValue().equals("\"200\"") && !pattern.getSubjectVar().getValue().equals("\"fr,en\"") && !pattern.getSubjectVar().getValue().equals("null") && !pattern.getSubjectVar().getValue().equals("\"fr,en\"") && !pattern.getSubjectVar().getValue().equals("\"en,en,fr\"") && !pattern.getSubjectVar().getValue().equals("\"fr,en\"") && !pattern.getSubjectVar().getValue().equals("\"tt0454873\"") && !pattern.getSubjectVar().getValue().equals("\"en,pt,en\"") && !pattern.getSubjectVar().getValue().equals("\"[AUTO_LANGUAGE],en\"") && !pattern.getSubjectVar().getValue().equals("\"tt0071301\"") && !pattern.getSubjectVar().getValue().equals("\"en,fr,de,ru,es,zh,jp\"") && !pattern.getSubjectVar().getValue().equals("\"fr") && !pattern.getSubjectVar().getValue().equals("\"en,en\"") && !pattern.getSubjectVar().getValue().equals("\"fr") && !pattern.getSubjectVar().getValue().equals("\"en\"") && !pattern.getSubjectVar().getValue().equals("\"fr") && !pattern.getSubjectVar().getValue().equals("\"tt0061410\"") && !pattern.getSubjectVar().getValue().equals("\"fr") && !pattern.getSubjectVar().getValue().equals("\"tt0122613\"") && !pattern.getSubjectVar().getValue().equals("\"fr") && !pattern.getSubjectVar().getValue().equals("\"tt0061410\"") && !pattern.getSubjectVar().getValue().equals("\"en,da,de,es,fr,jp,no,ru,sv,zh\"") && !pattern.getSubjectVar().getValue().equals("http://wikiba.se/ontology#Property") && !pattern.getSubjectVar().getValue().equals("\"string1\"") && !pattern.getSubjectVar().getValue().equals("\"en\"")) {
-     //
-     subjectMap_D_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsd_nodesubject));
-     subjectList_D_node.add(pattern.getSubjectVar().getValue().toString());
-     encoderDikstra.put(rowsd_node, pattern.getSubjectVar().getValue().toString());
-     encoderDikstraString.add(pattern.getSubjectVar().getValue().toString());
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodesubject = rowsd_nodesubject + 1;
-     rowsd_node = rowsd_node + 1;
-     subjectList_D_node_Global.add(pattern.getSubjectVar().getValue().toString());
-
-     //  }
-     } else if (pattern.getSubjectVar().getValue() == null) {
-     subjectList_D_node.add("null");
-     // encoderDikstra.put(rowsd_node,"null");
-     encoderDikstraString.add("null");
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodesubject = rowsd_nodesubject + 1;
-     //rowsd_node = rowsd_node + 1;
-     subjectList_D_node_Global.add("null");
-     }
-
-     // if(Literals.getIntValue(pattern.getPredicateVar().getValue(), 1)!=1){
-     if (pattern.getPredicateVar().getValue() != null) {
-     propertyMapV_D_node.put(pattern.getPredicateVar().getValue().toString(), String.valueOf(rowsd_nodeproperty));
-     propertyListV_D_node.add(pattern.getPredicateVar().getValue().toString());
-     encoderDikstra.put(rowsd_node, pattern.getPredicateVar().getValue().toString());
-     encoderDikstraString.add(pattern.getPredicateVar().getValue().toString());
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodeproperty = rowsd_nodeproperty + 1;
-     rowsd_node = rowsd_node + 1;
-     propertyListV_D_node_Global.add(pattern.getPredicateVar().getValue().toString());
-     } else if (pattern.getPredicateVar().getValue() == null) {
-     propertyListV_D_node.add("null");
-     //  encoderDikstra.put(rowsd_node,"null");
-     encoderDikstraString.add("null");
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodeobject = rowsd_nodeproperty + 1;
-     //  rowsd_node = rowsd_node + 1;
-     propertyListV_D_node_Global.add("null");
-     }
-     //   }
-     //  if(Literals.getIntValue(pattern.getObjectVar().getValue(), 1)!=1){
-     // if(!pattern.getObjectVar().toString().equals("\"string1\"^^<http://www.opengis.net/ont/geosparql#wktLiteral>")){
-     if (pattern.getObjectVar().getValue() != null) {
-     //  if (!pattern.getObjectVar().getValue().equals("\"POINT(17 53)\"^^<http://www.opengis.net/ont/geosparql#wktLiteral>") && !pattern.getObjectVar().getValue().equals("\"POINT(17 53)\"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ") && !pattern.getObjectVar().getValue().equals("\"de,en\"") && !pattern.getObjectVar().getValue().equals("\"en,da,de,es,fr,jp,nl,no,ru,sv,zh\"") && !pattern.getObjectVar().getValue().equals("\"nl,fr,en,de,it,es,no,pt\"") && !pattern.getObjectVar().getValue().equals("\"tt0053589\"") && !pattern.getObjectVar().getValue().equals("\"fr,en\"") && !pattern.getObjectVar().getValue().equals("\"200\"") && !pattern.getObjectVar().getValue().equals("\"fr,en\"") && !pattern.getObjectVar().getValue().equals("null") && !pattern.getObjectVar().getValue().equals("\"fr,en\"") && !pattern.getObjectVar().getValue().equals("\"en,en,fr\"") && !pattern.getObjectVar().getValue().equals("\"fr,en\"") && !pattern.getObjectVar().getValue().equals("\"tt0454873\"") && !pattern.getObjectVar().getValue().equals("\"en,pt,en\"") && !pattern.getObjectVar().getValue().equals("\"[AUTO_LANGUAGE],en\"") && !pattern.getObjectVar().getValue().equals("\"tt0071301\"") && !pattern.getObjectVar().getValue().equals("\"en,fr,de,ru,es,zh,jp\"") && !pattern.getObjectVar().getValue().equals("\"fr") && !pattern.getObjectVar().getValue().equals("\"en,en\"") && !pattern.getObjectVar().getValue().equals("\"fr") && !pattern.getObjectVar().getValue().equals("\"en\"") && !pattern.getObjectVar().getValue().equals("\"fr") && !pattern.getObjectVar().getValue().equals("\"tt0061410\"") && !pattern.getObjectVar().getValue().equals("\"fr") && !pattern.getObjectVar().getValue().equals("\"tt0122613\"") && !pattern.getObjectVar().getValue().equals("\"fr") && !pattern.getObjectVar().getValue().equals("\"tt0061410\"") && !pattern.getObjectVar().getValue().equals("\"en,da,de,es,fr,jp,no,ru,sv,zh\"") && !pattern.getObjectVar().getValue().equals("http://wikiba.se/ontology#Property") && !pattern.getObjectVar().getValue().equals("\"string1\"") && !pattern.getObjectVar().getValue().equals("\"en\"")) {
-
-     objectMap_D_node.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsd_nodeobject));
-     objectList_D_node.add(pattern.getObjectVar().getValue().toString());
-     encoderDikstra.put(rowsd_node, pattern.getObjectVar().getValue().toString());
-     encoderDikstraString.add(pattern.getObjectVar().getValue().toString());
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodeobject = rowsd_nodeobject + 1;
-     rowsd_node = rowsd_node + 1;
-     objectList_D_node_Global.add(pattern.getObjectVar().getValue().toString());
-
-     // }
-     } else if (pattern.getObjectVar().getValue() == null) {
-     objectList_D_node.add("null");
-     //  encoderDikstra.put(rowsd_node,"null");
-     encoderDikstraString.add("null");
-     encoderDikstraInteger.add(rowsd_node);
-     rowsd_nodeobject = rowsd_nodeobject + 1;
-     //    rowsd_node = rowsd_node + 1;
-     objectList_D_node_Global.add("null");
-     }
-
-     }
-
-     System.out.println("////////////////////////");
-     //   System.out.println("size objectList_D_node " + objectList_D_node.size() + " size predicate " + propertyListV_D_node.size() + "size subjectList_D_node " + subjectList_D_node.size());
-     // int code = 33;
-     /////////////////////////////
-
-     //   System.out.println("size objectList_D_node "+objectList_D_node+" size predicate "+propertyListV_D_node.size()+"size subjectList_D_node "+subjectList_D_node);
-               
-     for (Map.Entry mapElement : encoderDikstra.entrySet()) {
-
-     if (mapElement.getValue().equals(nodename)) {
-     code = Integer.valueOf(mapElement.getKey().toString());
-     }
-     if( moreSemantic.get(gloNode).equals(mapElement.getValue())){
-     endNode=25;
-                    
-     }
-
-                    
-     }
-                
-               
-                
-                         
-     if(endNode==25){
-     cfaa4=cfaa4+1;                 
-     }else{
-     endNode=34;
-     }
-     if (code != 33) {
-                    
-     cfaa2 = cfaa2 + 1;
-     in22 = in22 + 1;
-     if(endNode==25){
-     cfaa3=cfaa3+1;                   
-     }else{
-     endNode=34;
-     }
-                    
-                    
-                   
-     }else {
-     code=33;
-                    
-     cfaa = cfaa + 1;
-     in11 = in11 + 1;
-     System.out.println("inza1 " + in11);
-                    
-
-     }
-              
-
-     this.dikstraSF(subjectList_D_node, propertyListV_D_node, objectList_D_node, code);
-     System.out.println("lastfani time1 is " + time1);
-     System.out.println("lastfani time2 is " + time2);
-     test = tableValues;
-     int freq = 0;
-     System.out.println(" b3");
-     for (int p = 0; p < tableValues.size(); p++) {
-     for (int l = 0; l < tableValues.size(); l++) {
-
-     if (tableValues.get(p).getPath().equals(tableValues.get(l).getPath())) {
-     freq = freq + 1;
-
-     }
-     }
-     tableValuesDatas.add(new TableValuesDatas(tableValues.get(p).getPath().toString(), tableValues.get(p).getNumberPath(), String.valueOf(freq)));
-     freq = 0;
-     }
-
-     encoderDikstra.clear();
-     objectMap_D_node.clear();
-     objectList_D_node.clear();
-     rowsd_nodeobject = 0;
-
-     subjectMap_D_node.clear();
-     subjectList_D_node.clear();
-     rowsd_nodesubject = 0;
-
-     encoderDikstraString.clear();
-     encoderDikstraInteger.clear();
-
-     pairsvValues.clear();
-
-     // tableValues.clear();
-     //tableValuesDatas.clear();
-     rowsd_node = 0;
-     ////SSSS
-
-             
-
-     // System.out.println("encoder dikstra "+encoderDikstra+" node name-----------> "+nodename);
-          
-     } catch (MalformedQueryException e) {
-     e.printStackTrace();
-     cc = cc + 1;
-
-     }
-     counter = counter + 1;
-     }
-
-     }*/
     public void testCall(int loopes, String querys) {
         ArrayList<TableValues> test = new ArrayList<TableValues>();
         int c = 0, cc = 0, in = 0, in2, counter = 0;
         String[] arrOfStr = querys.split("-----------------", 1116000);
-        //int loop;
         for (loop = loopes; loop < arrOfStr.length; loop++) {
-            //c = c + 1;
-            //cc=cc+1;
             SPARQLParserFactory factory = new SPARQLParserFactory();
             QueryParser parser = factory.getParser();
             String query = arrOfStr[loop];
@@ -3869,12 +2536,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
 
             while (result.hasNext()) {
                 BindingSet r = result.next();
-                System.out.println("*** TRIPLESAAA ***");
-               // String subject = r.getValue("subject").stringValue();
-                //String predicate = r.getValue("predicate").stringValue();
-                //String object = r.getValue("object").stringValue();
-
-                // System.out.println(subject + " - " + predicate + " - " + object);
             }
         } catch (QueryEvaluationException ex) {
             Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
@@ -3882,46 +2543,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
         terminateConnection();
     }
 
-    /*
-     public void Parser_folder_C_D(String querys, String nodename) {//queries analysis
-     ArrayList<TableValues> test = new ArrayList<TableValues>();
-     int c = 0, in = 0, in2, counter = 0;
-     String[] arrOfStr = querys.split("-----------------");
-     int flag = 1;
-     int xx = 0;
-     int end = 0;
-     while (flag != 0) {
-     for (loop = xx; loop < arrOfStr.length; loop++) {
-     end = arrOfStr.length;
-     c = c + 1;
-     cc = cc + 1;
-     SPARQLParserFactory factory = new SPARQLParserFactory();
-     QueryParser parser = factory.getParser();
-     String query = arrOfStr[loop];
-     openConnection();
-     TupleQueryResult result = executeSparqlQuery(query);
-     try {
-     // System.out.println("*** TRIPLES ***");
-     while (result.hasNext()) {
-     BindingSet r = result.next();
-     System.out.println("*** TRIPLESINFA counter is ***" + cc + " QUERIE is--------> " + query);
-     }
-     } catch (QueryEvaluationException ex) {
-     Logger.getLogger(QueriesFunctionDBpedia.class.getName()).log(Level.SEVERE, null, ex);
-     } finally {
-                                     
-     break;
-     }
-     }
-     xx = xx + 1;
-            
-     if(xx>=end){
-     flag=0;
-            
-     }
-     }
-     System.out.println("Alless guttenn");
-     }*/
     public void convertArrayListToMap() {
         String value = "-";
         for (int i = 0; i < tempAll_C_node.size(); i++) {
@@ -3930,36 +2551,21 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
     }
 
     public void comperator() {
-
-        /*objectList_D_node subjectList_D_node propertyList_D_node  */
-        System.out.println("man called");
-
-        // using keySet() for iteration over keys
         for (String name : converter.keySet()) {
-            System.out.println("Fanis: " + name);
             for (int i = 0; i < objectList_D_node.size(); i++) {
-
                 if (name.equals(objectList_D_node.get(i))) {
                     System.out.println("Properties object are " + propertyList_D_node.get(i));
                 }
-
                 if (name.equals(subjectList_D_node.get(i))) {
                     System.out.println("Properties object are " + propertyList_D_node.get(i));
                 }
-
             }
-
         }
-
-        // using values() for iteration over values
-        //    for (String url : converter.values())
-        //System.out.println("value: " + url);
     }
 
     /*store querie in structures for DBpeia*/
     public void getNodes2(String querys, String nodename) {
         int c = 0, cc = 0, in = 0, in2, counter = 0;
-        //  System.out.println("Queries are "+querys);
         String[] arrOfStr = querys.split("-----------------", 1116000);
         for (String a : arrOfStr) {
             c = c + 1;
@@ -3972,60 +2578,38 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 TupleExpr tupleExpr = parsedQuery.getTupleExpr();
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
-
-                    System.out.println("objectfaa2 " + pattern.getObjectVar().getValue());
-                    System.out.println("predicatefa2 " + pattern.getPredicateVar().getValue());
-                    System.out.println("subjectfa2 " + pattern.getSubjectVar().getValue());
                     if (pattern.getPredicateVar().getValue() != null) {
-
-                        // propertyMap_D_node.put(pattern.getPredicateVar().getValue().toString(), String.valueOf(rowsd_node));
                         propertyList_D_node.add(pattern.getPredicateVar().getValue().toString());
-
                     } else if (pattern.getPredicateVar().getValue() == null) {
                         propertyList_D_node.add("out");
                     }
-
                     if (pattern.getSubjectVar().getValue() != null) {
-                        // subjectMap_D_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rowsd_node));
                         subjectList_D_node.add(pattern.getSubjectVar().getValue().toString());
-
                         rowsd_nodesubject = rowsd_nodesubject + 1;
                     } else if (pattern.getSubjectVar().getValue() == null) {
                         subjectList_D_node.add("out");
                     }
                     if (pattern.getObjectVar().getValue() != null) {
-
-                        // objectMap_D_node.put(pattern.getObjectVar().getValue().toString(), String.valueOf(rowsd_node));
                         objectList_D_node.add(pattern.getObjectVar().getValue().toString());
-
                         rowsd_nodeobject = rowsd_nodeobject + 1;
                     } else if (pattern.getObjectVar().getValue() == null) {
                         objectList_D_node.add("out");
                     }
-
                 }
-
             } catch (MalformedQueryException e) {
                 e.printStackTrace();
                 cc = cc + 1;
-
             }
             counter = counter + 1;
-
-            // System.out.println("line end fani and " + counter);
         }
         for (String e : tempAll_D) {
             System.out.println("temp fani is is " + e);
         }
-
-        //System.out.println("Queries are " + c + " and list size is" + propertyList_D.size() + "subject are" + rowsfor + "subject map is " + propertyMap_D.size() + " false are " + cc);
-        // tempAll= new ArrayList<String>();
     }
-    /*store querie in structures for DBpeia*/
 
+    /*store querie in structures for DBpeia*/
     public void getNodes(String querys, String nodename) {
         int c = 0, cc = 0, in = 0, in2, counter = 0;
-        //  System.out.println("Queries are "+querys);
         String[] arrOfStr = querys.split("-----------------", 1116000);
         for (String a : arrOfStr) {
             c = c + 1;
@@ -4038,10 +2622,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                 TupleExpr tupleExpr = parsedQuery.getTupleExpr();
                 tupleExpr.visit(collector);
                 for (StatementPattern pattern : collector.getStatementPatterns()) {
-
-                    //   System.out.println("objectfa "+pattern.getObjectVar().getValue());
-                    //  System.out.println("predicatefa "+pattern.getPredicateVar().getValue());
-                    //   System.out.println("subjectfa "+pattern.getSubjectVar().getValue());
                     if (pattern.getSubjectVar().getValue() != null) {
                         nodesMap_C_node.put(pattern.getSubjectVar().getValue().toString(), String.valueOf(rows));
                         nodesList_C_node.add(pattern.getSubjectVar().getValue().toString());
@@ -4055,7 +2635,6 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
                         rowsc = rowsc + 1;
                     }
                 }
-                System.out.println("////////////////////////");
                 int flag = 0;
                 for (String e : temp_C_node) {
                     if (e.equals(nodename)) {
@@ -4074,25 +2653,17 @@ temp_C_Calculation_Predicate_Random.add(pattern.getPredicateVar().getName().toSt
 
             }
             counter = counter + 1;
-
-            // System.out.println("line end fani and " + counter);
         }
         for (String e : tempAll_D) {
             System.out.println("temp fani is is " + e);
         }
-
-        //System.out.println("Queries are " + c + " and list size is" + propertyList_D.size() + "subject are" + rowsfor + "subject map is " + propertyMap_D.size() + " false are " + cc);
-        // tempAll= new ArrayList<String>();
     }
 
     public void printNodesMap() {
-
         for (String all : tempAll) {
             System.out.println("************** set is " + all);
 
         }
-        System.out.println("its end");
-
     }
 
 }

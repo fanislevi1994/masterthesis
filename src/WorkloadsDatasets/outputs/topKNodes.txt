@@ -1,0 +1,5 @@
+Topf 5 nodes are  https://de.wikipedia.org/ frequency 11
+Topf 5 nodes are  "11"^^<http://www.w3.org/2001/XMLSchema#integer> frequency 22
+Topf 5 nodes are  http://www.wikidata.org/entity/Q10864048 frequency 841
+Topf 5 nodes are  http://www.bigdata.com/rdf#serviceParam frequency 4235
+Topf 5 nodes are  http://www.wikidata.org/entity/Q1221156 frequency 2

@@ -1,0 +1,15 @@
+Topf 15 nodes are  loc frequency 3
+Topf 15 nodes are  isValueOf frequency 116
+Topf 15 nodes are  C frequency 64
+Topf 15 nodes are  subject frequency 243
+Topf 15 nodes are  peli frequency 3
+Topf 15 nodes are  hab frequency 1
+Topf 15 nodes are  hasValue frequency 106
+Topf 15 nodes are  label frequency 116
+Topf 15 nodes are  abstract frequency 103
+Topf 15 nodes are  http://dbpedia.org/class/yago/SpanishFilm frequency 1
+Topf 15 nodes are  m frequency 4
+Topf 15 nodes are  nombre frequency 1
+Topf 15 nodes are  visits frequency 1
+Topf 15 nodes are  http://dbpedia.org/class/yago/CapitalsInEurope frequency 65
+Topf 15 nodes are  http://dbpedia.org/ontology/Museum frequency 1

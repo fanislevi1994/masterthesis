@@ -1,0 +1,48 @@
+i have use 8 nodes for wikidata and 8 for dbpedia check main.java file we have take average
+check comments.To check output paths do a search in console with word "Algorithm paths are"
+in function algorithmPaths() and for wikidata and for dbpedia.If you want to use new node
+run operationsdb.Algo_C("http://dbpedia.org/class/yago/CapitalsInEurope",15,"httpdbpediaorgclassyagoCapitalsInEurope");
+End for check in wikidata test aand train you should put train.tsv in line 1574 and in line
+1740 and put in line 1906 test.tsv.Also in folder src/output you can see for wikidata and for dbpedia
+all nodes frequency and top-k nodes for debug.Finally in dbpedia we dont load all queries in ram because we have less memory 
+we do it partially.Also in dbpedia we have vars.If you want to use virtuoso get code
+from VirtuosoResult_c() function in line 1532 and do queries use google auth app to authenticate before connect.
+Finally in testRandom functions we have max 40 nodes and do testing the sensitivity of how many nodes can play random game is in the function.
+You can put as parameter how many node max 40 you can use.Also in main i have test the examples nodes you should comment and uncomment each instance
+node you make for example
+
+
+
+///////////////////
+//WIKIDATA/////////
+//////////////////
+QueriesFunctionWikidata operationwiki6= new QueriesFunctionWikidata();
+for (int i = 1; i < k2; i++) {
+            operationwiki6.Algo_D_nodes("http://www.bigdata.com/rdf/gas#program", k2, i, i);
+}
+operationwiki6.Calculate();
+operationwiki6.Algo_Calculation("http://www.bigdata.com/rdf/gas#program",k2);
+
+where k2=5 or k2=10 or k2=15
+
+FOR RANDOM randomwiki.testRandom(10);where 10 is the number of node max value we have 40 and min 1
+
+
+///////////////////
+//DBPEDIA/////////
+//////////////////
+
+
+
+QueriesFunctionDBpedia operationsdb8 = new QueriesFunctionDBpedia();
+for(int i=1;i<k;i++){
+         operationsdb8.Algo_C_D("http://dbpedia.org/ontology/Organisation",k,i,i,"httpdbpediaorgontologyOrganisation");
+}
+operationsdb8.Calculate();
+operationsdb8.Algo_Calculation("http://dbpedia.org/ontology/Organisation");
+
+and for random  randomwiki.testRandom(5);
+
+
+
+Thanks Fanis
